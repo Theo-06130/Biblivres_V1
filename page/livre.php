@@ -62,7 +62,7 @@ setlocale(LC_TIME, "fr_FR");
             echo "
             <h2>$value[Titre_Livre]</h2>
             <p>$value[Intrigue]</p>
-            <p> " . date('d/m/Y',strtotime($value["Date_Publi"])) . " </p>
+            <p> " . date('d/m/Y',strtotime( $value["Date_Publi"])) . " </p>
             <p class='lang'>$value[Acronyme]</p>
             <img src='/assets/miniature/$value[Miniature]' alt=''>
             <p>de $value[Nom] pour $value[Prix]€</p>";
