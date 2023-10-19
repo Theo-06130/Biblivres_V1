@@ -1,5 +1,11 @@
 <?php
 
+$parts = explode("/", $_SERVER["REQUEST_URI"]);
+
+if ($parts[1] == "livre" && !isset($parts[2])) {
+    header("Location: /home");
+}
+
 include("src/DisplayData.php");
 
 $database = new Database($_ENV["DB_HOST"], $_ENV["DB_PORT"], $_ENV["DB_DATABASE"], $_ENV["DB_USER"], $_ENV["DB_PASSWORD"]);
@@ -9,7 +15,8 @@ $conn = $database->getConnection();
 $sql = "SELECT * 
             FROM Livres
             JOIN Auteur ON Livres.Id_Auteur = Auteur.Id_Auteur
-            JOIN Langue ON Livres.Id_Langue = Langue.Id_Langue";
+            JOIN Langue ON Livres.Id_Langue = Langue.Id_Langue
+            WHERE Id_Livre = $parts[2]";
 
 $stmt = $conn->prepare($sql);
 
@@ -23,6 +30,7 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 
 // display_data($data);
 
+setlocale(LC_TIME, "fr_FR");
 
 ?>
 
@@ -38,7 +46,7 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="/style/home.css">
+    <link rel="stylesheet" href="/style/livre.css">
     <title>Home page</title>
 </head>
 
@@ -52,14 +60,12 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         <?php
         foreach ($data as $key => $value) {
             echo "
-        <a href='/livre/$value[Id_Livre]'>
-        <div class='book'>
             <h2>$value[Titre_Livre]</h2>
+            <p>$value[Intrigue]</p>
+            <p> " . date('d/m/Y',strtotime($value["Date_Publi"])) . " </p>
             <p class='lang'>$value[Acronyme]</p>
             <img src='/assets/miniature/$value[Miniature]' alt=''>
-            <p>de $value[Nom] pour $value[Prix]€</p>
-        </div>
-        </a>";
+            <p>de $value[Nom] pour $value[Prix]€</p>";
         }
 
         ?>

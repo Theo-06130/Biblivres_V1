@@ -16,7 +16,9 @@ $parts = explode("/", $_SERVER["REQUEST_URI"]);
 
 if ($parts[1] == "home") {
     include("page/home.php");
-} elseif ($parts[1] == "UpdateDB") {
+} elseif ($parts[1] == "livre") {
+    include("page/livre.php");
+}elseif ($parts[1] == "UpdateDB") {
     include("UpdateDB.php");
 } else {
     header("Location: /home");
