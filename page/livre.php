@@ -28,6 +28,10 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     $data[] = $row;
 }
 
+if(empty($data)){
+    header("Location: /home");
+}
+
 // display_data($data);
 
 setlocale(LC_TIME, "fr_FR");
