@@ -79,19 +79,40 @@ body {
     width: 90vw;
     height: 90vh;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-around;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 20px;
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
     background-color: #fff;
     border-radius: 50px;
     position: relative;
+    padding: 25px;
 }
 
 
-.book img{
-    width   : 250px;
+.content img{
+    max-height: 350px;
+    min-width: 250px;
+    max-width: 250px;
     object-fit: cover;
     border-radius: 10px;
+}
+
+#date{
+    position: absolute;
+    top: 10px;
+    left: 25px;
+}
+.image {
+    height: 50px;
+    width: 50px;
+}
+.Accueil {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 50px;
+    height: 50px;
+    z-index: 2;
+    cursor: pointer;
 }
