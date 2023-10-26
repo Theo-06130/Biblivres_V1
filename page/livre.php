@@ -59,17 +59,19 @@ setlocale(LC_TIME, "fr_FR");
 </style>
 
 <body>
-
+    <div class="Accueil"><img src='/assets/house.svg' class="image" alt="" onclick="home()"></div>
     <div class="content">
         <?php
         foreach ($data as $key => $value) {
             echo "
             <h2>$value[Titre_Livre]</h2>
-            <p>$value[Intrigue]</p>
-            <p> " . date('d/m/Y',strtotime( $value["Date_Publi"])) . " </p>
+            <p id='date'> " . date('d/m/Y',strtotime( $value["Date_Publi"])) . " </p>
             <p class='lang'>$value[Acronyme]</p>
+            <p>de $value[Nom]</p>
+            <h3>$value[Prix]€</h3>
             <img src='/assets/miniature/$value[Miniature]' alt=''>
-            <p>de $value[Nom] pour $value[Prix]€</p>";
+            <p>$value[Intrigue]</p>
+            ";
         }
 
         ?>
@@ -82,6 +84,11 @@ setlocale(LC_TIME, "fr_FR");
 <script type="module" src="/site/JS/home.js"></script> -->
 <script type="module">
 
+</script>
+<script>
+    function home(){
+    document.location.href="/home"; 
+}
 </script>
 
 </html>
