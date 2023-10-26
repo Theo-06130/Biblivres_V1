@@ -18,8 +18,10 @@ if ($parts[1] == "home") {
     include("page/home.php");
 } elseif ($parts[1] == "livre") {
     include("page/livre.php");
-}elseif ($parts[1] == "UpdateDB") {
+} elseif ($parts[1] == "UpdateDB") {
     include("UpdateDB.php");
+} elseif ($parts[1] == "uploadFile") {
+    include("page/uploadFile.php");
 } else {
     header("Location: /home");
 }
