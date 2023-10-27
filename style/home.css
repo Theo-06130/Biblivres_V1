@@ -1,4 +1,3 @@
-
 [data-theme=dark] {
     --couleur_fond: #121212;
     --couleur_principale: #2B2B2B;
@@ -43,19 +42,19 @@
 }
 
 ::-webkit-scrollbar-track {
-    background: var(--couleur_principale);
+    background: var(--couleur_fond);
     /* color of the tracking area */
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: var(--couleur_secondaire);
+    background-image: linear-gradient(to bottom, #4a4949, #383737, #272727, #171717, #000000);
     /* color of the scroll thumb */
-    border-radius: 10px;
+    border-radius: 2px;
     /* roundness of the scroll thumb */
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #555;
+    background-image: linear-gradient(to bottom, #4a4949, #383737, #272727, #171717, #000000);
     /* color on hover */
 }
 
@@ -70,7 +69,7 @@ body {
     right: 7px;
 } */
 
-.content{
+.content {
     overflow-y: scroll;
     width: 100vw;
     height: 100vh;
@@ -82,9 +81,10 @@ body {
     padding: 20px;
 }
 
-.book{
+.book {
     min-width: 300px;
-    max-width: 300px; /* Ajustez la largeur de la carte selon vos besoins */
+    max-width: 300px;
+    /* Ajustez la largeur de la carte selon vos besoins */
     max-height: 350px;
     min-height: 350px;
     border: 1px solid #ccc;
@@ -100,19 +100,19 @@ body {
 
 }
 
-.book img{
+.book img {
     min-height: 200px;
     max-height: 200px;
-    max-width: 150px; /* Les images occupent 100% de la largeur de la carte */
-    border-radius: 5px; 
+    max-width: 150px;
+    /* Les images occupent 100% de la largeur de la carte */
+    border-radius: 5px;
     overflow: hidden;
     padding: 10px 0px;
-    
-} 
 
-.book:hover{
-    transform: translate(-10px,-5px);
+}
+
+.book:hover {
+    transform: translate(-10px, -5px);
     transition: 0.2s;
     box-shadow: rgb(29, 29, 29) 5px 10px 0px;
 }
-   

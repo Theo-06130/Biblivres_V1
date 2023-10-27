@@ -59,7 +59,11 @@ setlocale(LC_TIME, "fr_FR");
 </style>
 
 <body>
-    <div class="Accueil"><img src='/assets/house.svg' class="image" alt="" onclick="home()"></div>
+    <div class="Accueil">
+    <button class="echap" onclick="home()">
+  Échap
+</button> 
+    </div>
     <div class="content">
         <?php
         foreach ($data as $key => $value) {
