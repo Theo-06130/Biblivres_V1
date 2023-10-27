@@ -44,8 +44,6 @@ function updateAuteurNbLivre($database)
         $stmt->execute();
     }
 
-    display_data($data);
-
 }
 
 
