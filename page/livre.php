@@ -28,7 +28,7 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     $data[] = $row;
 }
 
-if(empty($data)){
+if (empty($data)) {
     header("Location: /home");
 }
 
@@ -60,22 +60,21 @@ setlocale(LC_TIME, "fr_FR");
 
 <body>
     <div class="Accueil">
-    <button class="echap" onclick="home()">
-  Échap
-</button> 
+        <button class="echap" onclick="home()">
+            Échap
+        </button>
     </div>
     <div class="content">
         <?php
         foreach ($data as $key => $value) {
             echo "
             <h2>$value[Titre_Livre]</h2>
-            <p id='date'> " . date('d/m/Y',strtotime( $value["Date_Publi"])) . " </p>
+            <p id='date'> " . date('d/m/Y', strtotime($value["Date_Publi"])) . " </p>
             <p class='lang'>$value[Acronyme]</p>
             <p>de $value[Nom]</p>
             <h3>$value[Prix]€</h3>
-            <img src='/assets/miniature/$value[Miniature]' alt=''>
-            <p>$value[Intrigue]</p>
-            ";
+            <img src='data:image/png;base64," . base64_encode($value["Miniature"]) . "' alt=''>
+            <p>$value[Intrigue]</p>";
         }
 
         ?>
@@ -90,9 +89,9 @@ setlocale(LC_TIME, "fr_FR");
 
 </script>
 <script>
-    function home(){
-    document.location.href="/home"; 
-}
+    function home() {
+        document.location.href = "/home";
+    }
 </script>
 
 </html>

@@ -206,47 +206,11 @@ $conn = $database->getConnection();
 
             if ($_SESSION["send"] == 1) {
                 $stmt->execute();
+                include("UpdateDB.php");
+                header("Location: /home");
             } else {
                 echo "Already send";
             }
-
-            $sql = "SELECT * 
-                    FROM Livres";
-
-            $stmt = $conn->prepare($sql);
-
-            $stmt->execute();
-
-            $dataImg = [];
-
-            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                $dataImg[] = $row;
-            }
-
-
-            ?>
-
-            <div style="display:flex; flex-direction:column; background-color: white;">
-                <p>Resultat :</p>
-                <?php
-                // echo "Titre : " . $_POST["titre"] . "<br>";
-                // echo "Intrigue : " . $_POST["intrigue"] . "<br>";
-                // echo "Langue : " . $_POST["langue"] . "<br>";
-                // echo "Miniature : " . $_FILES['file']['name'] . "<br>";
-                // $base64_image = base64_encode(file_get_contents($_FILES['file']['tmp_name']));
-                // echo '<img src="data:image/png;base64, ' . $base64_image . '" style="width:50px;height:50px;">';
-            
-                foreach ($dataImg as $key => $value) {
-                    echo "Titre : " . $value["Titre_Livre"] . "<br>";
-                    $base64_image = base64_encode($value["Miniature"]);
-                    echo '<img src="data:image/png;base64, ' . $base64_image . '" style="width:50px;height:50px;">';
-                }
-
-                ?>
-
-            </div>
-
-            <?php
 
         }
         ?>
