@@ -9,7 +9,8 @@ $conn = $database->getConnection();
 $sql = "SELECT * 
             FROM Livres
             JOIN Auteur ON Livres.Id_Auteur = Auteur.Id_Auteur
-            JOIN Langue ON Livres.Id_Langue = Langue.Id_Langue";
+            JOIN Langue ON Livres.Id_Langue = Langue.Id_Langue
+            ORDER BY Titre_Livre";
 
 $stmt = $conn->prepare($sql);
 
