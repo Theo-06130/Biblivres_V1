@@ -9,7 +9,8 @@ $conn = $database->getConnection();
 $sql = "SELECT * 
             FROM Livres
             JOIN Auteur ON Livres.Id_Auteur = Auteur.Id_Auteur
-            JOIN Langue ON Livres.Id_Langue = Langue.Id_Langue";
+            JOIN Langue ON Livres.Id_Langue = Langue.Id_Langue
+            ORDER BY Titre_Livre";
 
 $stmt = $conn->prepare($sql);
 
@@ -56,7 +57,7 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         <div class='book'>
             <h2>$value[Titre_Livre]</h2>
             <p class='lang'>$value[Acronyme]</p>
-            <img src='/assets/miniature/$value[Miniature]' alt=''>
+            <img src='data:image/png;base64,". base64_encode($value["Miniature"])."' alt=''>
             <p>de $value[Nom] pour $value[Prix]€</p>
         </div>
         </a>";
