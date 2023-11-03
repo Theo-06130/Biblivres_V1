@@ -19,10 +19,10 @@ if ($parts[1] == "home") {
     include("page/livre.php");
 } elseif ($parts[1] == "UpdateDB") {
     include("UpdateDB.php");
-} elseif ($parts[1] == "uploadFile") {
-    include("page/uploadFile.php");
-} elseif ($parts[1] == "newauthor") {
-    include("page/auteur.php");
+} elseif ($parts[1] == "newlivre") {
+    include("page/newlivre.php");
+} elseif ($parts[1] == "newauteur") {
+    include("page/newauteur.php");
 } else {
     header("Location: /home");
 }
