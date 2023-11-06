@@ -23,6 +23,10 @@ if ($parts[1] == "home") {
     include("page/newlivre.php");
 } elseif ($parts[1] == "newauteur") {
     include("page/newauteur.php");
+} elseif ($parts[1] == "adminlivre") {
+    include("page/adminlivre.php");
+} elseif ($parts[1] == "modiflivre") {
+    include("page/modiflivre.php");
 } else {
     header("Location: /home");
 }
