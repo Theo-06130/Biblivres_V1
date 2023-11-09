@@ -24,7 +24,7 @@ $conn = $database->getConnection();
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="/style/home.css">
+    <link rel="stylesheet" href="/style/newlivre.css">
     <title>Home page</title>
 </head>
 
@@ -100,85 +100,87 @@ $conn = $database->getConnection();
             }
 
             ?>
-
-            <form method='post' action='<?php echo $_SERVER["REQUEST_URI"]; ?>' enctype='multipart/form-data'
-                style="display:flex; flex-direction:column; background-color: grey;">
-                <div>
-                    Titre du livre
-                    <input type="text" name="titre" placeholder="Titre du livre" required>
-                </div>
-                <div>
-                    Miniature
-                    <input type='file' name='file' accept="image/*" id="imgInp" required>
-                    <img id="blah" src="#" alt=" " style="width:50px;height:50px;" />
-                </div>
-                <div>
-                    Intrigue
-                    <textarea name="intrigue" placeholder="Intrigue du livre" required></textarea>
-                </div>
-                <div>
-                    Langue
-                    <select name="langue" required>
-                        <?php
-                        foreach ($dataLangue as $key => $value) {
-                            echo "<option value='$value[Id_Langue]'>$value[Language]</option>";
-                        }
-                        ?>
-                    </select>
-                </div>
-                <div>
-                    Date de publication
-                    <input type="date" name="date" placeholder="Date de publication" required>
-                </div>
-                <div>
-                    Auteur
-                    <select name="auteur" required>
-                        <?php
-                        foreach ($dataAuteur as $key => $value) {
-                            echo "<option value='$value[Id_Auteur]'>$value[Nom]</option>";
-                        }
-                        ?>
-                    </select>
-                </div>
-                <div>
-                    Genre
-                    <select name="genre" required>
-                        <?php
-                        foreach ($dataGenre as $key => $value) {
-                            echo "<option value='$value[Id_Genre]'>$value[Titre_Genre]</option>";
-                        }
-                        ?>
-                    </select>
-                </div>
-                <div>
-                    Type
-                    <select name="type" required>
-                        <?php
-                        foreach ($dataType as $key => $value) {
-                            echo "<option value='$value[Id_Types]'>$value[Types]</option>";
-                        }
-                        ?>
-                    </select>
-                </div>
-                <div>
-                    Prix
-                    <input type="number" pattern="^\d*(\.\d{0,2})?$" step="0.01" name="prix" placeholder="Prix" required>
-                    <label for="prix">€</label>
-                </div>
-                <div>
-                    Nombre de page
-                    <input type="number" pattern="^(?:\d*\.)?\d+$" step="1" name="page" placeholder="Pages" required>
-                </div>
-                <div>
-                    Editeur
-                    <input type="text" name="editeur" placeholder="Editeur" required>
-                </div>
-                <div>
-                    Add new Livre
-                    <input type='submit' value='Upload'>
-                </div>
-            </form>
-
+            <div class="container">
+                <h1>New Livre</h1>
+                <form method='post' action='<?php echo $_SERVER["REQUEST_URI"]; ?>' enctype='multipart/form-data'>
+                    <div class="intern">
+                        Titre du livre
+                        <input type="text" name="titre" placeholder="Titre du livre" required class="input-style">
+                    </div>
+                    <div class="intern imginline">
+                        Miniature
+                        <input type='file' name='file' accept="image/*" id="imgInp" required class="input-style">
+                        <img id="blah" src="#" alt=" " />
+                    </div>
+                    <div class="intern">
+                        Intrigue
+                        <textarea name="intrigue" placeholder="Intrigue du livre" required></textarea>
+                    </div>
+                    <div class="intern">
+                        Langue
+                        <select name="langue" required class="input-style">
+                            <?php
+                            foreach ($dataLangue as $key => $value) {
+                                echo "<option value='$value[Id_Langue]'>$value[Language]</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="intern">
+                        Date de publication
+                        <input type="date" name="date" placeholder="Date de publication" required class="input-style">
+                    </div>
+                    <div class="intern">
+                        Auteur
+                        <select name="auteur" required class="input-style">
+                            <?php
+                            foreach ($dataAuteur as $key => $value) {
+                                echo "<option value='$value[Id_Auteur]'>$value[Nom]</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="intern">
+                        Genre
+                        <select name="genre" required class="input-style">
+                            <?php
+                            foreach ($dataGenre as $key => $value) {
+                                echo "<option value='$value[Id_Genre]'>$value[Titre_Genre]</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="intern">
+                        Type
+                        <select name="type" required class="input-style">
+                            <?php
+                            foreach ($dataType as $key => $value) {
+                                echo "<option value='$value[Id_Types]'>$value[Types]</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="intern">
+                        Prix
+                        <input type="number" pattern="^\d*(\.\d{0,2})?$" step="0.01" name="prix" placeholder="Prix" required
+                            class="input-style">
+                        <label for="prix">€</label>
+                    </div>
+                    <div class="intern">
+                        Nombre de page
+                        <input type="number" pattern="^(?:\d*\.)?\d+$" step="1" name="page" placeholder="Pages" required
+                            class="input-style">
+                    </div>
+                    <div class="intern">
+                        Editeur
+                        <input type="text" name="editeur" placeholder="Editeur" required class="input-style">
+                    </div>
+                    <div class="intern">
+                        Add new Livre
+                        <input type='submit' value='Upload' class="input-style">
+                    </div>
+                </form>
+            </div>
             <?php
 
             $_SESSION["send"] = 0;
