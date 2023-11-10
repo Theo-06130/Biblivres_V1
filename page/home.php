@@ -46,9 +46,6 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     <title>Home page</title>
 </head>
 
-<style id="style_mod">
-
-</style>
 
 <body>
     <header>
@@ -64,7 +61,8 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     </header>
     <nav>
         <ul>
-            <li><a href="#">Accueil</a></li>
+            <li><a href="#" id='current_Page'>Accueil</a></li>
+            <!-- <div class="underline"></div> -->
             <li><a href="#">Genres</a></li>
             <li><a href="#">Livres</a></li>
             <li><a href="#">Auteur</a></li>
@@ -72,6 +70,7 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             <li><a href="#">Langues</a></li>
         </ul>
     </nav>
+    
     <h3>Récemment consulté</h3>
     <div class="last_see"> 
                <?php
@@ -136,9 +135,7 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 
 </script>
 
-</html>
 
 
-
-<!-- <h2>$value[Titre_Livre]</h2> -->
-<!-- <p>de $value[Nom] pour $value[Prix]€</p> -->
+<!-- <h2 class='value_Book'>$value[Titre_Livre]</h2> -->
+<!-- <p class='value_Book'>de $value[Nom] pour $value[Prix]€</p> -->

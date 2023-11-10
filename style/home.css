@@ -39,6 +39,10 @@ header {
     width: 80%;
 }
 
+.icon_settings>img:hover {
+    transform: rotate(-180deg);
+}
+
 nav {
     display: flex;
     align-items: center;
@@ -88,6 +92,32 @@ nav {
     }
 }
 
+li>a {
+    --primary-color: #111;
+    --hovered-color: skyblue;
+    position: relative;
+}
+
+
+li>a::after {
+    position: absolute;
+    content: "";
+    width: 0;
+    left: 0;
+    bottom: -7px;
+    background: var(--hovered-color);
+    height: 2px;
+    transition: 0.3s ease-out;
+}
+
+li>a:hover::after {
+    width: 100%;
+}
+
+li>a:hover {
+    width: 100%;
+}
+
 
 
 .last_see {
@@ -126,6 +156,13 @@ nav {
     overflow: hidden;
     padding: 5px 0px;
 
+}
+
+
+@media screen and (min-width:900px) {
+    .book>img:hover {
+        transform: translateY(-8px);
+    }
 }
 
 @media screen and (max-width:900px) {
@@ -179,6 +216,13 @@ button {
     .Genre_Fav {
         overflow-x: scroll;
     }
+
+}
+
+@media screen and (min-width:900px) {
+    button:hover {
+        transform: translateY(-8px);
+    }
 }
 
 .Favorite_Author {
@@ -192,9 +236,16 @@ button {
     border-radius: 100%;
 }
 
+
 @media screen and (max-width:900px) {
     .Favorite_Author {
         overflow-x: scroll;
+    }
+}
+
+@media screen and (min-width:900px) {
+    .Favorite_Author>img:hover {
+        transform: translateY(-8px);
     }
 }
 
@@ -208,6 +259,7 @@ button {
     width: 24px;
     margin-left: 10px;
 }
+
 
 .all_book_home {
     margin-top: 15px;
