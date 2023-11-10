@@ -27,8 +27,8 @@ if ($parts[1] == "home") {
     include("page/adminlivre.php");
 } elseif ($parts[1] == "modiflivre") {
     include("page/modiflivre.php");
+} elseif ($parts[1] == "signUp") {
+    include("page/signUp.php");
 } else {
     header("Location: /home");
 }
-
-

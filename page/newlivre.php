@@ -2,8 +2,8 @@
 
 session_start();
 
-if (!isset($_SESSION["send"])) {
-    $_SESSION["send"] = 0;
+if (!isset($_SESSION["sendLivre"])) {
+    $_SESSION["sendLivre"] = 0;
 }
 
 $database = new Database($_ENV["DB_HOST"], $_ENV["DB_PORT"], $_ENV["DB_DATABASE"], $_ENV["DB_USER"], $_ENV["DB_PASSWORD"]);
@@ -21,11 +21,9 @@ $conn = $database->getConnection();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/style/newlivre.css">
-    <title>Home page</title>
+    <title>New Livre</title>
 </head>
 
 <style id="style_mod">
@@ -99,7 +97,7 @@ $conn = $database->getConnection();
                 $dataType[] = $row;
             }
 
-            ?>
+        ?>
             <div class="container">
                 <h1>New Livre</h1>
                 <form method='post' action='<?php echo $_SERVER["REQUEST_URI"]; ?>' enctype='multipart/form-data'>
@@ -162,14 +160,12 @@ $conn = $database->getConnection();
                     </div>
                     <div class="intern">
                         Prix
-                        <input type="number" pattern="^\d*(\.\d{0,2})?$" step="0.01" name="prix" placeholder="Prix" required
-                            class="input-style">
+                        <input type="number" pattern="^\d*(\.\d{0,2})?$" step="0.01" name="prix" placeholder="Prix" required class="input-style">
                         <label for="prix">€</label>
                     </div>
                     <div class="intern">
                         Nombre de page
-                        <input type="number" pattern="^(?:\d*\.)?\d+$" step="1" name="page" placeholder="Pages" required
-                            class="input-style">
+                        <input type="number" pattern="^(?:\d*\.)?\d+$" step="1" name="page" placeholder="Pages" required class="input-style">
                     </div>
                     <div class="intern">
                         Editeur
@@ -181,13 +177,12 @@ $conn = $database->getConnection();
                     </div>
                 </form>
             </div>
-            <?php
+        <?php
 
-            $_SESSION["send"] = 0;
-
+            $_SESSION["sendLivre"] = 0;
         } else {
 
-            $_SESSION["send"] += 1;
+            $_SESSION["sendLivre"] += 1;
 
             $sql = "INSERT INTO Livres (Titre_Livre, Miniature, Intrigue, Id_Langue, Date_Publi, Id_Auteur, Id_Genre, Id_Types, Prix, Nb_Pages, Editeur)
                 VALUES (:Titre_Livre, :Miniature, :Intrigue, :Id_Langue, :Date_Publi, :Id_Auteur, :Id_Genre, :Id_Types, :Prix, :Nb_Pages, :Editeur)";
@@ -206,7 +201,7 @@ $conn = $database->getConnection();
             $stmt->bindValue(":Nb_Pages", ($_POST["page"]), PDO::PARAM_INT);
             $stmt->bindValue(":Editeur", htmlspecialchars($_POST["editeur"]), PDO::PARAM_STR);
 
-            if ($_SESSION["send"] == 1) {
+            if ($_SESSION["sendLivre"] == 1) {
                 $stmt->execute();
                 include("/page/UpdateSpecificAuteur.php");
                 UpdateSpecificAuteur($_POST["auteur"], $database);
@@ -214,17 +209,17 @@ $conn = $database->getConnection();
             } else {
                 echo "Already send";
             }
-
         }
         ?>
 
 </body>
 
+</html>
+
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <!-- <script type="module" src="/site/JS/script.js"></script>
 <script type="module" src="/site/JS/home.js"></script> -->
 <script type="module">
-
     const imgInp = document.getElementById('imgInp')
     const blah = document.getElementById('blah')
 
@@ -235,25 +230,22 @@ $conn = $database->getConnection();
         }
     }
 
-    $(document).on('keydown', 'input[pattern]', function (e) {
+    $(document).on('keydown', 'input[pattern]', function(e) {
         var input = $(this);
         var oldVal = input.val();
         var regex = new RegExp(input.attr('pattern'), 'g');
 
-        setTimeout(function () {
+        setTimeout(function() {
             var newVal = input.val();
             if (!regex.test(newVal)) {
                 input.val(oldVal);
             }
         }, 1);
     })
-
 </script>
 
-</html>
-
 <?php
-if ($_SESSION["send"] != 1) {
+if ($_SESSION["sendLivre"] != 1) {
     empty($_POST);
     empty($_FILES);
     unset($_POST);
