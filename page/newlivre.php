@@ -208,7 +208,8 @@ $conn = $database->getConnection();
 
             if ($_SESSION["send"] == 1) {
                 $stmt->execute();
-                include("UpdateDB.php");
+                include("/page/UpdateSpecificAuteur.php");
+                UpdateSpecificAuteur($_POST["auteur"], $database);
                 header("Location: /home");
             } else {
                 echo "Already send";

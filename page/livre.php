@@ -16,9 +16,10 @@ $sql = "SELECT *
             FROM Livres
             JOIN Auteur ON Livres.Id_Auteur = Auteur.Id_Auteur
             JOIN Langue ON Livres.Id_Langue = Langue.Id_Langue
-            WHERE Id_Livre = $parts[2]";
+            WHERE Id_Livre = :id";
 
 $stmt = $conn->prepare($sql);
+$stmt->bindValue(':id', $parts[2], PDO::PARAM_INT);
 
 $stmt->execute();
 
