@@ -31,6 +31,10 @@ if ($parts[1] == "home") {
     include("page/signUp.php");
 } elseif ($parts[1] == "genres") {
     include("page/genres.php");
+} elseif ($parts[1] == "livres") {
+    include("page/all_livre.php");
+} elseif ($parts[1] == "auteur") {
+    include("page/auteur.php");
 } else {
     header("Location: /home");
 }
