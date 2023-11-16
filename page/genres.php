@@ -32,13 +32,32 @@
     </header>
     <nav>
         <ul>
-            <li><a href="#" id='current_Page'>Accueil</a></li>
+            <li><a href="/home" id='current_Page'>Accueil</a></li>
             <!-- <div class="underline"></div> -->
-            <li><a href="#">Genres</a></li>
+            <li><a href="/genres">Genres</a></li>
             <li><a href="#">Livres</a></li>
             <li><a href="#">Auteur</a></li>
             <li><a href="#">Types</a></li>
             <li><a href="#">Langues</a></li>
         </ul>
     </nav>
+    <main>
+        <div class="all_genres">
+        
+        <button class="Romance">Romance</button>
+        <button class="Add_genres">.</button>
+        <button class='Fantaisie'>Fantaisie</button>
+        <button class='Horreur'>Horreur</button>
+        <button class='Action'>Action</button>
+        <button class='Comique'>Comique</button>
+        <button class='Tragique'>Tragique</button>
+        <button class="Romance">Romance</button>
+        <button class='Fantaisie'>Fantaisie</button>
+        <button class='Horreur'>Horreur</button>
+        <button class='Action'>Action</button>
+        <button class='Comique'>Comique</button>
+        <button class='Tragique'>Tragique</button>
+        </div>
+    </main>
+    
 </body>

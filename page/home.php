@@ -78,7 +78,7 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         <ul>
             <li><a href="/home" id='current_Page'>Accueil</a></li>
             <!-- <div class="underline"></div> -->
-            <li><a href="#">Genres</a></li>
+            <li><a href="/genres">Genres</a></li>
             <li><a href="/livre">Livres</a></li>
             <li><a href="#">Auteur</a></li>
             <li><a href="#">Types</a></li>
