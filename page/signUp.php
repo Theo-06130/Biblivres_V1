@@ -92,7 +92,7 @@ if (isset($_POST) && !empty($_POST)) {
     </body>
 
 
-
+    <script src="/style/script.js" ></script>
 
 
 

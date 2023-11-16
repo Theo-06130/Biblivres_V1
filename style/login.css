@@ -48,6 +48,7 @@ form {
     background-color: #F3F3F3;
     border-radius: 10px;
     transition: all 0.5s;
+    color: #01051A;
 }
 
 .input:hover,
@@ -60,7 +61,6 @@ form {
 /* CSS */
 .button-60 {
     align-items: center;
-
     background-color: #01051A;
     border: 1px solid #a5a4a4;
     border-radius: 10px;
@@ -70,31 +70,18 @@ form {
     font-size: 1rem;
     height: 2.5em;
     justify-content: center;
-
     padding: calc(.5em - 1px) 3em;
-
 }
 
 .btn {
-
     text-align: center;
-
-
 }
 
-.ligne_inscription {
-    color: rgb(124, 125, 126);
-    text-align: center;
-    font-family: 'lato', sans-serif;
-    font-size: 14px;
-    margin-top: 85px;
+.button-60.active {
+    background-color: #ffffff;
 }
 
-.deco {
-    text-decoration: underline;
-}
 
-a {
-    text-decoration: none;
-    color: #F3F3F3;
-}
+
+
+

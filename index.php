@@ -31,6 +31,8 @@ if ($parts[1] == "home") {
     include("page/signUp.php");
 } elseif ($parts[1] == "genres") {
     include("page/genres.php");
+} elseif ($parts[1] == "parametre") {
+    include("page/parametre.php");
 } else {
     header("Location: /home");
 }
