@@ -28,4 +28,21 @@ button {
 
 .Journal {
     background: linear-gradient(97deg, #FDFBFB 0%, #EBEDEE 100%);
+    color: black;
+}
+
+.BD {
+    background: linear-gradient(97deg, #F6D365 0%, #FDA085 100%);
+}
+
+.Manga {
+    background: linear-gradient(97deg, #4FACFE 0%, #00F2FE 100%);
+}
+
+.Magazine {
+    background: linear-gradient(97deg, #FF0844 -4.14%, #FFB199 100%);
+}
+
+.Roman {
+    background: linear-gradient(97deg, #434343 0%, #000 100%);
 }
