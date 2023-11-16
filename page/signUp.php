@@ -50,6 +50,7 @@ if (isset($_POST) && !empty($_POST)) {
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+        <link rel="stylesheet" href="/style/login.css">
         <!-- <link rel="stylesheet" href="/style/signup.css"> -->
         <title>Sign Up</title>
     </head>
@@ -61,25 +62,39 @@ if (isset($_POST) && !empty($_POST)) {
 
     <body>
         <h1>Inscription</h1>
+        <div class=contain>
+            <div class=element>
         <form method="post" action='<?php echo $_SERVER["REQUEST_URI"]; ?>'>
-            <label for="nom">Nom :</label>
-            <input type="text" id="nom" name="nom" required><br><br>
+       
+                <div class="form-group">
+                    <label for="prenom">Prenom :</label>
+                    <input type="text" id="prenom" name="prenom" required class="input">
+                </div>
 
-            <label for="prenom">Prenom :</label>
-            <input type="text" id="prenom" name="prenom" required><br><br>
+            
 
             <label for="phone">Numéro de téléphone :</label>
-            <input id="phone" type="tel" name="phone" /><br><br>
+            <input id="phone" type="tel" name="phone" class="input" /><br><br>
 
             <label for="email">Email :</label>
-            <input type="email" id="email" name="email" required><br><br>
+            <input type="email" id="email" name="email" required class="input"><br><br>
 
             <label for="password">Mot de passe :</label>
-            <input type="password" id="password" name="password" required><br><br>
-
-            <input type="submit" value="S'inscrire">
-        </form>
+            <input type="password" id="password" name="password" required class="input"><br><br>
+        <div class="btn">
+       <input type="submit" value="Done" class="button-60">  
+        </div>
+       
+       <p>By clicking on "Sign up", you accept the</p> 
+        <p1 class="deco">Terms and Conditions of Use.</p1>
+    </div>
+        </form></div>
     </body>
+
+
+
+
+
 
     </html>
 

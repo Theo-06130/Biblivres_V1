@@ -1,0 +1,89 @@
+
+
+
+body { 
+    background: radial-gradient(90.44% 75.36% at 46.91% -45.9%, #2346FF 0%, var(--couleur_fond) 100%);
+    background-color:  #01051A;
+   
+}
+
+h1 {
+    color: aliceblue;
+    text-align: center;
+    margin-bottom: 95px;
+    font-family: 'lato', sans-serif;
+}
+
+
+.contain {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #F3F3F3;
+    font-family: 'lato', sans-serif;
+    
+}
+ .form-group {
+        margin-bottom: 10px;
+    }
+
+    .element label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+
+
+.input {
+    border: 2px solid transparent;
+    width: 16em;
+    height: 2.5em;
+    padding-left: 0.8em;
+    outline: none;
+    overflow: hidden;
+    background-color: #F3F3F3;
+    border-radius: 10px;
+    transition: all 0.5s;
+  }
+  
+  .input:hover,
+  .input:focus {
+    border: 2px solid #4A9DEC;
+    box-shadow: 0px 0px 0px 7px rgb(74, 157, 236, 20%);
+    background-color: white;
+  }
+
+/* CSS */
+.button-60 {
+  align-items: center;
+  
+  background-color: #01051A;
+  border: 1px solid #a5a4a4;
+  border-radius: 10px;
+  color: #363636;
+  cursor: pointer;
+  font-family: BlinkMacSystemFont,-apple-system,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 1rem;
+  height: 2.5em;
+  justify-content: center;
+  
+  padding: calc(.5em - 1px) 3em;
+  
+}
+.btn{
+
+    text-align: center;
+
+
+}
+p {
+    color: rgb(124, 125, 126);
+    text-align: center;
+    font-family: 'lato', sans-serif;
+    font-size: 14px;
+    margin-top: 85px;
+}
+.deco{
+text-decoration: underline;
+}
+
