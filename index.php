@@ -38,6 +38,8 @@ if ($parts[1] == "home") {
     include("page/all_livre.php");
 } elseif ($parts[1] == "auteur") {
     include("page/auteur.php");
+} elseif ($parts[1] == "types") {
+    include("pages/types.php");
 } else {
     header("Location: /home");
 }
