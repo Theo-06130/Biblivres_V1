@@ -1,16 +1,16 @@
 <?php
 
-include("src/DisplayData.php");
+session_start();
 
 $database = new Database($_ENV["DB_HOST"], $_ENV["DB_PORT"], $_ENV["DB_DATABASE"], $_ENV["DB_USER"], $_ENV["DB_PASSWORD"]);
 
 $conn = $database->getConnection();
 
 $sql = "SELECT * 
-            FROM Livres
-            JOIN Auteur ON Livres.Id_Auteur = Auteur.Id_Auteur
-            JOIN Langue ON Livres.Id_Langue = Langue.Id_Langue
-            ORDER BY Titre_Livre";
+        FROM Livres
+        JOIN Auteur ON Livres.Id_Auteur = Auteur.Id_Auteur
+        JOIN Langue ON Livres.Id_Langue = Langue.Id_Langue
+        ORDER BY Titre_Livre";
 
 $stmt = $conn->prepare($sql);
 
@@ -21,9 +21,6 @@ $data = [];
 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     $data[] = $row;
 }
-
-// display_data($data);
-
 
 ?>
 
@@ -36,9 +33,7 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/style/home.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -49,23 +44,43 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 
 <body>
     <header>
-        <div class="div_icon_profil">
-            <img src="/assets\default_user.svg" alt="default_user">
-        </div>
+        <?php
+        if (isset($_SESSION["Id_client"]) && !empty($_SESSION["Id_client"])) {
+        ?>
+            <div class="div_icon_profil">
+                <img src="/assets\default_user.svg" alt="default_user">
+                <p><?php echo $_SESSION["Prenom"] ?></p>
+                <a class="logout" href="/logout">Se deconnecter</a>
+            </div>
+        <?php
+        } else {
+        ?>
+            <div class="logs">
+                <a class="signUp" href="/signUp">S'inscrire</a>
+                <a class="login" href="/login">Se connecter</a>
+            </div>
+        <?php
+        }
+        ?>
         <div class="name_page">
             <h2>Accueil</h2>
         </div>
         <div class="icon_settings">
             <img src="/assets\settings.svg" alt="settings">
         </div>
+
+        <div class="logout">
+
+        </div>
+
     </header>
     <nav>
         <ul>
             <li><a href="/home" id='current_Page'>Accueil</a></li>
             <!-- <div class="underline"></div> -->
             <li><a href="/genres">Genres</a></li>
-            <li><a href="/livres">Livres</a></li>
-            <li><a href="/auteur">Auteur</a></li>
+            <li><a href="/livre">Livres</a></li>
+            <li><a href="#">Auteur</a></li>
             <li><a href="#">Types</a></li>
             <li><a href="#">Langues</a></li>
         </ul>
