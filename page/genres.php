@@ -38,7 +38,7 @@
             <li><a href="/livres">Livres</a></li>
             <li><a href="/auteur">Auteur</a></li>
             <li><a href="/types">Types</a></li>
-            <li><a href="#">Langues</a></li>
+            <li><a href="/langues">Langues</a></li>
         </ul>
     </nav>
     <main>
