@@ -1,41 +1,67 @@
-
 @import url(root.css);
 
 
-body {
-    font-family: Arial, sans-serif;
-    
-    margin: 0;
+
+
+
+h1 {
+    color: aliceblue;
+    text-align: center;
+    margin-bottom: 95px;
+    font-family: 'lato', sans-serif;
+    margin-top: 20px;
+    background-color: aqua;
+}
+
+
+.contain {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-  }
-  h1 {
-    text-align: center;
-    color: #fff;
-  }
- 
-  form {
+    color: #F3F3F3;
+    font-family: 'lato', sans-serif;
+    background-color: aqua;
+
+}
+ .form-group {
+        margin-bottom: 10px;
+    }
+
+    .contain label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+.element{
     display: flex;
-    flex-direction: column;
-    
-  }
-  
-  label {
-    margin-bottom: 8px;
-    color: #fff;
-  }
-  
-  input {
-    padding: 8px;
-    margin-bottom: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  button {
+    justify-content: center;
     align-items: center;
+
+
+}
+
+.input {
+    border: 2px solid transparent;
+    width: 16em;
+    height: 2.5em;
+    padding-left: 0.8em;
+    outline: none;
+    overflow: hidden;
+    background-color: #F3F3F3;
+    border-radius: 10px;
+    transition: all 0.5s;
+  }
+  
+  .input:hover,
+  .input:focus {
+    border: 2px solid #4A9DEC;
+    box-shadow: 0px 0px 0px 7px rgb(74, 157, 236, 20%);
+    background-color: white;
+  }
+
+/* CSS */
+.button-60 {
+  align-items: center;
   
   background-color: #01051A;
   border: 1px solid #a5a4a4;
@@ -48,18 +74,26 @@ body {
   justify-content: center;
   
   padding: calc(.5em - 1px) 3em;
-  }
   
-button:hover {
-    background-color: #01051A;;
-  }
-p {
+}
+.btn{
+
+    text-align: center;
+
+
+}
+.ligne_inscription{
     color: rgb(124, 125, 126);
     text-align: center;
     font-family: 'lato', sans-serif;
     font-size: 14px;
     margin-top: 85px;
 }
+
+.deco{
+text-decoration: underline;
+}
+
 a{
     text-decoration: none;
     color: #F3F3F3;

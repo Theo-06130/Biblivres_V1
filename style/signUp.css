@@ -9,6 +9,7 @@ h1 {
     text-align: center;
     margin-bottom: 95px;
     font-family: 'lato', sans-serif;
+    margin-top: 20px;
 }
 
 
@@ -18,6 +19,7 @@ h1 {
     align-items: center;
     color: #F3F3F3;
     font-family: 'lato', sans-serif;
+   
     
 }
  .form-group {
@@ -52,7 +54,7 @@ h1 {
 
 /* CSS */
 .button-60 {
-  align-items: center;
+  
   
   background-color: #01051A;
   border: 1px solid #a5a4a4;
