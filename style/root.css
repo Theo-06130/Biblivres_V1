@@ -66,4 +66,5 @@ body {
     background-repeat: no-repeat;
     background-color: var(--couleur_fond);
     overflow-x: hidden;
+    height: 100vh;
 }

@@ -1,16 +1,16 @@
 <?php
 
-include("src/DisplayData.php");
+session_start();
 
 $database = new Database($_ENV["DB_HOST"], $_ENV["DB_PORT"], $_ENV["DB_DATABASE"], $_ENV["DB_USER"], $_ENV["DB_PASSWORD"]);
 
 $conn = $database->getConnection();
 
 $sql = "SELECT * 
-            FROM Livres
-            JOIN Auteur ON Livres.Id_Auteur = Auteur.Id_Auteur
-            JOIN Langue ON Livres.Id_Langue = Langue.Id_Langue
-            ORDER BY Titre_Livre";
+        FROM Livres
+        JOIN Auteur ON Livres.Id_Auteur = Auteur.Id_Auteur
+        JOIN Langue ON Livres.Id_Langue = Langue.Id_Langue
+        ORDER BY Titre_Livre";
 
 $stmt = $conn->prepare($sql);
 
@@ -21,9 +21,6 @@ $data = [];
 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     $data[] = $row;
 }
-
-// display_data($data);
-
 
 ?>
 
@@ -49,44 +46,66 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 
 <body>
     <header>
-        <div class="div_icon_profil">
-            <img src="/assets\default_user.svg" alt="default_user">
-        </div>
+        <?php
+        if (isset($_SESSION["Id_client"]) && !empty($_SESSION["Id_client"])) {
+            ?>
+            <div class="div_icon_profil">
+                <img src="/assets\default_user.svg" alt="default_user">
+                <p>
+                    <?php echo $_SESSION["Prenom"] ?>
+                </p>
+                <a class="logout" href="/logout">Se deconnecter</a>
+            </div>
+            <?php
+        } else {
+            ?>
+            <div class="logs">
+                <a class="signUp" href="/signUp">S'inscrire</a>
+                <a class="login" href="/login">Se connecter</a>
+            </div>
+            <?php
+        }
+        ?>
         <div class="name_page">
             <h2>Accueil</h2>
         </div>
         <div class="icon_settings">
             <img src="/assets\settings.svg" alt="settings">
         </div>
+
+        <div class="logout">
+
+        </div>
+
     </header>
     <nav>
         <ul>
-            <li><a href="#" id='current_Page'>Accueil</a></li>
+            <li><a href="/home" id='current_Page'>Accueil</a></li>
             <!-- <div class="underline"></div> -->
-            <li><a href="#">Genres</a></li>
-            <li><a href="#">Livres</a></li>
-            <li><a href="#">Auteur</a></li>
-            <li><a href="#">Types</a></li>
+            <li><a href="/genres">Genres</a></li>
+            <li><a href="/livre">Livres</a></li>
+            <li><a href="/auteur">Auteur</a></li>
+            <li><a href="/types">Types</a></li>
             <li><a href="#">Langues</a></li>
         </ul>
     </nav>
-    
+
     <h3>Récemment consulté</h3>
-    <div class="last_see"> 
-               <?php
+    <div class="last_see">
+        <?php
         foreach ($data as $key => $value) {
             echo "
         <a href='/livre/$value[Id_Livre]'>
         <div class='book'>
 
-            <img src='data:image/png;base64,". base64_encode($value["Miniature"])."' alt=''>
+            <img src='data:image/png;base64," . base64_encode($value["Miniature"]) . "' alt=''>
             
         </div>
         </a>";
         }
 
         ?>
-        </div>
+    </div>
     <h3>Genres favoris</h3>
     <div class="Genre_Fav">
         <button class="Romance">Romance</button>
@@ -111,21 +130,21 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         <h3>Tous les livres</h3>
         <img src="assets\plus.svg" alt="">
     </div>
-    <div class="all_book_home"> 
-               <?php
+    <div class="all_book_home">
+        <?php
         foreach ($data as $key => $value) {
             echo "
         <a href='/livre/$value[Id_Livre]'>
         <div class='book'>
 
-            <img src='data:image/png;base64,". base64_encode($value["Miniature"])."' alt=''>
+            <img src='data:image/png;base64," . base64_encode($value["Miniature"]) . "' alt=''>
             
         </div>
         </a>";
         }
 
         ?>
-        </div>
+    </div>
 </body>
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>

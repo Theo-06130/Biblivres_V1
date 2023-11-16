@@ -1,6 +1,11 @@
 <?php
 
-include("src/DisplayData.php");
+session_start();
+
+if (!isset($_SESSION["Id_admin"]) && empty($_SESSION["Id_admin"])) {
+    header("Location: /home");
+    exit();
+}
 
 $database = new Database($_ENV["DB_HOST"], $_ENV["DB_PORT"], $_ENV["DB_DATABASE"], $_ENV["DB_USER"], $_ENV["DB_PASSWORD"]);
 
