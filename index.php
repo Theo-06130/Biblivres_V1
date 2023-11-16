@@ -39,7 +39,9 @@ if ($parts[1] == "home") {
 } elseif ($parts[1] == "auteur") {
     include("page/auteur.php");
 } elseif ($parts[1] == "types") {
-    include("page/types.php");
+    include("pages/types.php");
+} elseif ($parts[1] == "parametre") {
+    include("page/parametre.php");
 } else {
     header("Location: /home");
 }

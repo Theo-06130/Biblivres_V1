@@ -1,3 +1,7 @@
+
+<!-- this page for login admin -->
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,7 +15,7 @@
 </head>
 
 <body>
-    <h1>Login</h1>
+    <h1>Login Admin</h1>
     <div class=contain>
 
         <form method="post" action='<?php echo $_SERVER["REQUEST_URI"]; ?>'>
@@ -25,8 +29,7 @@
                 <input type="submit" value="Done" class="button-60" id="button">
             </div>
 
-            <p class="ligne_inscription">By clicking on <a href="#">"Inscription"</a>, you accept the</p>
-            <p class="deco">Terms and Conditions of Use.</p>
+            
         </form>
 
 

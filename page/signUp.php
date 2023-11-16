@@ -144,6 +144,7 @@ function showinput($message)
 
     </html>
 
+    <script src="/style/script.js"></script>
     <script>
         const phoneInputField = document.querySelector("#phone");
         const phoneInput = window.intlTelInput(phoneInputField, {
