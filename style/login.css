@@ -1,10 +1,86 @@
+@import url(./root.css);
 
-
-
-body { 
+body {
     background: radial-gradient(90.44% 75.36% at 46.91% -45.9%, #2346FF 0%, var(--couleur_fond) 100%);
-    background-color:  #01051A;
-   
+    background-color: #01051A;
+    height: 100vh;
+}
+
+footer {
+    background-color: #2346FF;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: auto;
+    color: #F3F3F3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: 'lato', sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    line-height: 1.5;
+    text-align: center;
+    text-transform: uppercase;
+    z-index: 1;
+}
+
+footer div {
+    padding: 5px;
+}
+
+header {
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+}
+
+.logs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.signUp {
+    color: white;
+    background-color: black;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 10px;
+}
+
+.signUp:hover {
+    color: black;
+    background-color: white;
+}
+
+.login {
+    color: white;
+    background-color: black;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 10px;
+}
+
+.login:hover {
+    color: black;
+    background-color: white;
+}
+
+.name_page>h2 {
+    font-size: 2.7rem;
+}
+
+.homes {
+    width: 50px;
+    height: 50px;
+}
+
+.homes img {
+    width: 50px;
+    height: 50px;
 }
 
 h1 {
@@ -14,23 +90,22 @@ h1 {
     font-family: 'lato', sans-serif;
 }
 
-
 .contain {
     display: flex;
     justify-content: center;
     align-items: center;
     color: #F3F3F3;
     font-family: 'lato', sans-serif;
-    
 }
- .form-group {
-        margin-bottom: 10px;
-    }
 
-    .element label {
-        display: block;
-        margin-bottom: 5px;
-    }
+.form-group {
+    margin-bottom: 10px;
+}
+
+.element label {
+    display: block;
+    margin-bottom: 5px;
+}
 
 
 
@@ -44,38 +119,43 @@ h1 {
     background-color: #F3F3F3;
     border-radius: 10px;
     transition: all 0.5s;
-  }
-  
-  .input:hover,
-  .input:focus {
+}
+
+.input:hover,
+.input:focus {
     border: 2px solid #4A9DEC;
     box-shadow: 0px 0px 0px 7px rgb(74, 157, 236, 20%);
     background-color: white;
-  }
+}
 
 /* CSS */
 .button-60 {
-  align-items: center;
-  
-  background-color: #01051A;
-  border: 1px solid #a5a4a4;
-  border-radius: 10px;
-  color: #363636;
-  cursor: pointer;
-  font-family: BlinkMacSystemFont,-apple-system,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
-  font-size: 1rem;
-  height: 2.5em;
-  justify-content: center;
-  
-  padding: calc(.5em - 1px) 3em;
-  
-}
-.btn{
+    align-items: center;
 
+    background-color: #01051A;
+    border: 1px solid #a5a4a4;
+    border-radius: 10px;
+    color: #aeaeae;
+    cursor: pointer;
+    font-family: BlinkMacSystemFont, -apple-system, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1rem;
+    height: 2.5em;
+    justify-content: center;
+
+    padding: calc(.5em - 1px) 3em;
+
+}
+
+.button-60:hover {
+    background-color: #4A9DEC;
+    color: white;
+    border: 1px solid #4A9DEC;
+}
+
+.btn {
     text-align: center;
-
-
 }
+
 p {
     color: rgb(124, 125, 126);
     text-align: center;
@@ -83,7 +163,7 @@ p {
     font-size: 14px;
     margin-top: 85px;
 }
-.deco{
-text-decoration: underline;
-}
 
+.deco {
+    text-decoration: underline;
+}

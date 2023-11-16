@@ -1,5 +1,6 @@
 <?php
 
+declare(strict_types=1);
 
 require_once realpath(__DIR__ . '/vendor/autoload.php');
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
@@ -29,6 +30,8 @@ if ($parts[1] == "home") {
     include("page/modiflivre.php");
 } elseif ($parts[1] == "signUp") {
     include("page/signUp.php");
+} elseif ($parts[1] == "logout") {
+    include("page/logout.php");
 } else {
     header("Location: /home");
 }

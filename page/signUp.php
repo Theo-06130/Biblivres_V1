@@ -2,6 +2,10 @@
 
 session_start();
 
+if (isset($_SESSION["Id_client"]) && !empty($_SESSION["Id_client"])) {
+    header("Location: /home");
+}
+
 if (!isset($_SESSION["sendUser"])) {
     $_SESSION["sendUser"] = 0;
 }
@@ -12,30 +16,51 @@ $conn = $database->getConnection();
 
 if (isset($_POST) && !empty($_POST)) {
 
-    $_SESSION["sendUser"] += 1;
+    $sql = "SELECT * FROM Clients WHERE Email = :Email";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindValue(":Email", htmlspecialchars($_POST["email"]), PDO::PARAM_STR);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($result) {
+        showinput("Email already used");
+    } else {
 
-    $sql = "INSERT INTO Clients (Nom, Prenom, Email, Password, Num_tel)
+        $_SESSION["sendUser"] += 1;
+
+        $sql = "INSERT INTO Clients (Nom, Prenom, Email, Password, Num_tel)
                 VALUES (:Nom, :Prenom, :Email, :Password, :Num_tel)";
 
-    $stmt = $conn->prepare($sql);
+        $stmt = $conn->prepare($sql);
 
-    $stmt->bindValue(":Nom", htmlspecialchars($_POST["nom"]), PDO::PARAM_STR);
-    $stmt->bindValue(":Prenom", htmlspecialchars($_POST["prenom"]), PDO::PARAM_STR);
-    $stmt->bindValue(":Email", htmlspecialchars($_POST["email"]), PDO::PARAM_STR);
-    $options = [
-        'cost' => 14,
-    ];
-    $stmt->bindValue(":Password", (password_hash(htmlspecialchars($_POST["password"]), PASSWORD_DEFAULT, $options)), PDO::PARAM_STR);
-    $stmt->bindValue(":Num_tel", htmlspecialchars($_POST["phone"]), PDO::PARAM_STR);
+        $stmt->bindValue(":Nom", htmlspecialchars($_POST["nom"]), PDO::PARAM_STR);
+        $stmt->bindValue(":Prenom", htmlspecialchars($_POST["prenom"]), PDO::PARAM_STR);
+        $stmt->bindValue(":Email", htmlspecialchars($_POST["email"]), PDO::PARAM_STR);
+        $options = [
+            'cost' => 14,
+        ];
+        $passwd = password_hash(htmlspecialchars($_POST["password"]), PASSWORD_DEFAULT, $options);
+        $stmt->bindValue(":Password", $passwd, PDO::PARAM_STR);
+        $stmt->bindValue(":Num_tel", htmlspecialchars($_POST["phone"]), PDO::PARAM_STR);
 
-    if ($_SESSION["sendUser"] == 1) {
-        $stmt->execute();
-        header("Location: /home");
-    } else {
-        echo "Already send";
+        if ($_SESSION["sendUser"] == 1) {
+            $stmt->execute();
+            $_SESSION["Id_client"] = $conn->lastInsertId();
+            $_SESSION["Nom"] = htmlspecialchars($_POST["nom"]);
+            $_SESSION["Prenom"] = htmlspecialchars($_POST["prenom"]);
+            $_SESSION["Email"] = htmlspecialchars($_POST["email"]);
+            $_SESSION["Password"] = $passwd;
+            $_SESSION["Num_tel"] = htmlspecialchars($_POST["phone"]);
+            header("Location: /home");
+        } else {
+            echo "Already send";
+        }
     }
 } else {
+    showinput("");
+}
 
+function showinput($message)
+{
 ?>
 
     <!DOCTYPE html>
@@ -59,39 +84,60 @@ if (isset($_POST) && !empty($_POST)) {
 
     </style>
 
+    <header>
+        <div class="logs">
+            <a class="signUp" href="/signUp">S'inscrire</a>
+            <a class="login" href="/login">Se connecter</a>
+        </div>
+        <div class="name_page">
+            <h2>Sign Up</h2>
+        </div>
+        <div class="homes">
+            <a href="/home"><img src="/assets\house.svg" alt="home"></a>
+        </div>
+    </header>
 
     <body>
+        <?php
+        if (isset($message)) {
+            echo "<p>$message</p>";
+        }
+        ?>
         <h1>Inscription</h1>
         <div class=contain>
             <div class=element>
-        <form method="post" action='<?php echo $_SERVER["REQUEST_URI"]; ?>'>
-       
-                <div class="form-group">
-                    <label for="prenom">Prenom :</label>
-                    <input type="text" id="prenom" name="prenom" required class="input">
-                </div>
+                <form method="post" action='<?php echo $_SERVER["REQUEST_URI"]; ?>'>
 
-            
+                    <div class="form-group">
+                        <label for="prenom">Prenom :</label>
+                        <input type="text" id="prenom" name="prenom" required class="input">
+                    </div>
 
-            <label for="phone">Numéro de téléphone :</label>
-            <input id="phone" type="tel" name="phone" class="input" /><br><br>
+                    <div class="form-group">
+                        <label for="nom">Nom :</label>
+                        <input type="text" id="nom" name="nom" required class="input">
+                    </div>
 
-            <label for="email">Email :</label>
-            <input type="email" id="email" name="email" required class="input"><br><br>
+                    <label for="phone">Numéro de téléphone :</label>
+                    <input id="phone" type="tel" name="phone" class="input" required /><br><br>
 
-            <label for="password">Mot de passe :</label>
-            <input type="password" id="password" name="password" required class="input"><br><br>
-        <div class="btn">
-       <input type="submit" value="Done" class="button-60">  
+                    <label for="email">Email :</label>
+                    <input type="email" id="email" name="email" required class="input"><br><br>
+
+                    <label for="password">Mot de passe :</label>
+                    <input type="password" id="password" name="password" required class="input"><br><br>
+                    <div class="btn">
+                        <input type="submit" value="Done" class="button-60">
+                    </div>
+            </div>
+            </form>
         </div>
-       
-       <p>By clicking on "Sign up", you accept the</p> 
-        <p1 class="deco">Terms and Conditions of Use.</p1>
-    </div>
-        </form></div>
     </body>
 
-
+    <footer>
+        <div>By clicking on "Sign up", you accept the</div>
+        <div class="deco">Terms and Conditions of Use.</div>
+    </footer>
 
 
 
@@ -110,6 +156,8 @@ if (isset($_POST) && !empty($_POST)) {
 
     $_SESSION["sendUser"] = 0;
 }
+
+
 
 if ($_SESSION["sendUser"] != 1) {
     empty($_POST);
