@@ -29,6 +29,8 @@ if ($parts[1] == "home") {
     include("page/modiflivre.php");
 } elseif ($parts[1] == "signUp") {
     include("page/signUp.php");
+} elseif ($parts[1] == "genres") {
+    include("page/genres.php");
 } else {
     header("Location: /home");
 }

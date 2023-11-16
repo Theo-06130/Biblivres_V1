@@ -116,3 +116,68 @@ li>a:hover::after {
 li>a:hover {
     width: 100%;
 }
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+
+.all_genres {
+    width: clamp(400px, 80vw, 800px);
+    height: clamp(500px, 50vh, 900px);
+}
+
+
+
+
+button {
+    margin: 10px 0 0 15px;
+    padding: 10px 20px;
+    color: white;
+    border-radius: 0.3125rem;
+    background-color: white;
+    border: none;
+    min-width: 100px;
+    min-height: 40px;
+}
+
+
+.Add_genres {
+    padding: 0;
+}
+
+.Add_genres::after {
+    content: "";
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background: url(/assets/plus.svg) no-repeat;
+    background-size: 100%;
+}
+
+.Romance {
+    background: linear-gradient(97deg, #FF0844 -4.14%, #FFB199 100%);
+}
+
+.Fantaisie {
+    background: linear-gradient(97deg, #EBC0FD 0%, #D9DED8 100%);
+    color: var(--couleur_fond);
+}
+
+.Horreur {
+    background: linear-gradient(98deg, #F60505 0%, #1D0000 100.97%);
+}
+
+.Action {
+    background: linear-gradient(97deg, #F83600 0%, #F9D423 100%);
+}
+
+.Comique {
+    background: linear-gradient(97deg, #F6D365 0%, #FDA085 100%);
+}
+
+.Tragique {
+    background: linear-gradient(97deg, #434343 0%, #000 100%);
+}
