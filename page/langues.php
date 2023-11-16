@@ -42,9 +42,16 @@
         </ul>
     </nav>
     <main>
-        <div class="all_genres">
-
+        <div class="all_Langues">
+            <button id="add"></button>
+            <button id="FR">France</button>
+            <button id="USA">USA</button>
+            <button id="UK">UK</button>
+            <button id="ARB">Arabe</button>
+            <button id="ES">Espagne</button>
+            <button id="IT">Italien</button>
+            <button id="JAP">Japonais</button>
+            <button id="PORT">Portugal</button>
         </div>
     </main>
-
 </body>
