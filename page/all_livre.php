@@ -1,3 +1,39 @@
+<?php
+
+include("src/DisplayData.php");
+
+$database = new Database($_ENV["DB_HOST"], $_ENV["DB_PORT"], $_ENV["DB_DATABASE"], $_ENV["DB_USER"], $_ENV["DB_PASSWORD"]);
+
+$conn = $database->getConnection();
+
+$sql = "SELECT * 
+            FROM Livres
+            JOIN Auteur ON Livres.Id_Auteur = Auteur.Id_Auteur
+            JOIN Langue ON Livres.Id_Langue = Langue.Id_Langue
+            ORDER BY Titre_Livre";
+
+$stmt = $conn->prepare($sql);
+
+$stmt->execute();
+
+$data = [];
+
+while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    $data[] = $row;
+}
+
+// display_data($data);
+
+
+?>
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -10,11 +46,11 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="/style/genres.css">
+    <link rel="stylesheet" href="/style/all_livres.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700&display=swap" rel="stylesheet">
-    <title>Genres page</title>
+    <title>all livres page</title>
 </head>
 
 
@@ -24,7 +60,7 @@
             <img src="/assets\default_user.svg" alt="default_user">
         </div>
         <div class="name_page">
-            <h2>Genres</h2>
+            <h2>livres</h2>
         </div>
         <div class="icon_settings">
             <img src="/assets\settings.svg" alt="settings">
@@ -41,22 +77,20 @@
             <li><a href="#">Langues</a></li>
         </ul>
     </nav>
-    <main>
-        <div class="all_genres">
-            <button class="Add_genres"></button>
-            <button class="Romance">Romance</button>
-            <button class='Fantaisie'>Fantaisie</button>
-            <button class='Horreur'>Horreur</button>
-            <button class='Action'>Action</button>
-            <button class='Comique'>Comique</button>
-            <button class='Tragique'>Tragique</button>
-            <button class="Romance">Romance</button>
-            <button class='Fantaisie'>Fantaisie</button>
-            <button class='Horreur'>Horreur</button>
-            <button class='Action'>Action</button>
-            <button class='Comique'>Comique</button>
-            <button class='Tragique'>Tragique</button>
-        </div>
-    </main>
 
+    <div class="all_books">
+        <?php
+        foreach ($data as $key => $value) {
+            echo "
+        <a href='/livre/$value[Id_Livre]'>
+        <div class='book'>
+
+            <img src='data:image/png;base64," . base64_encode($value["Miniature"]) . "' alt=''>
+            
+        </div>
+        </a>";
+        }
+
+        ?>
+    </div>
 </body>

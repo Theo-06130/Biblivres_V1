@@ -2,6 +2,11 @@
 
 session_start();
 
+if (!isset($_SESSION["Id_admin"]) && empty($_SESSION["Id_admin"])) {
+    header("Location: /home");
+    exit();
+}
+
 if (!isset($_SESSION["sendAuteur"])) {
     $_SESSION["sendAuteur"] = 0;
 }
