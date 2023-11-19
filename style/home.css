@@ -1,10 +1,7 @@
 @import url(./root.css);
 
-
-
-
 header {
-    height: 100px;
+    height: 75px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -180,7 +177,7 @@ li>a:hover {
 button {
     margin-left: 15px;
     padding: 10px 20px;
-    color: white;
+    color: rgb(0, 0, 0);
     border-radius: 0.3125rem;
     background-color: white;
     border: none;

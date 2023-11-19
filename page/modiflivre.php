@@ -2,8 +2,13 @@
 
 session_start();
 
-if (!isset($_SESSION["sendLivre"])) {
-    $_SESSION["sendLivre"] = 0;
+if (!isset($_SESSION["Id_admin"]) && empty($_SESSION["Id_admin"])) {
+    header("Location: /loginadmin");
+    exit();
+}
+
+if (!isset($_SESSION["modLivre"])) {
+    $_SESSION["modLivre"] = 0;
 }
 
 $database = new Database($_ENV["DB_HOST"], $_ENV["DB_PORT"], $_ENV["DB_DATABASE"], $_ENV["DB_USER"], $_ENV["DB_PASSWORD"]);
@@ -100,39 +105,41 @@ $conn = $database->getConnection();
             $sql = "SELECT * 
                     FROM Livres
                     WHERE Id_Livre = :id";
-                    $stmt = $conn->prepare($sql);
-                    $stmt->bindValue(":id", $parts[2], PDO::PARAM_INT);
-                    $stmt->execute();
+            $stmt = $conn->prepare($sql);
+            $stmt->bindValue(":id", $parts[2], PDO::PARAM_INT);
+            $stmt->execute();
+
+            $dataLivre = [];
+
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $dataLivre[] = $row;
+            }
 
         ?>
-        
 
-        
-        <div class="content">
-        <?php
-        
-        ?>
-    </div>
-    
             <div class="container">
                 <h1>Update livre</h1>
                 <form method='post' action='<?php echo $_SERVER["REQUEST_URI"]; ?>' enctype='multipart/form-data'>
+                
                     <div class="intern">
                         Titre du livre
-                        <input type="text" name="titre" placeholder="Titre du livre" required class="input-style">
+                        <input type="text" id="titre" name="titre" placeholder="Titre du livre" required class="input-style" value="<?php echo $dataLivre[0]["Titre_Livre"]; ?>">
                     </div>
+
                     <div class="intern imginline">
                         Miniature
                         <input type='file' name='file' accept="image/*" id="imgInp" required class="input-style">
-                        <img id="blah" src="#" alt=" " />
+                        <img id="blah" src="data:image/png;base64, <?php echo base64_encode($dataLivre[0]["Miniature"]) ?>" alt="" style="width: 100px;" />
                     </div>
+
                     <div class="intern">
                         Intrigue
-                        <textarea name="intrigue" placeholder="Intrigue du livre" required></textarea>
+                        <textarea name="intrigue" placeholder="Intrigue du livre" required><?php echo $dataLivre[0]["Intrigue"] ?></textarea>
                     </div>
+
                     <div class="intern">
                         Langue
-                        <select name="langue" required class="input-style">
+                        <select id="langue" name="langue" required class="input-style">
                             <?php
                             foreach ($dataLangue as $key => $value) {
                                 echo "<option value='$value[Id_Langue]'>$value[Language]</option>";
@@ -140,13 +147,15 @@ $conn = $database->getConnection();
                             ?>
                         </select>
                     </div>
+
                     <div class="intern">
                         Date de publication
-                        <input type="date" name="date" placeholder="Date de publication" required class="input-style">
+                        <input type="date" name="date" placeholder="Date de publication" required class="input-style" value="<?php echo $dataLivre[0]["Date_Publi"] ?>">
                     </div>
+
                     <div class="intern">
                         Auteur
-                        <select name="auteur" required class="input-style">
+                        <select id="auteur" name="auteur" required class="input-style">
                             <?php
                             foreach ($dataAuteur as $key => $value) {
                                 echo "<option value='$value[Id_Auteur]'>$value[Nom]</option>";
@@ -154,9 +163,10 @@ $conn = $database->getConnection();
                             ?>
                         </select>
                     </div>
+
                     <div class="intern">
                         Genre
-                        <select name="genre" required class="input-style">
+                        <select id="genre" name="genre" required class="input-style">
                             <?php
                             foreach ($dataGenre as $key => $value) {
                                 echo "<option value='$value[Id_Genre]'>$value[Titre_Genre]</option>";
@@ -164,9 +174,10 @@ $conn = $database->getConnection();
                             ?>
                         </select>
                     </div>
+
                     <div class="intern">
                         Type
-                        <select name="type" required class="input-style">
+                        <select id="type" name="type" required class="input-style">
                             <?php
                             foreach ($dataType as $key => $value) {
                                 echo "<option value='$value[Id_Types]'>$value[Types]</option>";
@@ -174,31 +185,59 @@ $conn = $database->getConnection();
                             ?>
                         </select>
                     </div>
+
                     <div class="intern">
                         Prix
-                        <input type="number" pattern="^\d*(\.\d{0,2})?$" step="0.01" name="prix" placeholder="Prix" required class="input-style">
+                        <input type="number" pattern="^\d*(\.\d{0,2})?$" step="0.01" name="prix" placeholder="Prix" required class="input-style" value="<?php echo $dataLivre[0]["Prix"] ?>">
                         <label for="prix">€</label>
                     </div>
+
                     <div class="intern">
                         Nombre de page
-                        <input type="number" pattern="^(?:\d*\.)?\d+$" step="1" name="page" placeholder="Pages" required class="input-style">
+                        <input type="number" pattern="^(?:\d*\.)?\d+$" step="1" name="page" placeholder="Pages" required class="input-style" value="<?php echo $dataLivre[0]["Nb_Pages"] ?>">
                     </div>
+
                     <div class="intern">
                         Editeur
-                        <input type="text" name="editeur" placeholder="Editeur" required class="input-style">
+                        <input type="text" name="editeur" placeholder="Editeur" required class="input-style" value="<?php echo $dataLivre[0]["Editeur"] ?>">
                     </div>
+
+                    <div class="intern">
+                        Quantity
+                        <input type="text" name="quantity" placeholder="Quantity" required class="input-style" value="<?php echo $dataLivre[0]["Quantity"] ?>">
+                    </div>
+
                     <div class="intern">
                         Update Livre
                         <input type='submit' value='Upload' class="input-style">
                     </div>
                 </form>
             </div>
+
+            <script>
+                img = new File(["<?php echo base64_encode($dataLivre[0]["Miniature"]) ?>"], "<?php echo $dataLivre[0]["Titre_Livre"] ?>.png", {
+                    type: "image/png",
+                });
+                const dataTransfer = new DataTransfer();
+                dataTransfer.items.add(img);
+                document.getElementById("imgInp").files = dataTransfer.files;
+
+                document.getElementById("langue").value = "<?php echo $dataLivre[0]["Id_Langue"] ?>";
+
+                document.getElementById("auteur").value = "<?php echo $dataLivre[0]["Id_Auteur"] ?>";
+
+                document.getElementById("genre").value = "<?php echo $dataLivre[0]["Id_Genre"] ?>";
+
+                document.getElementById("type").value = "<?php echo $dataLivre[0]["Id_Types"] ?>";
+
+            </script>
+
         <?php
 
-            $_SESSION["sendLivre"] = 0;
+            $_SESSION["modLivre"] = 0;
         } else {
 
-            $_SESSION["sendLivre"] += 1;
+            $_SESSION["modLivre"] += 1;
 
             $sql = "UPDATE Livres
                     SET Titre_Livre = :Titre_Livre,
@@ -211,7 +250,8 @@ $conn = $database->getConnection();
                         Id_Types = :Id_Types,
                         Prix = :Prix,
                         Nb_Pages = :Nb_Pages,
-                        Editeur = :Editeur
+                        Editeur = :Editeur,
+                        Quantity = :Quantity
                     WHERE Id_Livre = :id";
 
             $stmt = $conn->prepare($sql);
@@ -227,12 +267,14 @@ $conn = $database->getConnection();
             $stmt->bindValue(":Prix", ($_POST["prix"]), PDO::PARAM_STR);
             $stmt->bindValue(":Nb_Pages", ($_POST["page"]), PDO::PARAM_INT);
             $stmt->bindValue(":Editeur", htmlspecialchars($_POST["editeur"]), PDO::PARAM_STR);
+            $stmt->bindValue(":Quantity", htmlspecialchars($_POST["quantity"]), PDO::PARAM_STR);
+            $stmt->bindValue(":id", $parts[2], PDO::PARAM_INT);
 
-            if ($_SESSION["sendLivre"] == 1) {
+            if ($_SESSION["modLivre"] == 1) {
                 $stmt->execute();
-                include("/page/UpdateSpecificAuteur.php");
+                include("UpdateSpecificAuteur.php");
                 UpdateSpecificAuteur($_POST["auteur"], $database);
-                header("Location: /home");
+                header("Location: /adminlivre");
             } else {
                 echo "Already send";
             }
@@ -272,7 +314,7 @@ $conn = $database->getConnection();
 </script>
 
 <?php
-if ($_SESSION["sendLivre"] != 1) {
+if ($_SESSION["modLivre"] != 1) {
     empty($_POST);
     empty($_FILES);
     unset($_POST);

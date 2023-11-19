@@ -84,19 +84,6 @@ function showinput($message)
 
     </style>
 
-    <header>
-        <div class="logs">
-            <a class="signUp" href="/signUp">S'inscrire</a>
-            <a class="login" href="/login">Se connecter</a>
-        </div>
-        <div class="name_page">
-            <h2>Sign Up</h2>
-        </div>
-        <div class="homes">
-            <a href="/home"><img src="/assets\house.svg" alt="home"></a>
-        </div>
-    </header>
-
     <body>
         <?php
         if (isset($message)) {
@@ -127,20 +114,14 @@ function showinput($message)
                     <label for="password">Mot de passe :</label>
                     <input type="password" id="password" name="password" required class="input"><br><br>
                     <div class="btn">
-                        <input type="submit" value="Done" class="button-60">
+                        <input type="submit" value="Sign up" class="button-60">
                     </div>
+
+                    <p class="ligne_inscription">By clicking on <a href="#">"Sign up"</a>, you accept the</p>
+                    <p class="deco">Terms and Conditions of Use.</p>
+                </form>
             </div>
-            </form>
-        </div>
     </body>
-
-    <footer>
-        <div>By clicking on "Sign up", you accept the</div>
-        <div class="deco">Terms and Conditions of Use.</div>
-    </footer>
-
-
-
 
     </html>
 
