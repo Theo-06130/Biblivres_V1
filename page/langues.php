@@ -43,15 +43,15 @@
     </nav>
     <main>
         <div class="all_Langues">
-            <button id="add"></button>
-            <button id="FR">France</button>
-            <button id="USA">USA</button>
-            <button id="UK">UK</button>
-            <button id="ARB">Arabe</button>
-            <button id="ES">Espagne</button>
-            <button id="IT">Italien</button>
-            <button id="JAP">Japonais</button>
-            <button id="PORT">Portugal</button>
+            <div class="langues" id="add"></div>
+            <div class="langues" id="FR">France</div>
+            <div class="langues" id="USA">USA</div>
+            <div class="langues" id="UK">UK</div>
+            <div class="langues" id="ARB">Arabe</div>
+            <div class="langues" id="ES">Espagne</div>
+            <div class="langues" id="IT">Italien</div>
+            <div class="langues" id="JAP">Japonais</div>
+            <div class="langues" id="PORT">Portugal</div>
         </div>
     </main>
 </body>
