@@ -13,84 +13,36 @@ main {
 
 .all_Langues {
     margin-top: 3%;
-    width: clamp(400px, 80vw, 800px);
-    height: clamp(500px, 50vh, 900px);
-    display: flex;
 }
 
 
 
 .langues {
+    display: flex;
     margin: 10px 0 0 15px;
-    padding: 10px 20px;
     color: white;
     border-radius: 0.3125rem;
-    background-color: white;
     border: none;
-    width: 100px;
+    min-width: 80px;
     height: 40px;
 }
 
-
-#add {
-    padding: 0;
-    position: relative;
-    top: 8px;
+.langues>img {
+    width: 100%;
+    max-width: 90px;
+    height: 100%;
+    border-radius: 0.3125rem;
 }
 
-#add::after {
-    content: "";
-    display: inline-block;
-    width: 30px;
-    height: 30px;
-    background: url(/assets/plus.svg) no-repeat;
-    background-size: 100%;
-}
+@media screen and (min-width:900px) {
+    .all_Langues {
+        display: flex;
+        flex-direction: row;
+        align-items: start;
+    }
 
-#FR {
-    background: url(/assets/drapeau/FR.jpg);
-    background-size: 100%;
-    color: black;
-}
-
-#USA {
-    background: url(/assets/drapeau/USA.jpg);
-    background-size: 100%;
-    color: black;
-}
-
-#UK {
-    background: url(/assets/drapeau/UK.jpg);
-    background-size: 100%;
-    color: black;
-}
-
-#ARB {
-    background: url(/assets/drapeau/ARB.jpg);
-    background-size: 100%;
-    color: black;
-}
-
-#ES {
-    background: url(/assets/drapeau/ESP.jpg);
-    background-size: 100%;
-    color: black;
-}
-
-#IT {
-    background: url(/assets/drapeau/ITA.jpg);
-    background-size: 100%;
-    color: black;
-}
-
-#JAP {
-    background: url(/assets/drapeau/JAP.jpg);
-    background-size: 100%;
-    color: black;
-}
-
-#PORT {
-    background: url(/assets/drapeau/PORT.jpg);
-    background-size: 100%;
-    color: black;
+    .langues {
+        text-align: center;
+        flex-direction: column;
+    }
 }
