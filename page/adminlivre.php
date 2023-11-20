@@ -3,7 +3,7 @@
 session_start();
 
 if (!isset($_SESSION["Id_admin"]) && empty($_SESSION["Id_admin"])) {
-    header("Location: /home");
+    header("Location: /loginadmin");
     exit();
 }
 
@@ -31,8 +31,8 @@ if (isset($parts[2]) && !empty($parts[2])) {
     $stmt->bindValue(":id", $parts[2], PDO::PARAM_INT);
     $stmt->execute();
 
-    include("/page/UpdateSpecificAuteur.php");
-    UpdateSpecificAuteur($data[0]["Id_auteur"], $database);
+    include("UpdateSpecificAuteur.php");
+    UpdateSpecificAuteur($data[0]["Id_Auteur"], $database);
     header("Location: /adminlivre");
 }
 
@@ -66,9 +66,7 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/style/home.css">
     <title>Admin livre page</title>
 </head>
@@ -78,6 +76,11 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 </style>
 
 <body>
+    <header>
+        <div class="logs">
+            <a class="signUp" href="/logoutadmin">Se deconnecter</a>
+        </div>
+    </header>
 
     <div class="content">
         <?php

@@ -62,7 +62,7 @@
 button {
     margin-left: 15px;
     padding: 10px 20px;
-    color: white;
+    color: rgb(0, 0, 0);
     border-radius: 0.3125rem;
     background-color: white;
     border: none;
