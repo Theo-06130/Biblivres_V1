@@ -1,8 +1,89 @@
+@import url(./root.css);
+
+
 h1 {
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
     text-align: center;
-    margin-bottom: 95px;
+    margin-bottom: 20px;
     font-family: 'lato', sans-serif;
     margin-top: 20px;
+    font-size: 40px;
 
+}
+.img {
+    border-radius: 50%;
+    height: 80px;
+   display: block;
+   margin-left: auto;
+   margin-right: auto; 
+   
+}
+p{
+    color: rgb(255, 255, 255);
+    text-align: center;
+    margin-bottom: 50px;
+    font-family: 'lato', sans-serif;
+    margin-top: 10px;
+    font-size: 20px;
+
+}
+   
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #000000;
+    font-family: 'lato', sans-serif;
+}
+.container label {
+    display: block;
+    margin-bottom: 5px;
+}
+.input {
+    border: 2px solid transparent;
+    width: 16em;
+    height: 2.5em;
+    padding-left: 0.8em;
+    outline: none;
+    overflow: hidden;
+    background-color: #F3F3F3;
+    border-radius: 10px;
+    transition: all 0.5s;
+    color: #01051A;
+    margin-bottom: 20px;
+    
+}
+
+.input:hover,
+.input:focus {
+    border: 2px solid #4A9DEC;
+    box-shadow: 0px 0px 0px 7px rgb(74, 157, 236, 20%);
+    background-color: white;
+}
+
+
+
+
+hr {
+    border: 1px solid #ffffff;
+    margin-bottom: 20px;
+
+}
+
+.btn {
+    align-items: center;
+    background-color: #01051A;
+    border: 1px solid #ff0303;
+    border-radius: 10px;
+    color: #ffffff;
+    cursor: pointer;
+    font-family: BlinkMacSystemFont, -apple-system, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1rem;
+    height: 2.5em;
+    justify-content: center;
+    padding: calc(.5em - 1px) 3em;
+}
+.boutton_centrage{
+
+    text-align: center;
 }

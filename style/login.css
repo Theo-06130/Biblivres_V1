@@ -11,6 +11,7 @@ h1 {
 
 }
 
+
 .contain {
     display: flex;
     justify-content: center;
@@ -77,8 +78,4 @@ form {
 .button-60.active {
     background-color: #ffffff;
 }
-
-
-
-
 
