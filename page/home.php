@@ -33,7 +33,9 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="/style/home.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -46,20 +48,22 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     <header>
         <?php
         if (isset($_SESSION["Id_client"]) && !empty($_SESSION["Id_client"])) {
-        ?>
+            ?>
             <div class="div_icon_profil">
                 <img src="/assets\default_user.svg" alt="default_user">
-                <p><?php echo $_SESSION["Prenom"] ?></p>
+                <p>
+                    <?php echo $_SESSION["Prenom"] ?>
+                </p>
                 <a class="logout" href="/logout">Se deconnecter</a>
             </div>
-        <?php
+            <?php
         } else {
-        ?>
+            ?>
             <div class="logs">
                 <a class="signUp" href="/signUp">S'inscrire</a>
                 <a class="login" href="/login">Se connecter</a>
             </div>
-        <?php
+            <?php
         }
         ?>
         <div class="name_page">
@@ -80,9 +84,9 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             <!-- <div class="underline"></div> -->
             <li><a href="/genres">Genres</a></li>
             <li><a href="/livre">Livres</a></li>
-            <li><a href="#">Auteur</a></li>
-            <li><a href="#">Types</a></li>
-            <li><a href="#">Langues</a></li>
+            <li><a href="/auteur">Auteur</a></li>
+            <li><a href="/types">Types</a></li>
+            <li><a href="/langues">Langues</a></li>
         </ul>
     </nav>
 

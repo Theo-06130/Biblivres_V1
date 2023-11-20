@@ -2,10 +2,10 @@
 
 session_start();
 
-if (!isset($_SESSION["Id_admin"]) && empty($_SESSION["Id_admin"])) {
-    header("Location: /home");
-    exit();
-}
+// if (!isset($_SESSION["Id_admin"]) && empty($_SESSION["Id_admin"])) {
+//     header("Location: /home");
+//     exit();
+// }
 
 if (!isset($_SESSION["sendLivre"])) {
     $_SESSION["sendLivre"] = 0;
@@ -177,6 +177,10 @@ $conn = $database->getConnection();
                         <input type="text" name="editeur" placeholder="Editeur" required class="input-style">
                     </div>
                     <div class="intern">
+                        Quantity
+                        <input type="number" pattern="^(?:\d*\.)?\d+$" step="1" name="quantity" placeholder="Quantity" required class="input-style">
+                    </div>
+                    <div class="intern">
                         Add new Livre
                         <input type='submit' value='Upload' class="input-style">
                     </div>
@@ -189,8 +193,8 @@ $conn = $database->getConnection();
 
             $_SESSION["sendLivre"] += 1;
 
-            $sql = "INSERT INTO Livres (Titre_Livre, Miniature, Intrigue, Id_Langue, Date_Publi, Id_Auteur, Id_Genre, Id_Types, Prix, Nb_Pages, Editeur)
-                VALUES (:Titre_Livre, :Miniature, :Intrigue, :Id_Langue, :Date_Publi, :Id_Auteur, :Id_Genre, :Id_Types, :Prix, :Nb_Pages, :Editeur)";
+            $sql = "INSERT INTO Livres (Titre_Livre, Miniature, Intrigue, Id_Langue, Date_Publi, Id_Auteur, Id_Genre, Id_Types, Prix, Nb_Pages, Editeur, Quantity)
+                VALUES (:Titre_Livre, :Miniature, :Intrigue, :Id_Langue, :Date_Publi, :Id_Auteur, :Id_Genre, :Id_Types, :Prix, :Nb_Pages, :Editeur, :Quantity)";
 
             $stmt = $conn->prepare($sql);
 
@@ -205,10 +209,11 @@ $conn = $database->getConnection();
             $stmt->bindValue(":Prix", ($_POST["prix"]), PDO::PARAM_STR);
             $stmt->bindValue(":Nb_Pages", ($_POST["page"]), PDO::PARAM_INT);
             $stmt->bindValue(":Editeur", htmlspecialchars($_POST["editeur"]), PDO::PARAM_STR);
+            $stmt->bindValue(":Quantity", ($_POST["quantity"]), PDO::PARAM_INT);
 
             if ($_SESSION["sendLivre"] == 1) {
                 $stmt->execute();
-                include("/page/UpdateSpecificAuteur.php");
+                include("UpdateSpecificAuteur.php");
                 UpdateSpecificAuteur($_POST["auteur"], $database);
                 header("Location: /home");
             } else {

@@ -30,8 +30,14 @@ if ($parts[1] == "home") {
     include("page/modiflivre.php");
 } elseif ($parts[1] == "signUp") {
     include("page/signUp.php");
+} elseif ($parts[1] == "login") {
+    include("page/login.php");
 } elseif ($parts[1] == "logout") {
     include("page/logout.php");
+} elseif ($parts[1] == "loginadmin") {
+    include("page/loginadmin.php");
+} elseif ($parts[1] == "logoutadmin") {
+    include("page/logoutadmin.php");
 } elseif ($parts[1] == "genres") {
     include("page/genres.php");
 } elseif ($parts[1] == "livres") {
@@ -39,9 +45,11 @@ if ($parts[1] == "home") {
 } elseif ($parts[1] == "auteur") {
     include("page/auteur.php");
 } elseif ($parts[1] == "types") {
-    include("pages/types.php");
+    include("page/types.php");
 } elseif ($parts[1] == "parametre") {
     include("page/parametre.php");
+} elseif ($parts[1] == "langues") {
+    include("page/langues.php");
 } else {
     header("Location: /home");
 }
