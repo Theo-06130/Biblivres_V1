@@ -48,7 +48,7 @@ if (isset($_POST) && !empty($_POST)) {
 function showinput($message)
 {
 
-?>
+    ?>
 
     <!DOCTYPE html>
     <html lang="en">
@@ -91,9 +91,9 @@ function showinput($message)
     </body>
 
     </html>
-    <script src="/style/script.js"></script>
+    <script src="/script/script.js"></script>
 
-<?php
+    <?php
     $_SESSION["logUser"] = 0;
 }
 

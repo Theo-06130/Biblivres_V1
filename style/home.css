@@ -2,6 +2,10 @@
 @import url(./header.css);
 
 
+
+
+
+
 .last_see {
     margin-top: 15px;
     background-color: transparent;
@@ -92,6 +96,7 @@ button {
 
 .Tragique {
     background: linear-gradient(97deg, #434343 0%, #000 100%);
+    color: white;
 }
 
 @media screen and (max-width:900px) {

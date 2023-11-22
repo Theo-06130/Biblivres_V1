@@ -50,9 +50,8 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         if (isset($_SESSION["Id_client"]) && !empty($_SESSION["Id_client"])) {
             ?>
             <div class="div_icon_profil">
-                <img src="/assets\default_user.svg" alt="default_user">
                 <p>
-                    <?php echo $_SESSION["Prenom"] ?>
+                    <?php echo strtoupper($_SESSION["Prenom"][0]) ?>
                 </p>
                 <a class="logout" href="/logout">Se deconnecter</a>
             </div>
@@ -60,8 +59,12 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         } else {
             ?>
             <div class="logs">
-                <a class="signUp" href="/signUp">S'inscrire</a>
-                <a class="login" href="/login">Se connecter</a>
+                <div class="div_MeConnecter">
+                    <h4 id="MeConnecter" onclick="log()">Me connecter</h4>
+                    <p id="chevron">></p>
+                </div>
+                <a class="signUp" id="SignUp" href="/signUp">S'inscrire</a>
+                <a class="login" id="LogIn" href="/login">Se connecter</a>
             </div>
             <?php
         }
@@ -69,12 +72,8 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         <div class="name_page">
             <h2>Accueil</h2>
         </div>
-        <div class="icon_settings">
+        <div class="icon_settings" onclick="settings()">
             <img src="/assets\settings.svg" alt="settings">
-        </div>
-
-        <div class="logout">
-
         </div>
 
     </header>
@@ -151,8 +150,8 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 <!-- <script type="module" src="/site/JS/script.js"></script>
 <script type="module" src="/site/JS/home.js"></script> -->
 <script type="module">
-
 </script>
+<script src="/script/home.js"></script>
 
 
 

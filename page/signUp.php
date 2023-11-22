@@ -61,7 +61,7 @@ if (isset($_POST) && !empty($_POST)) {
 
 function showinput($message)
 {
-?>
+    ?>
 
     <!DOCTYPE html>
     <html lang="fr">
@@ -72,7 +72,9 @@ function showinput($message)
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100&display=swap" rel="stylesheet">
+        <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100&display=swap"
+            rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
         <link rel="stylesheet" href="/style/signUp.css">
@@ -125,7 +127,7 @@ function showinput($message)
 
     </html>
 
-    <script src="/style/script.js"></script>
+    <script src="/script/script.js"></script>
     <script>
         const phoneInputField = document.querySelector("#phone");
         const phoneInput = window.intlTelInput(phoneInputField, {
@@ -134,7 +136,7 @@ function showinput($message)
         });
     </script>
 
-<?php
+    <?php
 
     $_SESSION["sendUser"] = 0;
 }
