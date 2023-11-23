@@ -53,7 +53,6 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 <p>
                     <?php echo strtoupper($_SESSION["Prenom"][0]) ?>
                 </p>
-                <a class="logout" href="/logout">Se deconnecter</a>
             </div>
             <?php
         } else {
@@ -72,9 +71,22 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         <div class="name_page">
             <h2>Accueil</h2>
         </div>
-        <div class="icon_settings" onclick="document.location.href = 'parametre'">
-            <img src="/assets\settings.svg" alt="settings">
-        </div>
+        <?php
+        if (isset($_SESSION["Id_client"]) && !empty($_SESSION["Id_client"])) {
+            ?>
+            <div class="icon_settings" onclick="document.location.href = 'parametre'">
+                <img src="/assets\settings.svg" alt="settings">
+            </div>
+            <?php
+        } else {
+            ?>
+            <div class="icon_settings" onclick="alert('Connectez vous pour accéder au paramètre'),show_log()">
+                <img src="/assets\settings.svg" alt="settings">
+            </div>
+            <?php
+        }
+        ?>
+
 
     </header>
     <nav>
