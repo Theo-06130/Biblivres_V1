@@ -118,9 +118,54 @@ hr {
 #edit {}
 
 .boutton_centrage {
+    color: #000000;
+    background-color: rgb(10, 185, 176);
     border: solid 2px red;
     padding: 5px;
     text-align: center;
-    width: 100px;
+    width: 120px;
     border-radius: 5px;
 }
+
+.boutton_centrage:hover {
+    background-color: rgb(10, 185, 176);
+    color: #ffffff;
+    border: solid 2px #ffffff;
+    cursor: pointer;
+}
+
+.form{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    width: 100%;
+}
+
+.form>hr{
+    width: 100%;
+}
+
+.form>form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.form>form>hr{
+    width: 100%;
+}
+
+.message{
+    color: #ffffff;
+    font-family: 'lato', sans-serif;
+    font-size: 20px;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
