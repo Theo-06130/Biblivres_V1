@@ -50,6 +50,8 @@ if ($parts[1] == "home") {
     include("page/parametre.php");
 } elseif ($parts[1] == "langues") {
     include("page/langues.php");
+} elseif ($parts[1] == "Addresse_liv") {
+    include("page/Addresse_liv.php");
 } else {
     header("Location: /home");
 }
