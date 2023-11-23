@@ -22,12 +22,14 @@ function log() {
 
 
 function show_log() {
+    show = true
     SignUp.style.transform = "translateX(110px)"
     LogIn.style.transform = "translateX(110px)"
     chevron.style.rotate = "90deg"
 }
 
 function Hide_log() {
+    show = false
     SignUp.style.transform = "translateX(0)"
     LogIn.style.transform = "translateX(0)"
     chevron.style.rotate = "0deg"
