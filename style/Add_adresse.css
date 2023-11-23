@@ -1,0 +1,7 @@
+@import url(./root.css);
+
+
+main {
+    display: flex;
+    flex-direction: column;
+}
