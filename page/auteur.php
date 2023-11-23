@@ -1,3 +1,29 @@
+<?php
+
+session_start();
+
+$database = new Database($_ENV["DB_HOST"], $_ENV["DB_PORT"], $_ENV["DB_DATABASE"], $_ENV["DB_USER"], $_ENV["DB_PASSWORD"]);
+
+$conn = $database->getConnection();
+
+$sql = "SELECT * 
+        FROM Livres
+        JOIN Auteur ON Livres.Id_Auteur = Auteur.Id_Auteur
+        JOIN Langue ON Livres.Id_Langue = Langue.Id_Langue
+        ORDER BY Titre_Livre";
+
+$stmt = $conn->prepare($sql);
+
+$stmt->execute();
+
+$data = [];
+
+while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    $data[] = $row;
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -20,13 +46,33 @@
 
 <body>
     <header>
-        <div class="div_icon_profil">
-            <img src="/assets\default_user.svg" alt="default_user">
-        </div>
+        <?php
+        if (isset($_SESSION["Id_client"]) && !empty($_SESSION["Id_client"])) {
+            ?>
+            <div class="div_icon_profil">
+                <p>
+                    <?php echo strtoupper($_SESSION["Prenom"][0]) ?>
+                </p>
+                <a class="logout" href="/logout">Se deconnecter</a>
+            </div>
+            <?php
+        } else {
+            ?>
+            <div class="logs">
+                <div class="div_MeConnecter">
+                    <h4 id="MeConnecter" onclick="log()">Me connecter</h4>
+                    <p id="chevron">></p>
+                </div>
+                <a class="signUp" id="SignUp" href="/signUp">S'inscrire</a>
+                <a class="login" id="LogIn" href="/login">Se connecter</a>
+            </div>
+            <?php
+        }
+        ?>
         <div class="name_page">
             <h2>Auteur</h2>
         </div>
-        <div class="icon_settings">
+        <div class="icon_settings" onclick="document.location.href = 'parametre'">
             <img src="/assets\settings.svg" alt="settings">
         </div>
     </header>
@@ -54,3 +100,6 @@
         </div>
     </main>
 </body>
+<script src="/script/menu_log.js"></script>
+
+</html>

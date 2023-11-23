@@ -35,6 +35,7 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 </head>
 
 <body>
+    <img src="/assets/left_arrow.svg" class="come_back" alt="" onclick="window.history.back()">
     <h1>Paramètres</h1>
     <div class="icon_profil">
         <img src="/style/cj.png" id="img_easter_egg" alt="">
@@ -50,7 +51,7 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     <div class="container">
         <form method="post" action='<?php echo $_SERVER["REQUEST_URI"]; ?>'>
 
-            <input type="text" id="Prenom" name="Prenom" disabled required class="input" value=<?php echo ($_SESSION["Prenom"]) ?>>
+            <input type="text" id="Prenom" name="Prenom" required class="input" value=<?php echo ($_SESSION["Prenom"]) ?>>
 
             <input type="text" id="name" name="name" required class="input" value=<?php echo ($_SESSION["Nom"]) ?>>
 
@@ -65,7 +66,7 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             <hr>
 
             <div class=boutton_centrage>
-                <button type="submit" id="edit">Modifier</button>
+                <a href="/logout" id="edit">Log Out</a>
             </div>
 
     </div>

@@ -16,9 +16,6 @@ function log() {
     }
 }
 
-function settings() {
-    document.location.href = "parametre";
-}
 
 
 

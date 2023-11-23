@@ -72,7 +72,7 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         <div class="name_page">
             <h2>Accueil</h2>
         </div>
-        <div class="icon_settings" onclick="settings()">
+        <div class="icon_settings" onclick="document.location.href = 'parametre'">
             <img src="/assets\settings.svg" alt="settings">
         </div>
 
@@ -151,7 +151,7 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 <script type="module" src="/site/JS/home.js"></script> -->
 <script type="module">
 </script>
-<script src="/script/home.js"></script>
+<script src="/script/menu_log.js"></script>
 
 
 

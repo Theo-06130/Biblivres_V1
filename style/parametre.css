@@ -1,5 +1,10 @@
 @import url(./root.css);
 
+
+.come_back {
+    width: 45px;
+}
+
 h1 {
     color: rgb(255, 255, 255);
     text-align: center;
