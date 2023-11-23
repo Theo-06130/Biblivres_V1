@@ -52,6 +52,10 @@ if ($parts[1] == "home") {
     include("page/panier.php");
 } elseif ($parts[1] == "langues") {
     include("page/langues.php");
+} elseif ($parts[1] == "Adresse_livraison") {
+    include("page/Adresse_liv.php");
+} elseif ($parts[1] == "Add_adresse") {
+    include("page/Add_adresse.php");
 } else {
     header("Location: /home");
 }
