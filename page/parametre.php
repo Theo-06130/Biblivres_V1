@@ -37,9 +37,9 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 <body>
     <h1>Paramètres</h1>
     <div class="icon_profil">
-        <img src="/style/cj.png" class="img_easter_egg" alt="">
+        <img src="/style/cj.png" id="img_easter_egg" alt="">
         <div class="div_icon_profil">
-            <p>
+            <p onclick="easter_egg()">
                 <?php echo strtoupper($_SESSION["Prenom"][0]) ?>
             </p>
         </div>
@@ -65,7 +65,7 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             <hr>
 
             <div class=boutton_centrage>
-                <button type="submit" id="edit" onclick="enable_input()">Modifier</button>
+                <button type="submit" id="edit">Modifier</button>
             </div>
 
     </div>
