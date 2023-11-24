@@ -9,6 +9,7 @@
 </head>
 
 <body>
+    <img src="/assets/left_arrow.svg" class="come_back" alt="" onclick="window.history.back()">
     <main>
         <article class="add_lieu">
             <img src="/assets/plus.svg" alt="">

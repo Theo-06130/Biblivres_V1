@@ -1,6 +1,10 @@
 @import url(./root.css);
 
 
+.come_back {
+    width: 45px;
+}
+
 main {
     display: flex;
     justify-content: space-around;

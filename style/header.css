@@ -56,10 +56,31 @@ header {
 
 .icon_settings {
     width: 50px;
+    display: flex;
+    flex-direction: column;
+    height: 50px;
+}
+
+
+#I_compte {
+    top: 55px;
+
+}
+
+#addr_liv {
+    top: 80px;
+}
+
+.icon_settings>a {
+    position: absolute;
+    right: calc(-30px - 110px);
+    width: 120px;
 }
 
 .icon_settings>img {
     width: 80%;
+    position: relative;
+    top: -10px;
 }
 
 .icon_settings>img:hover {
