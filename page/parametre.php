@@ -100,10 +100,6 @@ if (isset($_POST) && !empty($_POST)) {
             $message = "Ancien mot de passe incorrect";
         }
 
-
-
-
-        $message = $_POST["Gategorie"];
     }
 } else {
     $message = "";
