@@ -1,8 +1,15 @@
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
+@import url(./root.css);
+
+
+/* variable global css temporaire pour facilité le dev et mettre tt les texte en noir sur cette page*/
+* {
+    color: black
+}
+
+/* fin de la varible global*/
+
+.return {
+    width: 40px;
 }
 
 .panier {
@@ -33,11 +40,14 @@ table {
     margin-bottom: 20px;
 }
 
-table, th, td {
+table,
+th,
+td {
     border: 1px solid #ddd;
 }
 
-th, td {
+th,
+td {
     padding: 10px;
     text-align: left;
 }
@@ -63,7 +73,8 @@ label {
     margin-bottom: 8px;
 }
 
-input, button {
+input,
+button {
     padding: 10px;
     margin-bottom: 15px;
 }

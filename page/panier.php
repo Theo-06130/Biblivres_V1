@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panier</title>
     <link rel="stylesheet" href="../style/panier.css">
 </head>
-<body class="panier">
-    <a href="home.php" class="link">Home</a>
-    <section>
+
+<body>
+    <img src="/assets/left_arrow.svg" alt="" class="return" onclick='window.history.back()'>
+    <section class="panier">
         <?php
 
         $database = new Database($_ENV["DB_HOST"], $_ENV["DB_PORT"], $_ENV["DB_DATABASE"], $_ENV["DB_USER"], $_ENV["DB_PASSWORD"]);
-        
+
 
         $conn = $database->getConnection();
-        
+
 
         if (isset($_SESSION["Id_client"]) && !empty($_SESSION["Id_client"])) {
             $idClient = $_SESSION["Id_client"];
@@ -61,15 +63,15 @@
 
             while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
                 echo "<tr>
-                <td>".(isset($row["ID_article_panier"]) ? $row["ID_article_panier"] : "")."</td>
-                <td>".(isset($row["ID_client"]) ? $row["ID_client"] : "")."</td>
-                <td>".(isset($row["ID_livre"]) ? $row["ID_livre"] : "")."</td>
-                <td>".(isset($row["quantity"]) ? $row["quantity"] : "")."</td>
+                <td>" . (isset($row["ID_article_panier"]) ? $row["ID_article_panier"] : "") . "</td>
+                <td>" . (isset($row["ID_client"]) ? $row["ID_client"] : "") . "</td>
+                <td>" . (isset($row["ID_livre"]) ? $row["ID_livre"] : "") . "</td>
+                <td>" . (isset($row["quantity"]) ? $row["quantity"] : "") . "</td>
                 </tr>";
-            
+
 
                 // Calculez le total
-                $sql = "SELECT * FROM Livres WHERE ID_livre = ".(isset($row["ID_livre"]) ? $row["ID_livre"] : "");
+                $sql = "SELECT * FROM Livres WHERE ID_livre = " . (isset($row["ID_livre"]) ? $row["ID_livre"] : "");
                 $result2 = $conn->query($sql);
                 if ($result2->rowCount() > 0) {
                     while ($row2 = $result2->fetch(PDO::FETCH_ASSOC)) {
@@ -81,7 +83,7 @@
             echo "</table>";
 
             // Afficher le total
-            echo "<p>Total : ".$total."€</p>";
+            echo "<p>Total : " . $total . "€</p>";
         } else {
             echo "Le panier est vide.";
         }
@@ -104,7 +106,5 @@
         </form>
     </section>
 </body>
+
 </html>
-
-
-
