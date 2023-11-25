@@ -1,6 +1,13 @@
 @import url(./root.css);
 
 
+
+header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
 .come_back {
     width: 45px;
 }
@@ -10,7 +17,6 @@ h1 {
     text-align: center;
     margin-bottom: 20px;
     font-family: 'lato', sans-serif;
-    margin-top: 20px;
     font-size: 40px;
 
 }
@@ -20,7 +26,7 @@ h1 {
 .icon_profil {
     display: flex;
     justify-content: center;
-    margin-bottom: 10vh;
+    margin-bottom: 5vh;
 }
 
 
@@ -68,7 +74,7 @@ p {
 .container {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: start;
     color: #000000;
     font-family: 'lato', sans-serif;
 }
@@ -115,26 +121,58 @@ hr {
 
 }
 
-#edit {}
+.boutton_log_out {
+    margin: 10px 10px 0 0;
+    padding: 0.4em 1.1em;
+    background-color: #BF0426;
+    text-decoration: none;
+    border: none;
+    border-radius: 0.5em;
+    color: #DEDEDE;
+    box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.3);
+}
+
+.boutton_log_out>a {
+    color: black;
+}
+
 
 .boutton_centrage {
-    color: #000000;
-    background-color: rgb(10, 185, 176);
-    border: solid 2px red;
-    padding: 5px;
-    text-align: center;
-    width: 120px;
-    border-radius: 5px;
+    margin: 10px 10px 0 0;
+    padding: 0.4em 1.1em;
+    background-color: #00A97F;
+    text-decoration: none;
+    border: none;
+    border-radius: 0.5em;
+    color: #DEDEDE;
+    box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.3);
+    display: none;
 }
 
-.boutton_centrage:hover {
-    background-color: rgb(10, 185, 176);
-    color: #ffffff;
-    border: solid 2px #ffffff;
-    cursor: pointer;
+#EditInfo {
+    margin: 10px 10px 0 0;
+    padding: 0.4em 1.1em;
+    background-color: #151414;
+    text-decoration: none;
+    border: none;
+    border-radius: 0.5em;
+    color: #DEDEDE;
+    box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.3);
 }
 
-.form{
+
+#EditPass {
+    margin: 10px 10px 0 0;
+    padding: 0.4em 1.1em;
+    background-color: #151414;
+    text-decoration: none;
+    border: none;
+    border-radius: 0.5em;
+    color: #DEDEDE;
+    box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.3);
+}
+
+.form {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
@@ -144,11 +182,11 @@ hr {
     width: 100%;
 }
 
-.form>hr{
+.form>hr {
     width: 100%;
 }
 
-.form>form{
+.form>form {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -156,11 +194,11 @@ hr {
     width: 100%;
 }
 
-.form>form>hr{
+.form>form>hr {
     width: 100%;
 }
 
-.message{
+.message {
     color: #ffffff;
     font-family: 'lato', sans-serif;
     font-size: 20px;
@@ -168,4 +206,3 @@ hr {
     margin-top: 10px;
     margin-bottom: 10px;
 }
-

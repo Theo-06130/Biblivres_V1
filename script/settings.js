@@ -49,36 +49,36 @@ $('#submitPass').click(function (e) {
 
 EditInfo.addEventListener("click", function () {
     if (Prenom.disabled) {
-        EditInfo.style.border = "2px solid #00f708";
+        EditInfo.style.border = "1px solid white";
         Change_Info_State(false)
-        submitInfo.style.border = "2px solid #00f708";
+        submitInfo.style.display = "block";
         submitInfo.disabled = false;
     } else {
-        EditInfo.style.border = "2px solid #FF0000";
+        EditInfo.style.border = "none";
         Change_Info_State(true)
-        submitInfo.style.border = "2px solid #FF0000";
+        submitInfo.style.display = "none";
         submitInfo.disabled = true;
     }
 });
 
 EditPass.addEventListener("click", function () {
     if (password.disabled) {
-        EditPass.style.border = "2px solid #00f708";
+        EditPass.style.border = "1px solid white";
         Change_Pass_State(false)
-        submitPass.style.border = "2px solid #00f708";
+        submitPass.style.display = "block";
         submitPass.disabled = false;
     } else {
-        EditPass.style.border = "2px solid #FF0000";
+        EditPass.style.border = "none";
         Change_Pass_State(true)
-        submitPass.style.border = "2px solid #FF0000";
+        submitPass.style.display = "none";
         submitPass.disabled = true;
     }
 });
 
 window.onload = function () {
-    submitInfo.style.border = "2px solid #FF0000";
+    submitInfo.style.border = "none";
     submitInfo.disabled = true;
-    submitPass.style.border = "2px solid #FF0000";
+    submitPass.style.border = "none";
     submitPass.disabled = true;
     Change_Info_State(true)
     Change_Pass_State(true)

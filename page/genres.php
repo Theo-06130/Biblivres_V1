@@ -84,7 +84,7 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             <?php
         } else {
             ?>
-            <div class="icon_settings" onclick="alert('Connectez vous pour accéder au paramètre'),show_log()">
+            <div class="icon_settings" onclick="alert('Connectez vous pour accéder au paramètre'),show_logs()">
                 <img src="/assets\settings.svg" alt="settings">
             </div>
             <?php

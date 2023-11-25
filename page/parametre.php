@@ -122,7 +122,13 @@ if (isset($_POST) && !empty($_POST)) {
 </head>
 
 <body>
-    <img src="/assets/left_arrow.svg" class="come_back" alt="" onclick="window.history.back()">
+    <header>
+        <img src="/assets/left_arrow.svg" class="come_back" alt="" onclick="window.history.back()">
+        <div class=boutton_log_out>
+            <a href="/logout">Log Out</a>
+        </div>
+    </header>
+
     <h1>Paramètres</h1>
     <div class="icon_profil">
         <img src="/style/cj.png" id="img_easter_egg" alt="">
@@ -149,7 +155,7 @@ if (isset($_POST) && !empty($_POST)) {
                 <h1>Informations personnelles</h1>
             </div>
 
-            <div id="EditInfo" class=boutton_centrage>Edit Mes Informations</div>
+            <div id="EditInfo">Edit Mes Informations</div>
 
             <br>
             <hr>
@@ -180,18 +186,20 @@ if (isset($_POST) && !empty($_POST)) {
                 <h1>Mot de passe</h1>
             </div>
 
-            <div id="EditPass" class=boutton_centrage>Edit mon mot de passe</div>
+            <div id="EditPass">Edit mon mot de passe</div>
 
             <br>
             <hr>
 
             <form id="ChangePassword" method="post" action='<?php echo $_SERVER["REQUEST_URI"]; ?>'>
 
-                <input type="password" id="old_password" name="old_password" class="input" placeholder="Ancien mot de passe">
+                <input type="password" id="old_password" name="old_password" class="input"
+                    placeholder="Ancien mot de passe">
 
                 <input type="password" id="password" name="password" class="input" placeholder="Nouveau mot de passe">
 
-                <input type="password" id="confirm_password" name="confirm_password" class="input" placeholder="Confirmation mot de passe">
+                <input type="password" id="confirm_password" name="confirm_password" class="input"
+                    placeholder="Confirmation mot de passe">
 
                 <input type="hidden" id="GategoriePass" name="Gategorie" value="Password">
 
@@ -205,9 +213,7 @@ if (isset($_POST) && !empty($_POST)) {
 
     </div>
 
-    <div class=boutton_centrage>
-        <a href="/logout">Log Out</a>
-    </div>
+
 
 </body>
 
