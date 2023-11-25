@@ -103,15 +103,14 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     </nav>
     <main>
         <div class="all_Langues">
-            <div class="langues" id="add"><img src="/assets/plus.svg" alt=""></div>
-            <div class="langues" id="FR"><img src="/assets/drapeau/FR.jpg" alt="">France</div>
-            <div class="langues" id="USA"><img src="/assets/drapeau/USA.jpg" alt="">USA</div>
-            <div class="langues" id="UK"><img src="/assets/drapeau/UK.jpg" alt="">UK</div>
-            <div class="langues" id="ARB"><img src="/assets/drapeau/ARB.jpg" alt="">Arabe</div>
-            <div class="langues" id="ES"><img src="/assets/drapeau/ESP.jpg" alt="">Espagne</div>
-            <div class="langues" id="IT"><img src="/assets/drapeau/ITA.jpg" alt="">Italien</div>
-            <div class="langues" id="JAP"><img src="/assets/drapeau/JAP.jpg" alt="">Japonais</div>
-            <div class="langues" id="PORT"><img src="/assets/drapeau/PORT.jpg" alt="">Portugal</div>
+            <?php
+            foreach ($data as $key => $value) {
+                echo "
+                <button class='langues'>$value[Language]</button>
+                ";
+            }
+
+            ?>
         </div>
     </main>
 </body>

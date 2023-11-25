@@ -21,9 +21,9 @@ main {
 button {
     margin: 10px 0 0 15px;
     padding: 10px 20px;
-    color: white;
+    color: rgb(255, 255, 255);
     border-radius: 0.3125rem;
-    background-color: white;
+    background: linear-gradient(97deg, #434343 0%, #000 100%);
     border: none;
     min-width: 100px;
     min-height: 40px;
@@ -45,6 +45,7 @@ button {
     background-size: 100%;
 }
 
+/*
 .Romance {
     background: linear-gradient(97deg, #FF0844 -4.14%, #FFB199 100%);
 }
@@ -69,3 +70,5 @@ button {
 .Tragique {
     background: linear-gradient(97deg, #434343 0%, #000 100%);
 }
+
+*/

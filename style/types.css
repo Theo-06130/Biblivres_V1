@@ -18,14 +18,15 @@ main {
 button {
     margin: 10px 0 0 15px;
     padding: 10px 20px;
-    color: white;
+    color: rgb(0, 0, 0);
     border-radius: 0.3125rem;
-    background-color: white;
+    background: linear-gradient(97deg, #4FACFE 0%, #00F2FE 100%);
     border: none;
     min-width: 100px;
     min-height: 40px;
 }
 
+/*
 .Journal {
     background: linear-gradient(97deg, #FDFBFB 0%, #EBEDEE 100%);
     color: black;
@@ -46,3 +47,5 @@ button {
 .Roman {
     background: linear-gradient(97deg, #434343 0%, #000 100%);
 }
+
+*/

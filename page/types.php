@@ -9,6 +9,7 @@ $conn = $database->getConnection();
 $sql = "SELECT * 
         FROM Livres
         JOIN Auteur ON Livres.Id_Auteur = Auteur.Id_Auteur
+        JOIN Types ON Livres.Id_Types = Types.Id_Types
         JOIN Langue ON Livres.Id_Langue = Langue.Id_Langue
         ORDER BY Titre_Livre";
 
@@ -102,11 +103,14 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     </nav>
     <main>
         <div class="all_types">
-            <button class="Journal">Journal</button>
-            <button class='BD'>BD</button>
-            <button class='Manga'>Manga</button>
-            <button class='Magazine'>Magazine</button>
-            <button class='Roman'>Roman</button>
+            <?php
+            foreach ($data as $key => $value) {
+                echo "
+                <button>$value[Types]</button>
+                ";
+            }
+
+            ?>
         </div>
     </main>
 </body>
