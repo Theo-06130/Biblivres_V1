@@ -50,3 +50,7 @@ main {
 .edit_del>a {
     color: #0D1C6B;
 }
+
+.edit_but{
+    cursor: pointer;
+}

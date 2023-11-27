@@ -1,5 +1,8 @@
 @import url(./root.css);
 
+.come_back {
+    width: 45px;
+}
 
 main {
     margin-top: 5vh;

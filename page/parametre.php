@@ -2,8 +2,6 @@
 
 session_start();
 
-
-
 if (!isset($_SESSION["Id_client"]) || empty($_SESSION["Id_client"])) {
     header("Location: /home");
 }
@@ -99,8 +97,9 @@ if (isset($_POST) && !empty($_POST)) {
         } else {
             $message = "Ancien mot de passe incorrect";
         }
-
     }
+    unset($_POST);
+    empty($_POST);
 } else {
     $message = "";
 }
@@ -119,7 +118,7 @@ if (isset($_POST) && !empty($_POST)) {
 
 <body>
     <header>
-        <img src="/assets/left_arrow.svg" class="come_back" alt="" onclick="window.history.back()">
+        <a href="/home"><img src="/assets/left_arrow.svg" class="come_back" alt=""></a>
         <div class=boutton_log_out>
             <a href="/logout">Log Out</a>
         </div>
@@ -189,13 +188,11 @@ if (isset($_POST) && !empty($_POST)) {
 
             <form id="ChangePassword" method="post" action='<?php echo $_SERVER["REQUEST_URI"]; ?>'>
 
-                <input type="password" id="old_password" name="old_password" class="input"
-                    placeholder="Ancien mot de passe">
+                <input type="password" id="old_password" name="old_password" class="input" placeholder="Ancien mot de passe">
 
                 <input type="password" id="password" name="password" class="input" placeholder="Nouveau mot de passe">
 
-                <input type="password" id="confirm_password" name="confirm_password" class="input"
-                    placeholder="Confirmation mot de passe">
+                <input type="password" id="confirm_password" name="confirm_password" class="input" placeholder="Confirmation mot de passe">
 
                 <input type="hidden" id="GategoriePass" name="Gategorie" value="Password">
 
@@ -217,12 +214,3 @@ if (isset($_POST) && !empty($_POST)) {
 <script src="/script/settings.js"></script>
 
 </html>
-
-<?php
-
-empty($_POST);
-unset($_POST);
-
-$message = "";
-
-?>

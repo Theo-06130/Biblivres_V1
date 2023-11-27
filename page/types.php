@@ -7,11 +7,8 @@ $database = new Database($_ENV["DB_HOST"], $_ENV["DB_PORT"], $_ENV["DB_DATABASE"
 $conn = $database->getConnection();
 
 $sql = "SELECT * 
-        FROM Livres
-        JOIN Auteur ON Livres.Id_Auteur = Auteur.Id_Auteur
-        JOIN Types ON Livres.Id_Types = Types.Id_Types
-        JOIN Langue ON Livres.Id_Langue = Langue.Id_Langue
-        ORDER BY Titre_Livre";
+        FROM Types
+        ORDER BY Types";
 
 $stmt = $conn->prepare($sql);
 

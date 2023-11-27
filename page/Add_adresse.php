@@ -1,3 +1,37 @@
+<?php
+
+session_start();
+
+if (!isset($_SESSION["Id_client"]) || empty($_SESSION["Id_client"])) {
+    header("Location: /home");
+}
+
+$database = new Database($_ENV["DB_HOST"], $_ENV["DB_PORT"], $_ENV["DB_DATABASE"], $_ENV["DB_USER"], $_ENV["DB_PASSWORD"]);
+
+$conn = $database->getConnection();
+
+if (isset($_POST) && !empty($_POST)) {
+    $sql = "INSERT INTO Adresse (Id_client, Pays, Adresse, Complement, Ville, Code_postal) VALUES (:id_client, :pays, :adresse_part1, :adresse_part2, :ville, :code_postal)";
+
+    $stmt = $conn->prepare($sql);
+
+    $stmt->bindValue(":id_client", htmlspecialchars($_SESSION["Id_client"]), PDO::PARAM_INT);
+    $stmt->bindValue(":pays", htmlspecialchars($_POST["pays"]), PDO::PARAM_STR);
+    $stmt->bindValue(":adresse_part1", htmlspecialchars($_POST["adresse_part1"]), PDO::PARAM_STR);
+    $stmt->bindValue(":adresse_part2", htmlspecialchars($_POST["adresse_part2"]), PDO::PARAM_STR);
+    $stmt->bindValue(":ville", htmlspecialchars($_POST["ville"]), PDO::PARAM_STR);
+    $stmt->bindValue(":code_postal", htmlspecialchars($_POST["code_postal"]), PDO::PARAM_STR);
+
+    $stmt->execute();
+
+    empty($_POST);
+    unset($_POST);
+
+    header("Location: /Adresse");
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -9,8 +43,9 @@
 </head>
 
 <body>
+    <a href="/Adresse"><img src="/assets/left_arrow.svg" class="come_back" alt=""></a>
     <main>
-        <div class="div_ajout">
+        <form class="div_ajout" method="post" action='<?php echo $_SERVER["REQUEST_URI"]; ?>'>
             <h2>Ajouter une nouvelle adresse</h2>
             <label for="pays">Pays/région</label>
             <select name="pays">
@@ -276,18 +311,16 @@
             <div class="ville_codePost">
                 <div class="code_post">
                     <h4>Code postal</h4>
-                    <input type="number" placeholder="06130">
+                    <input name="code_postal" type="number" placeholder="06130">
                 </div>
                 <div class="ville">
                     <h4>Ville</h3>
-                        <input type="text" placeholder="Grasse">
+                        <input name="ville" type="text" placeholder="Grasse">
                 </div>
             </div>
-            <div class="valid">
-                <button>Valider</button>
-            </div>
+            <input type="submit" value="Valider">
 
-        </div>
+        </form>
 
 
     </main>

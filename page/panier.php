@@ -1,3 +1,190 @@
+<?php
+
+session_start();
+
+if (!isset($_SESSION["Id_client"]) || empty($_SESSION["Id_client"])) {
+    header("Location: /home");
+}
+
+$database = new Database($_ENV["DB_HOST"], $_ENV["DB_PORT"], $_ENV["DB_DATABASE"], $_ENV["DB_USER"], $_ENV["DB_PASSWORD"]);
+
+$conn = $database->getConnection();
+
+$parts = explode("/", $_SERVER["REQUEST_URI"]);
+
+if ($parts[1] == "panier" && $parts[2] == "movetokart" && isset($parts[3]) && !empty($parts[3])) {
+
+    $sql = "SELECT * FROM Article_souhait WHERE Id_livre = :id_livre && Id_client = :id_client";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindValue(":id_livre", htmlspecialchars($parts[3]), PDO::PARAM_INT);
+    $stmt->bindValue(":id_client", htmlspecialchars($_SESSION["Id_client"]), PDO::PARAM_INT);
+    $stmt->execute();
+
+    $data = [];
+
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $data[] = $row;
+    }
+
+    if (!empty($data)) {
+        $sql = "DELETE FROM Article_souhait WHERE Id_livre = :id_livre && Id_client = :id_client";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(":id_livre", htmlspecialchars($parts[3]), PDO::PARAM_INT);
+        $stmt->bindValue(":id_client", htmlspecialchars($_SESSION["Id_client"]), PDO::PARAM_INT);
+        $stmt->execute();
+    }
+
+    $sql = "SELECT * FROM Article_panier WHERE Id_livre = :id_livre && Id_client = :id_client";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindValue(":id_livre", htmlspecialchars($parts[3]), PDO::PARAM_INT);
+    $stmt->bindValue(":id_client", htmlspecialchars($_SESSION["Id_client"]), PDO::PARAM_INT);
+    $stmt->execute();
+
+    $data = [];
+
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $data[] = $row;
+    }
+
+    if (empty($data)) {
+        $sql = "INSERT INTO Article_panier (Id_livre, Id_client, quantity) VALUES (:id_livre, :id_client, 1)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(":id_livre", htmlspecialchars($parts[3]), PDO::PARAM_INT);
+        $stmt->bindValue(":id_client", htmlspecialchars($_SESSION["Id_client"]), PDO::PARAM_INT);
+        $stmt->execute();
+    } else {
+        $sql = "UPDATE Article_panier SET quantity = quantity + 1 WHERE Id_livre = :id_livre && Id_client = :id_client";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(":id_livre", htmlspecialchars($parts[3]), PDO::PARAM_INT);
+        $stmt->bindValue(":id_client", htmlspecialchars($_SESSION["Id_client"]), PDO::PARAM_INT);
+        $stmt->execute();
+    }
+
+    header("Location: /panier");
+} else if ($parts[1] == "panier" && $parts[2] == "movetosouhait" && isset($parts[3]) && !empty($parts[3])) {
+    $sql = "SELECT * FROM Article_panier WHERE Id_livre = :id_livre && Id_client = :id_client";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindValue(":id_livre", htmlspecialchars($parts[3]), PDO::PARAM_INT);
+    $stmt->bindValue(":id_client", htmlspecialchars($_SESSION["Id_client"]), PDO::PARAM_INT);
+    $stmt->execute();
+
+    $data = [];
+
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $data[] = $row;
+    }
+
+    if (!empty($data)) {
+        $sql = "DELETE FROM Article_panier WHERE Id_livre = :id_livre && Id_client = :id_client";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(":id_livre", htmlspecialchars($parts[3]), PDO::PARAM_INT);
+        $stmt->bindValue(":id_client", htmlspecialchars($_SESSION["Id_client"]), PDO::PARAM_INT);
+        $stmt->execute();
+    }
+
+    $sql = "SELECT * FROM Article_souhait WHERE Id_livre = :id_livre && Id_client = :id_client";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindValue(":id_livre", htmlspecialchars($parts[3]), PDO::PARAM_INT);
+    $stmt->bindValue(":id_client", htmlspecialchars($_SESSION["Id_client"]), PDO::PARAM_INT);
+    $stmt->execute();
+
+    $data = [];
+
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $data[] = $row;
+    }
+
+    if (empty($data)) {
+        $sql = "INSERT INTO Article_souhait (Id_livre, Id_client) VALUES (:id_livre, :id_client)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(":id_livre", htmlspecialchars($parts[3]), PDO::PARAM_INT);
+        $stmt->bindValue(":id_client", htmlspecialchars($_SESSION["Id_client"]), PDO::PARAM_INT);
+        $stmt->execute();
+    }
+
+    header("Location: /panier");
+} else if ($parts[1] == "panier" && $parts[2] == "removefromcart" && isset($parts[3]) && !empty($parts[3])) {
+    $sql = "DELETE FROM Article_panier WHERE Id_livre = :id_livre && Id_client = :id_client";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindValue(":id_livre", htmlspecialchars($parts[3]), PDO::PARAM_INT);
+    $stmt->bindValue(":id_client", htmlspecialchars($_SESSION["Id_client"]), PDO::PARAM_INT);
+    $stmt->execute();
+    header("Location: /panier");
+} else if ($parts[1] == "panier" && $parts[2] == "removeformsouhait" && isset($parts[3]) && !empty($parts[3])) {
+    $sql = "DELETE FROM Article_souhait WHERE Id_livre = :id_livre && Id_client = :id_client";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindValue(":id_livre", htmlspecialchars($parts[3]), PDO::PARAM_INT);
+    $stmt->bindValue(":id_client", htmlspecialchars($_SESSION["Id_client"]), PDO::PARAM_INT);
+    $stmt->execute();
+    header("Location: /panier");
+} else if ($parts[1] == "panier" && $parts[2] == "addtocart" && isset($parts[3]) && !empty($parts[3])) {
+    $quantity = 1;
+    if (isset($parts[4]) && !empty($parts[4])) {
+        $quantity = htmlspecialchars($parts[4]);
+    }
+
+    $sql = "SELECT * FROM Article_panier WHERE Id_livre = :id_livre && Id_client = :id_client";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindValue(":id_livre", htmlspecialchars($parts[3]), PDO::PARAM_INT);
+    $stmt->bindValue(":id_client", htmlspecialchars($_SESSION["Id_client"]), PDO::PARAM_INT);
+    $stmt->execute();
+
+    $data = [];
+
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $data[] = $row;
+    }
+
+    if (!empty($data)) {
+        if ($data[0]["quantity"] + $quantity <= 0) {
+            $sql = "DELETE FROM Article_panier WHERE Id_livre = :id_livre && Id_client = :id_client";
+            $stmt = $conn->prepare($sql);
+            $stmt->bindValue(":id_livre", htmlspecialchars($parts[3]), PDO::PARAM_INT);
+            $stmt->bindValue(":id_client", htmlspecialchars($_SESSION["Id_client"]), PDO::PARAM_INT);
+            $stmt->execute();
+            header("Location: /panier");
+            exit();
+        }
+        $sql = "UPDATE Article_panier SET quantity = quantity + :quantity WHERE Id_livre = :id_livre && Id_client = :id_client";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(":id_livre", htmlspecialchars($parts[3]), PDO::PARAM_INT);
+        $stmt->bindValue(":id_client", htmlspecialchars($_SESSION["Id_client"]), PDO::PARAM_INT);
+        $stmt->bindValue(":quantity", $quantity, PDO::PARAM_INT);
+        $stmt->execute();
+    } else {
+        $sql = "INSERT INTO Article_panier (Id_livre, Id_client, quantity) VALUES (:id_livre, :id_client, :quantity)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(":id_livre", htmlspecialchars($parts[3]), PDO::PARAM_INT);
+        $stmt->bindValue(":id_client", htmlspecialchars($_SESSION["Id_client"]), PDO::PARAM_INT);
+        $stmt->bindValue(":quantity", $quantity, PDO::PARAM_INT);
+        $stmt->execute();
+    }
+    header("Location: /panier");
+} else if ($parts[1] == "panier" && $parts[2] == "addtosouhait" && isset($parts[3]) && !empty($parts[3])) {
+    $sql = "SELECT * FROM Article_souhait WHERE Id_livre = :id_livre && Id_client = :id_client";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindValue(":id_livre", htmlspecialchars($parts[3]), PDO::PARAM_INT);
+    $stmt->bindValue(":id_client", htmlspecialchars($_SESSION["Id_client"]), PDO::PARAM_INT);
+    $stmt->execute();
+
+    $data = [];
+
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $data[] = $row;
+    }
+
+    if (empty($data)) {
+        $sql = "INSERT INTO Article_souhait (Id_livre, Id_client) VALUES (:id_livre, :id_client)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(":id_livre", htmlspecialchars($parts[3]), PDO::PARAM_INT);
+        $stmt->bindValue(":id_client", htmlspecialchars($_SESSION["Id_client"]), PDO::PARAM_INT);
+        $stmt->execute();
+    }
+    header("Location: /panier");
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -9,102 +196,111 @@
 </head>
 
 <body>
-    <img src="/assets/left_arrow.svg" alt="" class="return" onclick='window.history.back()'>
+    <a href="/home"><img src="/assets/left_arrow.svg" alt="" class="return"></a>
     <section class="panier">
         <?php
 
-        $database = new Database($_ENV["DB_HOST"], $_ENV["DB_PORT"], $_ENV["DB_DATABASE"], $_ENV["DB_USER"], $_ENV["DB_PASSWORD"]);
-
-
-        $conn = $database->getConnection();
-
-
-        if (isset($_SESSION["Id_client"]) && !empty($_SESSION["Id_client"])) {
-            $idClient = $_SESSION["Id_client"];
-        } else {
-            $idClient = 0;
-        }
-
-
-        // Vérifiez si les données du formulaire ont été soumises pour ajouter un article
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $idClient = $_POST['id_client'];
-            $idLivre = $_POST['id_livre'];
-            $quantity = $_POST['quantity'];
-
-            // Effectuez l'insertion dans la base de données
-            $sql = "INSERT INTO Articles_panier (ID_client, ID_livre, quantity) VALUES ($idClient, $idLivre, $quantity)";
-
-            if ($conn->query($sql) === TRUE) {
-                echo "Article ajouté au panier avec succès.";
-
-
-            } else {
-                echo "Erreur lors de l'ajout de l'article au panier : " . $errorInfo[2];
-            }
-        }
-
-
         // Récupérer les articles du panier
-        $sql = "SELECT * FROM Article_panier";
-        $result = $conn->query($sql);
+        $sql = "SELECT * FROM Article_panier
+                JOIN Livres ON Article_panier.Id_livre = Livres.Id_livre
+                JOIN Clients ON Article_panier.Id_client = Clients.Id_client
+                WHERE Article_panier.Id_client = :id_client";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(":id_client", htmlspecialchars($_SESSION["Id_client"]), PDO::PARAM_INT);
+        $stmt->execute();
 
+        $data = [];
 
-        if ($result->rowCount() > 0) {
-            echo "<table border='1'>
-            <tr>
-            <th>Id_article_panier</th>
-            <th>Id_client</th>
-            <th>Id_livre</th>
-            <th>Quantité</th>
-            </tr>";
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $data[] = $row;
+        }
+
+        if (!empty($data)) {
+            echo "Votre panier";
 
             $total = 0;
+            $articles = 0;
 
-            while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                echo "<tr>
-                <td>" . (isset($row["ID_article_panier"]) ? $row["ID_article_panier"] : "") . "</td>
-                <td>" . (isset($row["ID_client"]) ? $row["ID_client"] : "") . "</td>
-                <td>" . (isset($row["ID_livre"]) ? $row["ID_livre"] : "") . "</td>
-                <td>" . (isset($row["quantity"]) ? $row["quantity"] : "") . "</td>
-                </tr>";
+            foreach ($data as $key => $value) {
+                $total += $value["Prix"] * $value["quantity"];
+                $articles += $value["quantity"];
 
-
-                // Calculez le total
-                $sql = "SELECT * FROM Livres WHERE ID_livre = " . (isset($row["ID_livre"]) ? $row["ID_livre"] : "");
-                $result2 = $conn->query($sql);
-                if ($result2->rowCount() > 0) {
-                    while ($row2 = $result2->fetch(PDO::FETCH_ASSOC)) {
-                        $total += $row2["prix"] * $row["quantity"];
-                    }
-                }
+                echo "
+                <article class='article_panier'>
+                <a href='/livre/$value[Id_livre]'>
+                <img src='data:image/png;base64," . base64_encode($value["Miniature"]) . "' alt='' class='mini_back'>
+                </a>
+                    <div class='info_article'>
+                        <p>" . $value["Titre_Livre"] . "</p>
+                        <p>" . $value["Prix"] . " €</p>
+                        <div class='quantity'>
+                        <p>Quantité : </p>
+                            <a href='/panier/addtocart/$value[Id_livre]'><button class='add'>+</button></a>
+                            <p>$value[quantity]</p>
+                            <a href='/panier/addtocart/$value[Id_livre]/-1'><button class='remove'>-</button></a>
+                        </div>
+                    </div>
+                <a href='/panier/movetosouhait/$value[Id_livre]'><button class='add_to_souhait'>Déplacer dans la liste de souhait</button></a>
+                <a href='/panier/removefromcart/$value[Id_livre]'><button class='remove_from_cart'>Supprimer</button></a>
+                </article>
+                ";
             }
 
-            echo "</table>";
-
-            // Afficher le total
-            echo "<p>Total : " . $total . "€</p>";
+            echo "<p>Sous-total ($articles articles) : $total €</p>
+            <a href='/checkout'><button class='checkout'>Passer la commande</button></a>";
         } else {
-            echo "Le panier est vide.";
+            echo "Votre panier est vide.";
         }
 
-        $conn = null;
         ?>
 
-        <!-- Formulaire pour ajouter un article -->
-        <form method="post" action="<?php echo $_SERVER["REQUEST_URI"]; ?>">
-            <label for="id_client">ID Client:</label>
-            <input type="text" name="id_client" required>
-
-            <label for="id_livre">ID Livre:</label>
-            <input type="text" name="id_livre" required>
-
-            <label for="quantity">Quantité:</label>
-            <input type="text" name="quantity" required>
-
-            <button type="submit">Ajouter au Panier</button>
-        </form>
     </section>
+
+    <section class="souhait">
+        <?php
+
+        // Récupérer les articles du panier
+        $sql = "SELECT * FROM Article_souhait
+                JOIN Livres ON Article_souhait.Id_livre = Livres.Id_livre
+                JOIN Clients ON Article_souhait.Id_client = Clients.Id_client
+                WHERE Article_souhait.Id_client = :id_client";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(":id_client", htmlspecialchars($_SESSION["Id_client"]), PDO::PARAM_INT);
+        $stmt->execute();
+
+        $data = [];
+
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $data[] = $row;
+        }
+
+        if (!empty($data)) {
+            echo "Votre liste de souhait";
+
+            foreach ($data as $key => $value) {
+
+                echo "
+                <article class='article_panier'>
+                <a href='/livre/$value[Id_livre]'>
+                <img src='data:image/png;base64," . base64_encode($value["Miniature"]) . "' alt='' class='mini_back'>
+                </a>
+                    <div class='info_article'>
+                        <p>" . $value["Titre_Livre"] . "</p>
+                        <p>" . $value["Prix"] . " €</p>
+                    </div>
+                <a href='/panier/movetokart/$value[Id_livre]'><button class='add_to_cart'>Ajouter au panier</button></a>
+                <a href='/panier/removeformsouhait/$value[Id_livre]'><button class='remove_from_souhait'>Supprimer</button></a>
+                </article>
+                ";
+            }
+        } else {
+            echo "Votre liste de souhait est vide.";
+        }
+
+        ?>
+
+    </section>
+
 </body>
 
 </html>

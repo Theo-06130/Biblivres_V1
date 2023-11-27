@@ -7,11 +7,8 @@ $database = new Database($_ENV["DB_HOST"], $_ENV["DB_PORT"], $_ENV["DB_DATABASE"
 $conn = $database->getConnection();
 
 $sql = "SELECT * 
-        FROM Livres
-        JOIN Auteur ON Livres.Id_Auteur = Auteur.Id_Auteur
-        JOIN Genre ON Livres.Id_Genre = Genre.Id_Genre
-        JOIN Langue ON Livres.Id_Langue = Langue.Id_Langue
-        ORDER BY Titre_Livre";
+        FROM Genre
+        ORDER BY Titre_Genre";
 
 $stmt = $conn->prepare($sql);
 
@@ -105,7 +102,6 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     </nav>
     <main>
         <div class="all_genres">
-            <button class="Add_genres"></button>
             <?php
             foreach ($data as $key => $value) {
                 echo "
