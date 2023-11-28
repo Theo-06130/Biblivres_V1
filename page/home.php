@@ -99,6 +99,7 @@ if (isset($_SESSION["Id_client"]) && !empty($_SESSION["Id_client"])) {
                     <img src="/assets\settings.svg" alt="settings" onclick="setting()">
                     <a id="I_compte" href="/parametre">Info compte</a>
                     <a id="addr_liv" href="/Adresse">Info livraison</a>
+                    <a id="command" href="/commande">Mes commandes</a>
                 </div>
             </div>
         <?php

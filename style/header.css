@@ -61,10 +61,12 @@ header {
     height: 50px;
 }
 
+#command{
+    top: 103px;
+}
 
 #I_compte {
     top: 55px;
-
 }
 
 #addr_liv {

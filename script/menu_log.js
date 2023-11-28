@@ -5,6 +5,7 @@ const chevron = document.getElementById("chevron");
 
 const addr_liv = document.getElementById("addr_liv")
 const I_compte = document.getElementById("I_compte");
+const command = document.getElementById("command");
 
 let show_log = false;
 let show_setting = false;
@@ -50,14 +51,16 @@ function setting() {
 
 function show_settings() {
     show_setting = true
-    addr_liv.style.transform = "translateX(-110px)"
-    I_compte.style.transform = "translateX(-110px)"
+    addr_liv.style.transform = "translateX(-127px)"
+    I_compte.style.transform = "translateX(-124px)"
+    command.style.transform = "translateX(-140px)"
 }
 
 function Hide_settings() {
     show_setting = false
     addr_liv.style.transform = "translateX(0)"
     I_compte.style.transform = "translateX(0)"
+    command.style.transform = "translateX(0)"
 }
 
 function shopping() {
