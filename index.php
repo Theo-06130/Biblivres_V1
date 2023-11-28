@@ -56,8 +56,12 @@ if ($parts[1] == "home") {
     include("page/Adresse_liv.php");
 } elseif ($parts[1] == "Add_adresse") {
     include("page/Add_adresse.php");
+} elseif ($parts[1] == "Edit_adresse") {
+    include("page/Edit_adresse.php");
 } elseif ($parts[1] == "checkout") {
     include("page/checkout.php");
+} elseif ($parts[1] == "commande") {
+    include("page/commande.php");
 } else {
     header("Location: /home");
 }

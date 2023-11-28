@@ -59,3 +59,7 @@ function Hide_settings() {
     addr_liv.style.transform = "translateX(0)"
     I_compte.style.transform = "translateX(0)"
 }
+
+function shopping() {
+    window.location.href = "/panier"
+}

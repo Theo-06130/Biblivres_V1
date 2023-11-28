@@ -163,3 +163,40 @@ button {
         overflow-x: scroll;
     }
 }
+
+.icon_panier {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+.icon_panier>img {
+    width: 50px;
+    position: relative;
+    top: -4px;
+}
+
+.side{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 10px;
+}
+
+#nbr_article{
+    z-index: -1;
+    position: relative;
+    top: -44px;
+    left: 3px;
+    color: white;
+    border-radius: 100%;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    font-size: 15px;
+}
+
