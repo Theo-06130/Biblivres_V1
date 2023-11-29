@@ -95,7 +95,9 @@ setlocale(LC_TIME, "fr_FR");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="/style/livre.css">
     <title>livre</title>
 </head>
@@ -153,7 +155,7 @@ setlocale(LC_TIME, "fr_FR");
                 echo "<h3>$value[Prix]€</h3>";
                 if (isset($_SESSION["Id_client"]) && !empty($_SESSION["Id_client"])) {
                     echo "
-                        <div>
+                        <div class='choix_qte'>
                         <label for='quantity'>Quantité :</label>
                         <select name='quantity' id='quantity'>
                             <option value='1' selected>1</option>
@@ -199,25 +201,25 @@ setlocale(LC_TIME, "fr_FR");
     if (isset($_SESSION["Id_client"]) && !empty($_SESSION["Id_client"])) {
 
         if (!empty($data)) {
-    ?>
+            ?>
             wishremove = document.getElementById("wishremove")
-            wishremove.onmouseover = function() {
+            wishremove.onmouseover = function () {
                 wishremove.src = "/assets/unwish.svg"
             }
-            wishremove.onmouseout = function() {
+            wishremove.onmouseout = function () {
                 wishremove.src = "/assets/wished.svg"
             }
-        <?php
+            <?php
         }
         ?>
         addtocart = document.getElementById("addtocart")
 
-        addtocart.onclick = function() {
+        addtocart.onclick = function () {
             quantity = document.getElementById("quantity").value
             window.location.href = "/panier/addtocart/<?php echo $parts[2] ?>/" + quantity
         }
 
-    <?php
+        <?php
     }
     ?>
 </script>
