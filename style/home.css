@@ -179,7 +179,7 @@ button {
     top: -4px;
 }
 
-.side{
+.side {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -187,7 +187,7 @@ button {
     margin: 0 10px;
 }
 
-#nbr_article{
+#nbr_article {
     z-index: -1;
     position: relative;
     top: -44px;
@@ -200,3 +200,6 @@ button {
     font-size: 15px;
 }
 
+#log_out_admin {
+    left: 0;
+}
