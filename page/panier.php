@@ -12,7 +12,7 @@ $conn = $database->getConnection();
 
 $parts = explode("/", $_SERVER["REQUEST_URI"]);
 
-if ($parts[1] == "panier" && $parts[2] == "movetokart" && isset($parts[3]) && !empty($parts[3])) {
+if ($parts[1] == "panier" && isset($parts[2]) && !empty($parts[2])  && $parts[2] == "movetokart" && isset($parts[3]) && !empty($parts[3])) {
 
     $sql = "SELECT * FROM Article_souhait WHERE Id_livre = :id_livre && Id_client = :id_client";
     $stmt = $conn->prepare($sql);
@@ -61,7 +61,7 @@ if ($parts[1] == "panier" && $parts[2] == "movetokart" && isset($parts[3]) && !e
     }
 
     header("Location: /panier");
-} else if ($parts[1] == "panier" && $parts[2] == "movetosouhait" && isset($parts[3]) && !empty($parts[3])) {
+} else if ($parts[1] == "panier" && isset($parts[2]) && !empty($parts[2]) && $parts[2] == "movetosouhait" && isset($parts[3]) && !empty($parts[3])) {
     $sql = "SELECT * FROM Article_panier WHERE Id_livre = :id_livre && Id_client = :id_client";
     $stmt = $conn->prepare($sql);
     $stmt->bindValue(":id_livre", htmlspecialchars($parts[3]), PDO::PARAM_INT);
@@ -103,21 +103,21 @@ if ($parts[1] == "panier" && $parts[2] == "movetokart" && isset($parts[3]) && !e
     }
 
     header("Location: /panier");
-} else if ($parts[1] == "panier" && $parts[2] == "removefromcart" && isset($parts[3]) && !empty($parts[3])) {
+} else if ($parts[1] == "panier" && isset($parts[2]) && !empty($parts[2]) && $parts[2] == "removefromcart" && isset($parts[3]) && !empty($parts[3])) {
     $sql = "DELETE FROM Article_panier WHERE Id_livre = :id_livre && Id_client = :id_client";
     $stmt = $conn->prepare($sql);
     $stmt->bindValue(":id_livre", htmlspecialchars($parts[3]), PDO::PARAM_INT);
     $stmt->bindValue(":id_client", htmlspecialchars($_SESSION["Id_client"]), PDO::PARAM_INT);
     $stmt->execute();
     header("Location: /panier");
-} else if ($parts[1] == "panier" && $parts[2] == "removeformsouhait" && isset($parts[3]) && !empty($parts[3])) {
+} else if ($parts[1] == "panier" && isset($parts[2]) && !empty($parts[2]) && $parts[2] == "removeformsouhait" && isset($parts[3]) && !empty($parts[3])) {
     $sql = "DELETE FROM Article_souhait WHERE Id_livre = :id_livre && Id_client = :id_client";
     $stmt = $conn->prepare($sql);
     $stmt->bindValue(":id_livre", htmlspecialchars($parts[3]), PDO::PARAM_INT);
     $stmt->bindValue(":id_client", htmlspecialchars($_SESSION["Id_client"]), PDO::PARAM_INT);
     $stmt->execute();
     header("Location: /panier");
-} else if ($parts[1] == "panier" && $parts[2] == "addtocart" && isset($parts[3]) && !empty($parts[3])) {
+} else if ($parts[1] == "panier" && isset($parts[2]) && !empty($parts[2]) && $parts[2] == "addtocart" && isset($parts[3]) && !empty($parts[3])) {
     $quantity = 1;
     if (isset($parts[4]) && !empty($parts[4])) {
         $quantity = htmlspecialchars($parts[4]);
@@ -160,7 +160,7 @@ if ($parts[1] == "panier" && $parts[2] == "movetokart" && isset($parts[3]) && !e
         $stmt->execute();
     }
     header("Location: /panier");
-} else if ($parts[1] == "panier" && $parts[2] == "addtosouhait" && isset($parts[3]) && !empty($parts[3])) {
+} else if ($parts[1] == "panier" && isset($parts[2]) && !empty($parts[2]) && $parts[2] == "addtosouhait" && isset($parts[3]) && !empty($parts[3])) {
     $sql = "SELECT * FROM Article_souhait WHERE Id_livre = :id_livre && Id_client = :id_client";
     $stmt = $conn->prepare($sql);
     $stmt->bindValue(":id_livre", htmlspecialchars($parts[3]), PDO::PARAM_INT);

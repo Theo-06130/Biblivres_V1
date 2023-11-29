@@ -129,6 +129,7 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             if (empty($data)) {
             ?>
                 <p>Vous n'avez pas encore d'adresse de livraison</p>
+                <a href="/Adresse">Ajouter une adresses</a>
             <?php
             } else {
             ?>
@@ -158,9 +159,9 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 <div class="book">
                     <img src="data:image/png;base64,<?= base64_encode($value["Miniature"]) ?>" alt="">
                     <div class="info_book">
-                        <p><?= $value["Titre"] ?></p>
-                        <p><?= $value["Nom"] . " " . $value["Prenom"] ?></p>
-                        <p><?= $value["Nom_langue"] ?></p>
+                        <p><?= $value["Titre_Livre"] ?></p>
+                        <p><?= $value["Nom"] ?></p>
+                        <p><?= $value["Language"] ?></p>
                         <p><?= $value["Prix"] ?>€</p>
                         <p>Quantité : <?= $value["quantity"] ?></p>
                     </div>
