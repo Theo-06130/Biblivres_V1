@@ -12,7 +12,7 @@ $database = new Database($_ENV["DB_HOST"], $_ENV["DB_PORT"], $_ENV["DB_DATABASE"
 
 $conn = $database->getConnection();
 
-if ($parts[1] == "livre" && isset($parts[2]) && !empty($parts[2]) && $parts[3] == "add_wish" && isset($parts[3]) && !empty($parts[3])) {
+if ($parts[1] == "livre" && isset($parts[2]) && !empty($parts[2]) && isset($parts[3]) && !empty($parts[3]) && $parts[3] == "add_wish") {
 
     $sql = "SELECT * FROM Article_souhait WHERE Id_livre = :id_livre AND Id_client = :id_client";
     $stmt = $conn->prepare($sql);
@@ -34,7 +34,7 @@ if ($parts[1] == "livre" && isset($parts[2]) && !empty($parts[2]) && $parts[3] =
         $stmt->execute();
     }
     header("Location: /livre/$parts[2]");
-} else if ($parts[1] == "livre" && isset($parts[2]) && !empty($parts[2]) && $parts[3] == "remove_wish" && isset($parts[3]) && !empty($parts[3])) {
+} else if ($parts[1] == "livre" && isset($parts[2]) && !empty($parts[2]) && isset($parts[3]) && !empty($parts[3]) && $parts[3] == "remove_wish") {
 
     $sql = "SELECT * FROM Article_souhait WHERE Id_livre = :id_livre AND Id_client = :id_client";
     $stmt = $conn->prepare($sql);
