@@ -19,22 +19,26 @@ main {
 
 .langues {
     display: flex;
+    justify-content: center;
+    align-items: center;
     margin: 10px 0 0 15px;
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
     border-radius: 0.3125rem;
     border: none;
     min-width: 80px;
     height: 40px;
+    background: linear-gradient(97deg, #434343 0%, #000 100%);
+
 }
 
-/*
+/* 
 .langues>img {
     width: 100%;
     max-width: 90px;
     height: 100%;
     border-radius: 0.3125rem;
-}
-*/
+} */
+
 @media screen and (min-width:900px) {
     .all_Langues {
         display: flex;

@@ -51,7 +51,9 @@ if (isset($_SESSION["Id_client"]) && !empty($_SESSION["Id_client"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="/style/home.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -64,15 +66,15 @@ if (isset($_SESSION["Id_client"]) && !empty($_SESSION["Id_client"])) {
     <header>
         <?php
         if (isset($_SESSION["Id_client"]) && !empty($_SESSION["Id_client"])) {
-        ?>
+            ?>
             <div class="div_icon_profil">
                 <p>
                     <?php echo strtoupper($_SESSION["Prenom"][0]) ?>
                 </p>
             </div>
-        <?php
+            <?php
         } else {
-        ?>
+            ?>
             <div class="logs">
                 <div class="div_MeConnecter">
                     <h4 id="MeConnecter" onclick="log()">Me connecter</h4>
@@ -81,7 +83,7 @@ if (isset($_SESSION["Id_client"]) && !empty($_SESSION["Id_client"])) {
                 <a class="signUp" id="SignUp" href="/signUp">S'inscrire</a>
                 <a class="login" id="LogIn" href="/login">Se connecter</a>
             </div>
-        <?php
+            <?php
         }
         ?>
         <div class="name_page">
@@ -89,11 +91,13 @@ if (isset($_SESSION["Id_client"]) && !empty($_SESSION["Id_client"])) {
         </div>
         <?php
         if (isset($_SESSION["Id_client"]) && !empty($_SESSION["Id_client"])) {
-        ?>
+            ?>
             <div class="side">
                 <div class="icon_panier">
                     <img id="shopping_kart" src="/assets\panier.svg" alt="panier" onclick="shopping()">
-                    <p id="nbr_article"><?php echo $total_article ?></p>
+                    <p id="nbr_article">
+                        <?php echo $total_article ?>
+                    </p>
                 </div>
                 <div class="icon_settings">
                     <img src="/assets\settings.svg" alt="settings" onclick="setting()">
@@ -102,13 +106,13 @@ if (isset($_SESSION["Id_client"]) && !empty($_SESSION["Id_client"])) {
                     <a id="command" href="/commande">Mes commandes</a>
                 </div>
             </div>
-        <?php
+            <?php
         } else {
-        ?>
+            ?>
             <div class="icon_settings" onclick="alert('Connectez vous pour accéder au paramètre'),show_logs()">
                 <img src="/assets\settings.svg" alt="settings">
             </div>
-        <?php
+            <?php
         }
         ?>
 
@@ -119,7 +123,7 @@ if (isset($_SESSION["Id_client"]) && !empty($_SESSION["Id_client"])) {
             <li><a href="/home" id='current_Page'>Accueil</a></li>
             <!-- <div class="underline"></div> -->
             <li><a href="/genres">Genres</a></li>
-            <li><a href="/livre">Livres</a></li>
+            <li><a href="/livres">Livres</a></li>
             <li><a href="/auteur">Auteur</a></li>
             <li><a href="/types">Types</a></li>
             <li><a href="/langues">Langues</a></li>
