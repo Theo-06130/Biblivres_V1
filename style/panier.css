@@ -21,6 +21,11 @@
     text-align: center;
 }
 
+
+.info_article {
+    max-width: 30%;
+}
+
 .link {
     display: block;
     background-color: #333;
@@ -84,7 +89,7 @@ button:hover {
 .article_panier img {
     width: 100px;
     height: 100px;
-    object-fit:contain;
+    object-fit: contain;
     margin-right: 20px;
 }
 
