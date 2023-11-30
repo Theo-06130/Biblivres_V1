@@ -7,10 +7,8 @@ $database = new Database($_ENV["DB_HOST"], $_ENV["DB_PORT"], $_ENV["DB_DATABASE"
 $conn = $database->getConnection();
 
 $sql = "SELECT * 
-        FROM Livres
-        JOIN Auteur ON Livres.Id_Auteur = Auteur.Id_Auteur
-        JOIN Langue ON Livres.Id_Langue = Langue.Id_Langue
-        ORDER BY Titre_Livre";
+        FROM Auteur
+        ORDER BY Nom";
 
 $stmt = $conn->prepare($sql);
 
@@ -75,8 +73,9 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         ?>
             <div class="icon_settings">
                 <img src="/assets\settings.svg" alt="settings" onclick="setting()">
-                <a id="I_compte" href="parametre">Info compte</a>
-                <a id="addr_liv" href="Adresse_livraison">Info livraison</a>
+                <a id="I_compte" href="/parametre">Info compte</a>
+                <a id="addr_liv" href="/Adresse">Info livraison</a>
+                <a id="command" href="/commande">Mes commandes</a>
             </div>
         <?php
         } else {

@@ -72,8 +72,11 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         <?php
         if (isset($_SESSION["Id_client"]) && !empty($_SESSION["Id_client"])) {
         ?>
-            <div class="icon_settings" onclick="document.location.href = 'parametre'">
-                <img src="/assets\settings.svg" alt="settings">
+            <div class="icon_settings">
+                <img src="/assets\settings.svg" alt="settings" onclick="setting()">
+                <a id="I_compte" href="/parametre">Info compte</a>
+                <a id="addr_liv" href="/Adresse">Info livraison</a>
+                <a id="command" href="/commande">Mes commandes</a>
             </div>
         <?php
         } else {

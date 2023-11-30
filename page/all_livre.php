@@ -44,6 +44,7 @@ if (isset($parts[2]) && $parts[2] == "genre" && isset($parts[3]) && !empty($part
         $data_genre[] = $row;
     }
 
+
     $data_genre = $data_genre[0]["Titre_Genre"];
 } else if (isset($parts[2]) && $parts[2] == "auteur" && isset($parts[3]) && !empty($parts[3])) {
     $sql = "SELECT * 
@@ -228,8 +229,9 @@ if (isset($parts[2]) && $parts[2] == "genre" && isset($parts[3]) && !empty($part
             ?>
             <div class="icon_settings">
                 <img src="/assets\settings.svg" alt="settings" onclick="setting()">
-                <a id="I_compte" href="parametre">Info compte</a>
-                <a id="addr_liv" href="Adresse_livraison">Info livraison</a>
+                <a id="I_compte" href="/parametre">Info compte</a>
+                <a id="addr_liv" href="/Adresse">Info livraison</a>
+                <a id="command" href="/commande">Mes commandes</a>
             </div>
             <?php
         } else {
