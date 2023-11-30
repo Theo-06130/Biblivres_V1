@@ -269,7 +269,7 @@ if (isset($parts[2]) && $parts[2] == "genre" && isset($parts[3]) && !empty($part
 
         }
         if (empty($data)) {
-            echo "<h1>Aucun livre trouvé</h1>";
+            echo "<h2>Aucun livre trouvé</h2>";
         } else {
             foreach ($data as $key => $value) {
                 echo "
