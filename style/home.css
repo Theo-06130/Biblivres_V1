@@ -291,3 +291,25 @@ button {
     border: none;
     border-radius: 10px;
 }
+
+
+.edit_author {
+    text-align: center;
+}
+
+.form_edit_author {
+    width: 50vw;
+    height: 80vh;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.211);
+    border: solid 2px white;
+}
+
+.div_edit_author {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5vh;
+}

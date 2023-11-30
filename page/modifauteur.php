@@ -36,7 +36,19 @@ function romanToNumber($roman)
 {
     $roman = strtoupper($roman);
     $romans = [
-        'M' => 1000, 'CM' => 900, 'D' => 500, 'CD' => 400, 'C' => 100, 'XC' => 90, 'L' => 50, 'XL' => 40, 'X' => 10, 'IX' => 9, 'V' => 5, 'IV' => 4, 'I' => 1
+        'M' => 1000,
+        'CM' => 900,
+        'D' => 500,
+        'CD' => 400,
+        'C' => 100,
+        'XC' => 90,
+        'L' => 50,
+        'XL' => 40,
+        'X' => 10,
+        'IX' => 9,
+        'V' => 5,
+        'IV' => 4,
+        'I' => 1
     ];
     $result = 0;
     foreach ($romans as $key => $value) {
@@ -127,7 +139,7 @@ if (isset($_POST) && !empty($_POST) && isset($_FILES)) {
 
     $data = $data[0];
 
-?>
+    ?>
 
     <!DOCTYPE html>
     <html lang="fr">
@@ -138,7 +150,9 @@ if (isset($_POST) && !empty($_POST) && isset($_FILES)) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100&display=swap" rel="stylesheet">
+        <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100&display=swap"
+            rel="stylesheet">
         <link rel="stylesheet" href="/style/home.css">
         <title>New Auteur</title>
     </head>
@@ -146,52 +160,59 @@ if (isset($_POST) && !empty($_POST) && isset($_FILES)) {
     <body>
         <a href="/adminauteur"><img src="/assets/left_arrow.svg" alt="" class="return"></a>
 
-        <h1>Ajouter un auteur</h1>
-
-        <form method='post' action='<?php echo $_SERVER["REQUEST_URI"]; ?>' enctype='multipart/form-data' style="display:flex; flex-direction:column; background-color: grey;">
-            <div>
-                Nom de l'auteur
-                <input type="text" name="nom" placeholder="Nom de l'auteur" required value="<?php echo $data["Nom"] ?>">
-            </div>
-            <div>
-                Photo de profil
-                <input type='file' name='file' accept="image/*" id="imgInp">
-                <img id="blah" src="data:image/png;base64, <?php echo base64_encode($data["profil"]) ?>" alt="" style="width: 100px;" alt=" " style="width:100px;height:100px;" />
-            </div>
-            <div>
-                Nationalité
-                <input type="text" name="nationalite" placeholder="Nationalité" required value="<?php echo $data["Nationalite"] ?>">
-            </div>
-            <div>
-                Mort
-                <input type="checkbox" name="mort" <?php if ($data["Mort"]) {
-                                                        echo "checked";
-                                                    } ?>>
-            </div>
-            <div>
-                Epoque
-                <input type="number" name="epoque" id="romanin" value="<?php echo romanToNumber($data["Epoque"]) ?>" />
-                <p id="romanout"><?php echo $data["Epoque"] ?></p>
-            </div>
-            <div>
-                Courant
-                <select name="courant" required>
-                    <?php
-                    echo "<option value='$data[Courant]' selected>$data[Courant]</option>";
-                    foreach ($vals as $key => $value) {
-                        if ($value == $data["Courant"]) {
-                            continue;
+        <h1 class="edit_author">Ajouter un auteur</h1>
+        <div class="div_edit_author">
+            <form method='post' action='<?php echo $_SERVER["REQUEST_URI"]; ?>' enctype='multipart/form-data'
+                class="form_edit_author">
+                <div>
+                    Nom de l'auteur
+                    <input type="text" name="nom" placeholder="Nom de l'auteur" required value="<?php echo $data["Nom"] ?>">
+                </div>
+                <div>
+                    Photo de profil
+                    <input type='file' name='file' accept="image/*" id="imgInp">
+                    <img id="blah" src="data:image/png;base64, <?php echo base64_encode($data["profil"]) ?>" alt=""
+                        style="width: 100px;" alt=" " style="width:100px;height:100px;" />
+                </div>
+                <div>
+                    Nationalité
+                    <input type="text" name="nationalite" placeholder="Nationalité" required
+                        value="<?php echo $data["Nationalite"] ?>">
+                </div>
+                <div>
+                    Mort
+                    <input type="checkbox" name="mort" <?php if ($data["Mort"]) {
+                        echo "checked";
+                    } ?>>
+                </div>
+                <div>
+                    Epoque
+                    <input type="number" name="epoque" id="romanin" value="<?php echo romanToNumber($data["Epoque"]) ?>" />
+                    <p id="romanout">
+                        <?php echo $data["Epoque"] ?>
+                    </p>
+                </div>
+                <div>
+                    Courant
+                    <select name="courant" required>
+                        <?php
+                        echo "<option value='$data[Courant]' selected>$data[Courant]</option>";
+                        foreach ($vals as $key => $value) {
+                            if ($value == $data["Courant"]) {
+                                continue;
+                            }
+                            echo "<option value='$value'>$value</option>";
                         }
-                        echo "<option value='$value'>$value</option>";
-                    }
-                    ?>
-                </select>
-            </div>
-            <div>
-                Add new Auteur
-                <input type='submit' value='Upload'>
-            </div>
+                        ?>
+                    </select>
+                </div>
+                <div>
+                    Add new Auteur
+                    <input type='submit' value='Upload'>
+                </div>
+        </div>
         </form>
+
 
     </body>
 
@@ -211,12 +232,12 @@ if (isset($_POST) && !empty($_POST) && isset($_FILES)) {
             }
         }
 
-        $(document).on('keydown', 'input[pattern]', function(e) {
+        $(document).on('keydown', 'input[pattern]', function (e) {
             var input = $(this);
             var oldVal = input.val();
             var regex = new RegExp(input.attr('pattern'), 'g');
 
-            setTimeout(function() {
+            setTimeout(function () {
                 var newVal = input.val();
                 if (!regex.test(newVal)) {
                     input.val(oldVal);
@@ -224,26 +245,26 @@ if (isset($_POST) && !empty($_POST) && isset($_FILES)) {
             }, 1);
         })
 
-        romanin.addEventListener('change', function(e) {
+        romanin.addEventListener('change', function (e) {
             romanout.innerHTML = romanize(romanin.value)
         })
 
         function romanize(num) {
             var lookup = {
-                    M: 1000,
-                    CM: 900,
-                    D: 500,
-                    CD: 400,
-                    C: 100,
-                    XC: 90,
-                    L: 50,
-                    XL: 40,
-                    X: 10,
-                    IX: 9,
-                    V: 5,
-                    IV: 4,
-                    I: 1
-                },
+                M: 1000,
+                CM: 900,
+                D: 500,
+                CD: 400,
+                C: 100,
+                XC: 90,
+                L: 50,
+                XL: 40,
+                X: 10,
+                IX: 9,
+                V: 5,
+                IV: 4,
+                I: 1
+            },
                 roman = '',
                 i;
             for (i in lookup) {
@@ -257,7 +278,7 @@ if (isset($_POST) && !empty($_POST) && isset($_FILES)) {
 
     </script>
 
-<?php
+    <?php
 
     $_SESSION["modifAuteur"] = 0;
 }

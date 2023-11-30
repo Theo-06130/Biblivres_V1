@@ -12,3 +12,7 @@
     width: 100px;
     border-radius: 100%;
 }
+
+.author>img {
+    width: 100px;
+}
