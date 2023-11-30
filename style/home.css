@@ -313,3 +313,10 @@ button {
     align-items: center;
     margin-top: 5vh;
 }
+
+.form_edit_author>div>textarea,
+.form_edit_author>div>input,
+.form_edit_author>div>select,
+.form_edit_author>div>select>option {
+    color: black
+}

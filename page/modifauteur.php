@@ -208,7 +208,7 @@ if (isset($_POST) && !empty($_POST) && isset($_FILES)) {
                 </div>
                 <div>
                     Add new Auteur
-                    <input type='submit' value='Upload'>
+                    <input type='submit' value='Upload' class="submit">
                 </div>
         </div>
         </form>
