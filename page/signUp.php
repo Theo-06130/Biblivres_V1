@@ -61,7 +61,7 @@ if (isset($_POST) && !empty($_POST)) {
 
 function showinput($message)
 {
-    ?>
+?>
 
     <!DOCTYPE html>
     <html lang="fr">
@@ -72,9 +72,7 @@ function showinput($message)
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link
-            href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100&display=swap"
-            rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
         <link rel="stylesheet" href="/style/signUp.css">
@@ -87,6 +85,7 @@ function showinput($message)
     </style>
 
     <body>
+        <a href="/home"><img src="/assets/left_arrow.svg" class="return" alt=""></a>
         <?php
         if (isset($message)) {
             echo "<p>$message</p>";
@@ -109,7 +108,7 @@ function showinput($message)
 
                     <div class="fomr-group">
                         <label for="phone">Numéro de téléphone :</label>
-                        <input id="phone" type="tel" name="phone" class="input" required /><br><br>
+                        <input id="phone" type="number" name="phone" class="input" required /><br><br>
                     </div>
 
                     <div class="form-group">
@@ -133,8 +132,8 @@ function showinput($message)
     </body>
 
     </html>
-   
-    <script src="/script/script.js"></script> 
+
+    <script src="/script/script.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
         const phoneInputField = document.querySelector("#phone");
@@ -146,21 +145,20 @@ function showinput($message)
 
 
 
-        
 
-        <script>
-            // Limite la longueur de la valeur de l'élément à maxLength
-             function limitLength(element, maxLength) {
+
+    <script>
+        // Limite la longueur de la valeur de l'élément à maxLength
+        function limitLength(element, maxLength) {
             // Remplace tout caractère non numérique par une chaîne vide
-            element.value = element.value.replace(/[^0-9]/g, '');  
+            element.value = element.value.replace(/[^0-9]/g, '');
         }
-        
-        </script>
-        
+    </script>
 
 
 
-    <?php
+
+<?php
 
     $_SESSION["sendUser"] = 0;
 }

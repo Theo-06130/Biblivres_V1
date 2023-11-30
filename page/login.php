@@ -48,7 +48,7 @@ if (isset($_POST) && !empty($_POST)) {
 function showinput($message)
 {
 
-    ?>
+?>
 
     <!DOCTYPE html>
     <html lang="en">
@@ -63,6 +63,7 @@ function showinput($message)
     </head>
 
     <body>
+        <a href="/home"><img src="/assets/left_arrow.svg" class="return" alt=""></a>
         <h1>Login</h1>
         <div class=contain>
 
@@ -72,14 +73,14 @@ function showinput($message)
                     echo "<p class='msg'>$message</p>";
                 }
                 ?>
-            <div class="form-group">
-                <label for="email">Email :</label>
-                <input type="email" id="email" name="email" required class="input" placeholder="Email"><br><br>
-            </div>
-            <div class="form-group">
-                <label for="password">Mot de passe :</label>
-                <input type="password" id="password" name="password" required class="input" placeholder="password"><br><br>
-            </div>
+                <div class="form-group">
+                    <label for="email">Email :</label>
+                    <input type="email" id="email" name="email" required class="input" placeholder="Email"><br><br>
+                </div>
+                <div class="form-group">
+                    <label for="password">Mot de passe :</label>
+                    <input type="password" id="password" name="password" required class="input" placeholder="password"><br><br>
+                </div>
                 <div class="btn">
                     <input type="submit" value="Login" class="button-60" id="button">
                 </div>
@@ -96,7 +97,7 @@ function showinput($message)
     </html>
     <script src="/script/script.js"></script>
 
-    <?php
+<?php
     $_SESSION["logUser"] = 0;
 }
 

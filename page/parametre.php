@@ -126,9 +126,8 @@ if (isset($_POST) && !empty($_POST)) {
 
     <h1>Paramètres</h1>
     <div class="icon_profil">
-        <img src="/style/cj.png" id="img_easter_egg" alt="">
         <div class="div_icon_profil">
-            <p onclick="easter_egg()">
+            <p>
                 <?php echo strtoupper($_SESSION["Prenom"][0]) ?>
             </p>
         </div>
