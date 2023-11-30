@@ -15,6 +15,15 @@ main {
     height: clamp(500px, 50vh, 900px);
 }
 
+.type>p {
+    font-size: 20px;
+    margin-top: 2vh;
+    background: linear-gradient(97deg, #4FACFE 0%, #00F2FE 100%);
+    width: 8vw;
+    padding: 5px;
+    border-radius: 5px;
+}
+
 button {
     margin: 10px 0 0 15px;
     padding: 10px 20px;
