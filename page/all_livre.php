@@ -184,7 +184,9 @@ if (isset($parts[2]) && $parts[2] == "genre" && isset($parts[3]) && !empty($part
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="/style/all_livres.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -197,16 +199,16 @@ if (isset($parts[2]) && $parts[2] == "genre" && isset($parts[3]) && !empty($part
     <header>
         <?php
         if (isset($_SESSION["Id_client"]) && !empty($_SESSION["Id_client"])) {
-        ?>
+            ?>
             <div class="div_icon_profil">
                 <p>
                     <?php echo strtoupper($_SESSION["Prenom"][0]) ?>
                 </p>
                 <a class="logout" href="/logout">Se deconnecter</a>
             </div>
-        <?php
+            <?php
         } else {
-        ?>
+            ?>
             <div class="logs">
                 <div class="div_MeConnecter">
                     <h4 id="MeConnecter" onclick="log()">Me connecter</h4>
@@ -215,7 +217,7 @@ if (isset($parts[2]) && $parts[2] == "genre" && isset($parts[3]) && !empty($part
                 <a class="signUp" id="SignUp" href="/signUp">S'inscrire</a>
                 <a class="login" id="LogIn" href="/login">Se connecter</a>
             </div>
-        <?php
+            <?php
         }
         ?>
         <div class="name_page">
@@ -223,19 +225,19 @@ if (isset($parts[2]) && $parts[2] == "genre" && isset($parts[3]) && !empty($part
         </div>
         <?php
         if (isset($_SESSION["Id_client"]) && !empty($_SESSION["Id_client"])) {
-        ?>
+            ?>
             <div class="icon_settings">
                 <img src="/assets\settings.svg" alt="settings" onclick="setting()">
                 <a id="I_compte" href="parametre">Info compte</a>
                 <a id="addr_liv" href="Adresse_livraison">Info livraison</a>
             </div>
-        <?php
+            <?php
         } else {
-        ?>
+            ?>
             <div class="icon_settings" onclick="alert('Connectez vous pour accéder au paramètre'),show_logs()">
                 <img src="/assets\settings.svg" alt="settings">
             </div>
-        <?php
+            <?php
         }
         ?>
     </header>
@@ -254,7 +256,7 @@ if (isset($parts[2]) && $parts[2] == "genre" && isset($parts[3]) && !empty($part
     <div class="all_books">
         <?php
         if (isset($parts[2]) && $parts[2] == "genre" && isset($parts[3]) && !empty($parts[3])) {
-            echo "<h1>Genre : " . $data_genre . "</h1>";
+            echo "<h1>Tous les livres du genre : " . $data_genre . "</h1>";
         } else if (isset($parts[2]) && $parts[2] == "auteur" && isset($parts[3]) && !empty($parts[3])) {
             echo "<h1>Auteur : $data_auteur</h1>";
         } else if (isset($parts[2]) && $parts[2] == "langue" && isset($parts[3]) && !empty($parts[3])) {
@@ -262,7 +264,7 @@ if (isset($parts[2]) && $parts[2] == "genre" && isset($parts[3]) && !empty($part
         } else if (isset($parts[2]) && $parts[2] == "type" && isset($parts[3]) && !empty($parts[3])) {
             echo "<h1>Type : $data_type</h1>";
         } else {
-            echo "<h1>Tous les livres</h1>";
+
         }
         if (empty($data)) {
             echo "<h1>Aucun livre trouvé</h1>";

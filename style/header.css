@@ -61,16 +61,19 @@ header {
     height: 50px;
 }
 
-#command{
+#command {
     top: 103px;
+    right: -200px;
 }
 
 #I_compte {
     top: 55px;
+    right: -200px;
 }
 
 #addr_liv {
     top: 80px;
+    right: -200px;
 }
 
 .icon_settings>a {

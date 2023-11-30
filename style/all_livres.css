@@ -8,11 +8,16 @@
 
 
 .all_books {
-    margin-top: 15px;
+    margin-top: 8vh;
     background-color: transparent;
     height: 70vh;
     display: flex;
     flex-flow: row wrap;
+}
+
+.all_books>h1 {
+    position: relative;
+    top: -30px;
 }
 
 

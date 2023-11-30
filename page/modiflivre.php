@@ -26,7 +26,9 @@ $conn = $database->getConnection();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100&display=swap"
+        rel="stylesheet">
     <title>Update Livre</title>
     <link rel="stylesheet" href="/style/home.css">
 </head>
@@ -117,7 +119,7 @@ $conn = $database->getConnection();
                 $dataLivre[] = $row;
             }
 
-        ?>
+            ?>
 
             <div class="container">
                 <h1>Update livre</h1>
@@ -125,18 +127,21 @@ $conn = $database->getConnection();
 
                     <div class="intern">
                         Titre du livre
-                        <input type="text" id="titre" name="titre" placeholder="Titre du livre" required class="input-style" value="<?php echo $dataLivre[0]["Titre_Livre"]; ?>">
+                        <input type="text" id="titre" name="titre" placeholder="Titre du livre" required class="input-style"
+                            value="<?php echo $dataLivre[0]["Titre_Livre"]; ?>">
                     </div>
 
                     <div class="intern imginline">
                         Miniature
                         <input type='file' name='file' accept="image/*" id="imgInp" class="input-style">
-                        <img id="blah" src="data:image/png;base64, <?php echo base64_encode($dataLivre[0]["Miniature"]) ?>" alt="" style="width: 100px;" />
+                        <img id="blah" src="data:image/png;base64, <?php echo base64_encode($dataLivre[0]["Miniature"]) ?>"
+                            alt="" style="width: 100px;" />
                     </div>
 
                     <div class="intern">
                         Intrigue
-                        <textarea name="intrigue" placeholder="Intrigue du livre" required><?php echo $dataLivre[0]["Intrigue"] ?></textarea>
+                        <textarea name="intrigue" placeholder="Intrigue du livre"
+                            required><?php echo $dataLivre[0]["Intrigue"] ?></textarea>
                     </div>
 
                     <div class="intern">
@@ -152,7 +157,8 @@ $conn = $database->getConnection();
 
                     <div class="intern">
                         Date de publication
-                        <input type="date" name="date" placeholder="Date de publication" required class="input-style" value="<?php echo $dataLivre[0]["Date_Publi"] ?>">
+                        <input type="date" name="date" placeholder="Date de publication" required class="input-style"
+                            value="<?php echo $dataLivre[0]["Date_Publi"] ?>">
                     </div>
 
                     <div class="intern">
@@ -190,28 +196,32 @@ $conn = $database->getConnection();
 
                     <div class="intern">
                         Prix
-                        <input type="number" pattern="^\d*(\.\d{0,2})?$" step="0.01" name="prix" placeholder="Prix" required class="input-style" value="<?php echo $dataLivre[0]["Prix"] ?>">
+                        <input type="number" pattern="^\d*(\.\d{0,2})?$" step="0.01" name="prix" placeholder="Prix" required
+                            class="input-style" value="<?php echo $dataLivre[0]["Prix"] ?>">
                         <label for="prix">€</label>
                     </div>
 
                     <div class="intern">
                         Nombre de page
-                        <input type="number" pattern="^(?:\d*\.)?\d+$" step="1" name="page" placeholder="Pages" required class="input-style" value="<?php echo $dataLivre[0]["Nb_Pages"] ?>">
+                        <input type="number" pattern="^(?:\d*\.)?\d+$" step="1" name="page" placeholder="Pages" required
+                            class="input-style" value="<?php echo $dataLivre[0]["Nb_Pages"] ?>">
                     </div>
 
                     <div class="intern">
                         Editeur
-                        <input type="text" name="editeur" placeholder="Editeur" required class="input-style" value="<?php echo $dataLivre[0]["Editeur"] ?>">
+                        <input type="text" name="editeur" placeholder="Editeur" required class="input-style"
+                            value="<?php echo $dataLivre[0]["Editeur"] ?>">
                     </div>
 
                     <div class="intern">
                         Quantity
-                        <input type="text" name="quantity" placeholder="Quantity" required class="input-style" value="<?php echo $dataLivre[0]["Quantity"] ?>">
+                        <input type="text" name="quantity" placeholder="Quantity" required class="input-style"
+                            value="<?php echo $dataLivre[0]["Quantity"] ?>">
                     </div>
 
                     <div class="intern">
                         Update Livre
-                        <input type='submit' value='Upload' class="input-style">
+                        <input type='submit' value='Update' class="submit">
                     </div>
                 </form>
             </div>
@@ -226,7 +236,7 @@ $conn = $database->getConnection();
                 document.getElementById("type").value = "<?php echo $dataLivre[0]["Id_Types"] ?>";
             </script>
 
-        <?php
+            <?php
 
             $_SESSION["modLivre"] = 0;
         } else {
@@ -264,7 +274,7 @@ $conn = $database->getConnection();
                 $stmt->bindValue(":Editeur", htmlspecialchars($_POST["editeur"]), PDO::PARAM_STR);
                 $stmt->bindValue(":Quantity", htmlspecialchars($_POST["quantity"]), PDO::PARAM_STR);
                 $stmt->bindValue(":id", htmlspecialchars($parts[2]), PDO::PARAM_INT);
-            }else{
+            } else {
                 $sql = "UPDATE Livres
                     SET Titre_Livre = :Titre_Livre,
                         Intrigue = :Intrigue,
@@ -324,12 +334,12 @@ $conn = $database->getConnection();
         }
     }
 
-    $(document).on('keydown', 'input[pattern]', function(e) {
+    $(document).on('keydown', 'input[pattern]', function (e) {
         var input = $(this);
         var oldVal = input.val();
         var regex = new RegExp(input.attr('pattern'), 'g');
 
-        setTimeout(function() {
+        setTimeout(function () {
             var newVal = input.val();
             if (!regex.test(newVal)) {
                 input.val(oldVal);

@@ -78,7 +78,7 @@ if (isset($_POST) && !empty($_POST) && isset($_FILES) && !empty($_FILES)) {
     }
 } else {
 
-?>
+    ?>
 
     <!DOCTYPE html>
     <html lang="fr">
@@ -89,8 +89,10 @@ if (isset($_POST) && !empty($_POST) && isset($_FILES) && !empty($_FILES)) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="/style/home.css">
+        <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100&display=swap"
+            rel="stylesheet">
+        <link rel="stylesheet" href="/style/newauteur.css">
         <title>New Auteur</title>
     </head>
 
@@ -98,46 +100,46 @@ if (isset($_POST) && !empty($_POST) && isset($_FILES) && !empty($_FILES)) {
         <a href="/adminauteur"><img src="/assets/left_arrow.svg" alt="" class="return"></a>
 
         <h1>Ajouter un auteur</h1>
-
-        <form method='post' action='<?php echo $_SERVER["REQUEST_URI"]; ?>' enctype='multipart/form-data' style="display:flex; flex-direction:column; background-color: grey;">
-            <div>
-                Nom de l'auteur
-                <input type="text" name="nom" placeholder="Nom de l'auteur" required>
-            </div>
-            <div>
-                Photo de profil
-                <input type='file' name='file' accept="image/*" id="imgInp" required>
-                <img id="blah" src="#" alt=" " style="width:100px;height:100px;" />
-            </div>
-            <div>
-                Nationalité
-                <input type="text" name="nationalite" placeholder="Nationalité" required>
-            </div>
-            <div>
-                Mort
-                <input type="checkbox" name="mort">
-            </div>
-            <div>
-                Epoque
-                <input type="number" name="epoque" id="romanin" />
-                <p id="romanout"></p>
-            </div>
-            <div>
-                Courant
-                <select name="courant" required>
-                    <?php
-                    foreach ($vals as $key => $value) {
-                        echo "<option value='$value'>$value</option>";
-                    }
-                    ?>
-                </select>
-            </div>
-            <div>
-                Add new Auteur
-                <input type='submit' value='Upload'>
-            </div>
-        </form>
-
+        <div class="add_auteur_div">
+            <form method='post' action='<?php echo $_SERVER["REQUEST_URI"]; ?>' enctype='multipart/form-data'>
+                <div>
+                    Nom de l'auteur
+                    <input type="text" name="nom" placeholder="Nom de l'auteur" required>
+                </div>
+                <div>
+                    Photo de profil
+                    <input type='file' name='file' accept="image/*" id="imgInp" required>
+                    <img id="blah" src="#" alt=" " style="width:100px;height:100px;" />
+                </div>
+                <div>
+                    Nationalité
+                    <input type="text" name="nationalite" placeholder="Nationalité" required>
+                </div>
+                <div>
+                    Mort
+                    <input type="checkbox" name="mort">
+                </div>
+                <div>
+                    Epoque
+                    <input type="number" name="epoque" id="romanin" />
+                    <p id="romanout"></p>
+                </div>
+                <div>
+                    Courant
+                    <select name="courant" required>
+                        <?php
+                        foreach ($vals as $key => $value) {
+                            echo "<option value='$value'>$value</option>";
+                        }
+                        ?>
+                    </select>
+                </div>
+                <div>
+                    Add new Auteur
+                    <input type='submit' value='Upload' class="submit">
+                </div>
+            </form>
+        </div>
     </body>
 
     </html>
@@ -156,12 +158,12 @@ if (isset($_POST) && !empty($_POST) && isset($_FILES) && !empty($_FILES)) {
             }
         }
 
-        $(document).on('keydown', 'input[pattern]', function(e) {
+        $(document).on('keydown', 'input[pattern]', function (e) {
             var input = $(this);
             var oldVal = input.val();
             var regex = new RegExp(input.attr('pattern'), 'g');
 
-            setTimeout(function() {
+            setTimeout(function () {
                 var newVal = input.val();
                 if (!regex.test(newVal)) {
                     input.val(oldVal);
@@ -169,26 +171,26 @@ if (isset($_POST) && !empty($_POST) && isset($_FILES) && !empty($_FILES)) {
             }, 1);
         })
 
-        romanin.addEventListener('change', function(e) {
+        romanin.addEventListener('change', function (e) {
             romanout.innerHTML = romanize(romanin.value)
         })
 
         function romanize(num) {
             var lookup = {
-                    M: 1000,
-                    CM: 900,
-                    D: 500,
-                    CD: 400,
-                    C: 100,
-                    XC: 90,
-                    L: 50,
-                    XL: 40,
-                    X: 10,
-                    IX: 9,
-                    V: 5,
-                    IV: 4,
-                    I: 1
-                },
+                M: 1000,
+                CM: 900,
+                D: 500,
+                CD: 400,
+                C: 100,
+                XC: 90,
+                L: 50,
+                XL: 40,
+                X: 10,
+                IX: 9,
+                V: 5,
+                IV: 4,
+                I: 1
+            },
                 roman = '',
                 i;
             for (i in lookup) {
@@ -201,7 +203,7 @@ if (isset($_POST) && !empty($_POST) && isset($_FILES) && !empty($_FILES)) {
         }
     </script>
 
-<?php
+    <?php
 
     $_SESSION["sendAuteur"] = 0;
 }

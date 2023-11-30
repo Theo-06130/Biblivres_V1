@@ -26,7 +26,9 @@ $conn = $database->getConnection();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="/style/newlivre.css">
     <title>New Livre</title>
 </head>
@@ -103,7 +105,7 @@ $conn = $database->getConnection();
                 $dataType[] = $row;
             }
 
-        ?>
+            ?>
             <div class="container">
                 <h1>New Livre</h1>
                 <form method='post' action='<?php echo $_SERVER["REQUEST_URI"]; ?>' enctype='multipart/form-data'>
@@ -166,12 +168,14 @@ $conn = $database->getConnection();
                     </div>
                     <div class="intern">
                         Prix
-                        <input type="number" pattern="^\d*(\.\d{0,2})?$" step="0.01" name="prix" placeholder="Prix" required class="input-style">
+                        <input type="number" pattern="^\d*(\.\d{0,2})?$" step="0.01" name="prix" placeholder="Prix" required
+                            class="input-style">
                         <label for="prix">€</label>
                     </div>
                     <div class="intern">
                         Nombre de page
-                        <input type="number" pattern="^(?:\d*\.)?\d+$" step="1" name="page" placeholder="Pages" required class="input-style">
+                        <input type="number" pattern="^(?:\d*\.)?\d+$" step="1" name="page" placeholder="Pages" required
+                            class="input-style">
                     </div>
                     <div class="intern">
                         Editeur
@@ -179,15 +183,16 @@ $conn = $database->getConnection();
                     </div>
                     <div class="intern">
                         Quantity
-                        <input type="number" pattern="^(?:\d*\.)?\d+$" step="1" name="quantity" placeholder="Quantity" required class="input-style">
+                        <input type="number" pattern="^(?:\d*\.)?\d+$" step="1" name="quantity" placeholder="Quantity"
+                            required class="input-style">
                     </div>
                     <div class="intern">
                         Add new Livre
-                        <input type='submit' value='Upload' class="input-style">
+                        <input type='submit' value='Upload' class="submit">
                     </div>
                 </form>
             </div>
-        <?php
+            <?php
 
             $_SESSION["sendLivre"] = 0;
         } else {
@@ -241,12 +246,12 @@ $conn = $database->getConnection();
         }
     }
 
-    $(document).on('keydown', 'input[pattern]', function(e) {
+    $(document).on('keydown', 'input[pattern]', function (e) {
         var input = $(this);
         var oldVal = input.val();
         var regex = new RegExp(input.attr('pattern'), 'g');
 
-        setTimeout(function() {
+        setTimeout(function () {
             var newVal = input.val();
             if (!regex.test(newVal)) {
                 input.val(oldVal);

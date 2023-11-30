@@ -51,16 +51,16 @@ function setting() {
 
 function show_settings() {
     show_setting = true
-    addr_liv.style.transform = "translateX(-127px)"
-    I_compte.style.transform = "translateX(-124px)"
-    command.style.transform = "translateX(-140px)"
+    addr_liv.style.transform = "translateX(-227px)"
+    I_compte.style.transform = "translateX(-224px)"
+    command.style.transform = "translateX(-240px)"
 }
 
 function Hide_settings() {
     show_setting = false
-    addr_liv.style.transform = "translateX(0)"
-    I_compte.style.transform = "translateX(0)"
-    command.style.transform = "translateX(0)"
+    addr_liv.style.transform = "translateX(+150px)"
+    I_compte.style.transform = "translateX(+150px)"
+    command.style.transform = "translateX(+150px)"
 }
 
 function shopping() {

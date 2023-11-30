@@ -79,13 +79,14 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 
 <body>
     <header>
-        <div class="logs">
+        <div>
             <a class="signUp" id="log_out_admin" href="/logoutadmin">Se deconnecter</a>
         </div>
-        <a href="/adminauteur">Auteurs</a>
+        <h1>Admin Livre</h1>
+        <a href="/adminauteur">Modifier les auteurs</a>
     </header>
 
-    <h1>Admin Livre</h1>
+
 
     <div class="all_livres">
         <a href="/newlivre">

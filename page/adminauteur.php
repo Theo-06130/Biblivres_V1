@@ -62,7 +62,9 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="/style/home.css">
     <title>Admin auteur page</title>
 </head>
@@ -73,11 +75,14 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 
 <body>
     <header>
-        <a class="signUp" href="/logoutadmin">Se deconnecter</a>
-        <a href="/adminlivre">Livres</a>
+        <div>
+            <a class="signUp" href="/logoutadmin">Se deconnecter</a>
+        </div>
+        <h1>Admin Auteur</h1>
+        <a href="/adminlivre">Modifier les livres</a>
     </header>
 
-    <h1>Admin Auteur</h1>
+
 
     <div class="all_livres">
         <a href="/newauteur">
