@@ -2,10 +2,10 @@
 
 session_start();
 
-// if (!isset($_SESSION["Id_admin"]) && empty($_SESSION["Id_admin"])) {
-//     header("Location: /home");
-//     exit();
-// }
+if (!isset($_SESSION["Id_admin"]) && empty($_SESSION["Id_admin"])) {
+    header("Location: /loginadmin");
+    exit();
+}
 
 if (!isset($_SESSION["sendLivre"])) {
     $_SESSION["sendLivre"] = 0;
@@ -36,6 +36,7 @@ $conn = $database->getConnection();
 </style>
 
 <body>
+    <a href="/adminlivre"><img src="/assets/left_arrow.svg" alt="" class="return"></a>
 
     <div class="content">
         <?php
@@ -215,7 +216,7 @@ $conn = $database->getConnection();
                 $stmt->execute();
                 include("UpdateSpecificAuteur.php");
                 UpdateSpecificAuteur($_POST["auteur"], $database);
-                header("Location: /home");
+                header("Location: /adminlivre");
             } else {
                 echo "Already send";
             }

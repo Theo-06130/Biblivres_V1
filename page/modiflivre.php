@@ -28,6 +28,7 @@ $conn = $database->getConnection();
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100&display=swap" rel="stylesheet">
     <title>Update Livre</title>
+    <link rel="stylesheet" href="/style/home.css">
 </head>
 
 <style id="style_mod">
@@ -35,11 +36,12 @@ $conn = $database->getConnection();
 </style>
 
 <body>
+    <a href="/adminlivre"><img src="/assets/left_arrow.svg" alt="" class="return"></a>
 
     <div class="content">
         <?php
 
-        if (!isset($_POST) || empty($_POST) || !isset($_FILES) || empty($_FILES)) {
+        if (!isset($_POST) || empty($_POST) || !isset($_FILES)) {
 
             // get all langue for select
             $sql = "SELECT * 
@@ -120,7 +122,7 @@ $conn = $database->getConnection();
             <div class="container">
                 <h1>Update livre</h1>
                 <form method='post' action='<?php echo $_SERVER["REQUEST_URI"]; ?>' enctype='multipart/form-data'>
-                
+
                     <div class="intern">
                         Titre du livre
                         <input type="text" id="titre" name="titre" placeholder="Titre du livre" required class="input-style" value="<?php echo $dataLivre[0]["Titre_Livre"]; ?>">
@@ -128,7 +130,7 @@ $conn = $database->getConnection();
 
                     <div class="intern imginline">
                         Miniature
-                        <input type='file' name='file' accept="image/*" id="imgInp" required class="input-style">
+                        <input type='file' name='file' accept="image/*" id="imgInp" class="input-style">
                         <img id="blah" src="data:image/png;base64, <?php echo base64_encode($dataLivre[0]["Miniature"]) ?>" alt="" style="width: 100px;" />
                     </div>
 
@@ -215,13 +217,6 @@ $conn = $database->getConnection();
             </div>
 
             <script>
-                img = new File(["<?php echo base64_encode($dataLivre[0]["Miniature"]) ?>"], "<?php echo $dataLivre[0]["Titre_Livre"] ?>.png", {
-                    type: "image/png",
-                });
-                const dataTransfer = new DataTransfer();
-                dataTransfer.items.add(img);
-                document.getElementById("imgInp").files = dataTransfer.files;
-
                 document.getElementById("langue").value = "<?php echo $dataLivre[0]["Id_Langue"] ?>";
 
                 document.getElementById("auteur").value = "<?php echo $dataLivre[0]["Id_Auteur"] ?>";
@@ -229,7 +224,6 @@ $conn = $database->getConnection();
                 document.getElementById("genre").value = "<?php echo $dataLivre[0]["Id_Genre"] ?>";
 
                 document.getElementById("type").value = "<?php echo $dataLivre[0]["Id_Types"] ?>";
-
             </script>
 
         <?php
@@ -239,7 +233,8 @@ $conn = $database->getConnection();
 
             $_SESSION["modLivre"] += 1;
 
-            $sql = "UPDATE Livres
+            if ($_FILES["file"]["error"] != 4) {
+                $sql = "UPDATE Livres
                     SET Titre_Livre = :Titre_Livre,
                         Miniature = :Miniature,
                         Intrigue = :Intrigue,
@@ -254,21 +249,51 @@ $conn = $database->getConnection();
                         Quantity = :Quantity
                     WHERE Id_Livre = :id";
 
-            $stmt = $conn->prepare($sql);
+                $stmt = $conn->prepare($sql);
 
-            $stmt->bindValue(":Titre_Livre", htmlspecialchars($_POST["titre"]), PDO::PARAM_STR);
-            $stmt->bindValue(":Miniature", file_get_contents($_FILES['file']['tmp_name']), PDO::PARAM_LOB);
-            $stmt->bindValue(":Intrigue", htmlspecialchars($_POST["intrigue"]), PDO::PARAM_STR);
-            $stmt->bindValue(":Id_Langue", ($_POST["langue"]), PDO::PARAM_INT);
-            $stmt->bindValue(":Date_Publi", htmlspecialchars($_POST["date"]), PDO::PARAM_STR);
-            $stmt->bindValue(":Id_Auteur", ($_POST["auteur"]), PDO::PARAM_INT);
-            $stmt->bindValue(":Id_Genre", ($_POST["genre"]), PDO::PARAM_INT);
-            $stmt->bindValue(":Id_Types", ($_POST["type"]), PDO::PARAM_INT);
-            $stmt->bindValue(":Prix", ($_POST["prix"]), PDO::PARAM_STR);
-            $stmt->bindValue(":Nb_Pages", ($_POST["page"]), PDO::PARAM_INT);
-            $stmt->bindValue(":Editeur", htmlspecialchars($_POST["editeur"]), PDO::PARAM_STR);
-            $stmt->bindValue(":Quantity", htmlspecialchars($_POST["quantity"]), PDO::PARAM_STR);
-            $stmt->bindValue(":id", $parts[2], PDO::PARAM_INT);
+                $stmt->bindValue(":Titre_Livre", htmlspecialchars($_POST["titre"]), PDO::PARAM_STR);
+                $stmt->bindValue(":Miniature", file_get_contents($_FILES['file']['tmp_name']), PDO::PARAM_LOB);
+                $stmt->bindValue(":Intrigue", htmlspecialchars($_POST["intrigue"]), PDO::PARAM_STR);
+                $stmt->bindValue(":Id_Langue", htmlspecialchars($_POST["langue"]), PDO::PARAM_INT);
+                $stmt->bindValue(":Date_Publi", htmlspecialchars($_POST["date"]), PDO::PARAM_STR);
+                $stmt->bindValue(":Id_Auteur", htmlspecialchars($_POST["auteur"]), PDO::PARAM_INT);
+                $stmt->bindValue(":Id_Genre", htmlspecialchars($_POST["genre"]), PDO::PARAM_INT);
+                $stmt->bindValue(":Id_Types", htmlspecialchars($_POST["type"]), PDO::PARAM_INT);
+                $stmt->bindValue(":Prix", htmlspecialchars($_POST["prix"]), PDO::PARAM_STR);
+                $stmt->bindValue(":Nb_Pages", htmlspecialchars($_POST["page"]), PDO::PARAM_INT);
+                $stmt->bindValue(":Editeur", htmlspecialchars($_POST["editeur"]), PDO::PARAM_STR);
+                $stmt->bindValue(":Quantity", htmlspecialchars($_POST["quantity"]), PDO::PARAM_STR);
+                $stmt->bindValue(":id", htmlspecialchars($parts[2]), PDO::PARAM_INT);
+            }else{
+                $sql = "UPDATE Livres
+                    SET Titre_Livre = :Titre_Livre,
+                        Intrigue = :Intrigue,
+                        Id_Langue = :Id_Langue,
+                        Date_Publi = :Date_Publi,
+                        Id_Auteur = :Id_Auteur,
+                        Id_Genre = :Id_Genre,
+                        Id_Types = :Id_Types,
+                        Prix = :Prix,
+                        Nb_Pages = :Nb_Pages,
+                        Editeur = :Editeur,
+                        Quantity = :Quantity
+                    WHERE Id_Livre = :id";
+
+                $stmt = $conn->prepare($sql);
+
+                $stmt->bindValue(":Titre_Livre", htmlspecialchars($_POST["titre"]), PDO::PARAM_STR);
+                $stmt->bindValue(":Intrigue", htmlspecialchars($_POST["intrigue"]), PDO::PARAM_STR);
+                $stmt->bindValue(":Id_Langue", htmlspecialchars($_POST["langue"]), PDO::PARAM_INT);
+                $stmt->bindValue(":Date_Publi", htmlspecialchars($_POST["date"]), PDO::PARAM_STR);
+                $stmt->bindValue(":Id_Auteur", htmlspecialchars($_POST["auteur"]), PDO::PARAM_INT);
+                $stmt->bindValue(":Id_Genre", htmlspecialchars($_POST["genre"]), PDO::PARAM_INT);
+                $stmt->bindValue(":Id_Types", htmlspecialchars($_POST["type"]), PDO::PARAM_INT);
+                $stmt->bindValue(":Prix", htmlspecialchars($_POST["prix"]), PDO::PARAM_STR);
+                $stmt->bindValue(":Nb_Pages", htmlspecialchars($_POST["page"]), PDO::PARAM_INT);
+                $stmt->bindValue(":Editeur", htmlspecialchars($_POST["editeur"]), PDO::PARAM_STR);
+                $stmt->bindValue(":Quantity", htmlspecialchars($_POST["quantity"]), PDO::PARAM_STR);
+                $stmt->bindValue(":id", htmlspecialchars($parts[2]), PDO::PARAM_INT);
+            }
 
             if ($_SESSION["modLivre"] == 1) {
                 $stmt->execute();

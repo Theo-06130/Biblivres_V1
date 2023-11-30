@@ -23,6 +23,7 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 }
 
 if (isset($_SESSION["Id_client"]) && !empty($_SESSION["Id_client"])) {
+
     $sql = "SELECT * 
             FROM Article_panier
             JOIN Livres ON Article_panier.Id_Livre = Livres.Id_Livre
@@ -40,6 +41,23 @@ if (isset($_SESSION["Id_client"]) && !empty($_SESSION["Id_client"])) {
     }
 }
 
+$sql = "SELECT * FROM Genre";
+$stmt = $conn->prepare($sql);
+$stmt->execute();
+$data_genre = [];
+while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    $data_genre[] = $row;
+}
+
+$sql = "SELECT * FROM Auteur";
+$stmt = $conn->prepare($sql);
+$stmt->execute();
+$data_auteur = [];
+while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    $data_auteur[] = $row;
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -51,9 +69,7 @@ if (isset($_SESSION["Id_client"]) && !empty($_SESSION["Id_client"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/style/home.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -66,15 +82,15 @@ if (isset($_SESSION["Id_client"]) && !empty($_SESSION["Id_client"])) {
     <header>
         <?php
         if (isset($_SESSION["Id_client"]) && !empty($_SESSION["Id_client"])) {
-            ?>
+        ?>
             <div class="div_icon_profil">
                 <p>
                     <?php echo strtoupper($_SESSION["Prenom"][0]) ?>
                 </p>
             </div>
-            <?php
+        <?php
         } else {
-            ?>
+        ?>
             <div class="logs">
                 <div class="div_MeConnecter">
                     <h4 id="MeConnecter" onclick="log()">Me connecter</h4>
@@ -83,7 +99,7 @@ if (isset($_SESSION["Id_client"]) && !empty($_SESSION["Id_client"])) {
                 <a class="signUp" id="SignUp" href="/signUp">S'inscrire</a>
                 <a class="login" id="LogIn" href="/login">Se connecter</a>
             </div>
-            <?php
+        <?php
         }
         ?>
         <div class="name_page">
@@ -91,7 +107,7 @@ if (isset($_SESSION["Id_client"]) && !empty($_SESSION["Id_client"])) {
         </div>
         <?php
         if (isset($_SESSION["Id_client"]) && !empty($_SESSION["Id_client"])) {
-            ?>
+        ?>
             <div class="side">
                 <div class="icon_panier">
                     <img id="shopping_kart" src="/assets\panier.svg" alt="panier" onclick="shopping()">
@@ -106,13 +122,13 @@ if (isset($_SESSION["Id_client"]) && !empty($_SESSION["Id_client"])) {
                     <a id="command" href="/commande">Mes commandes</a>
                 </div>
             </div>
-            <?php
+        <?php
         } else {
-            ?>
+        ?>
             <div class="icon_settings" onclick="alert('Connectez vous pour accéder au paramètre'),show_logs()">
                 <img src="/assets\settings.svg" alt="settings">
             </div>
-            <?php
+        <?php
         }
         ?>
 
@@ -130,45 +146,8 @@ if (isset($_SESSION["Id_client"]) && !empty($_SESSION["Id_client"])) {
         </ul>
     </nav>
 
-    <h3>Récemment consulté</h3>
-    <div class="last_see">
-        <?php
-        foreach ($data as $key => $value) {
-            echo "
-        <a href='/livre/$value[Id_Livre]'>
-        <div class='book'>
-
-            <img src='data:image/png;base64," . base64_encode($value["Miniature"]) . "' alt=''>
-            
-        </div>
-        </a>";
-        }
-
-        ?>
-    </div>
-    <h3>Genres favoris</h3>
-    <div class="Genre_Fav">
-        <button class="Romance">Romance</button>
-        <button class='Fantaisie'>Fantaisie</button>
-        <button class='Horreur'>Horreur</button>
-        <button class='Action'>Action</button>
-        <button class='Comique'>Comique</button>
-        <button class='Tragique'>Tragique</button>
-    </div>
-    <h3>Auteur favoris</h3>
-    <div class="Favorite_Author">
-        <img src="assets\test_auteur.jpeg" alt="">
-        <img src="assets\test_auteur.jpeg" alt="">
-        <img src="assets\test_auteur.jpeg" alt="">
-        <img src="assets\test_auteur.jpeg" alt="">
-        <img src="assets\test_auteur.jpeg" alt="">
-        <img src="assets\test_auteur.jpeg" alt="">
-        <img src="assets\test_auteur.jpeg" alt="">
-        <img src="assets\test_auteur.jpeg" alt="">
-    </div>
     <div class="all_livres">
         <h3>Tous les livres</h3>
-        <img src="assets\plus.svg" alt="">
     </div>
     <div class="all_book_home">
         <?php
@@ -176,13 +155,34 @@ if (isset($_SESSION["Id_client"]) && !empty($_SESSION["Id_client"])) {
             echo "
         <a href='/livre/$value[Id_Livre]'>
         <div class='book'>
-
             <img src='data:image/png;base64," . base64_encode($value["Miniature"]) . "' alt=''>
-            
         </div>
         </a>";
         }
 
+        ?>
+    </div>
+    <h3>Tous les genres</h3>
+    <div class="Genre_Fav">
+        <?php
+        foreach ($data_genre as $key => $value) {
+            echo "
+            <a href='/livres/genre/$value[Id_Genre]'><button class='$value[Titre_Genre]'>$value[Titre_Genre]</button></a>";
+        }
+        ?>
+    </div>
+    <h3>Tous les auteurs</h3>
+    <div class="Favorite_Author">
+        <?php
+        foreach ($data_auteur as $key => $value) {
+            echo "
+            <a href='/livres/auteur/$value[Id_Auteur]'>
+            <div class='author'>
+                <img src='data:image/png;base64," . base64_encode($value["profil"]) . "' alt=''>
+                <p>$value[Nom]</p>
+            </div>
+            </a>";
+        }
         ?>
     </div>
 </body>

@@ -60,6 +60,7 @@ function showinput($message)
     </head>
 
     <body>
+        <a href="/home"><img src="/assets/left_arrow.svg" alt="" class="return"></a>
         <h1>Login Admin</h1>
         <div class=contain>
 

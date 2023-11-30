@@ -26,8 +26,12 @@ if ($parts[1] == "home") {
     include("page/newauteur.php");
 } elseif ($parts[1] == "adminlivre") {
     include("page/adminlivre.php");
+} elseif ($parts[1] == "adminauteur") {
+    include("page/adminauteur.php");
 } elseif ($parts[1] == "modiflivre") {
     include("page/modiflivre.php");
+} elseif ($parts[1] == "modifauteur") {
+    include("page/modifauteur.php");
 } elseif ($parts[1] == "signUp") {
     include("page/signUp.php");
 } elseif ($parts[1] == "login") {

@@ -1,3 +1,9 @@
+@import url(./root.css);
+
+.return {
+    width: 40px;
+}
+
 body {
     margin: 0;
     padding: 0;

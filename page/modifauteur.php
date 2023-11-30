@@ -3,12 +3,12 @@
 session_start();
 
 if (!isset($_SESSION["Id_admin"]) && empty($_SESSION["Id_admin"])) {
-    header("Location: /adminlogin");
+    header("Location: /loginadmin");
     exit();
 }
 
-if (!isset($_SESSION["sendAuteur"])) {
-    $_SESSION["sendAuteur"] = 0;
+if (!isset($_SESSION["modifAuteur"])) {
+    $_SESSION["modifAuteur"] = 0;
 }
 
 // Connexion à la base de données
@@ -30,6 +30,22 @@ function numberToRoman($number)
         }
     }
     return $returnValue;
+}
+
+function romanToNumber($roman)
+{
+    $roman = strtoupper($roman);
+    $romans = [
+        'M' => 1000, 'CM' => 900, 'D' => 500, 'CD' => 400, 'C' => 100, 'XC' => 90, 'L' => 50, 'XL' => 40, 'X' => 10, 'IX' => 9, 'V' => 5, 'IV' => 4, 'I' => 1
+    ];
+    $result = 0;
+    foreach ($romans as $key => $value) {
+        while (strpos($roman, $key) === 0) {
+            $result += $value;
+            $roman = substr($roman, strlen($key));
+        }
+    }
+    return $result;
 }
 
 function isDead($mort)
@@ -54,29 +70,62 @@ foreach ($vals as $key => $value) {
     $vals[$key] = trim($value, "'");
 }
 
-if (isset($_POST) && !empty($_POST) && isset($_FILES) && !empty($_FILES)) {
+if (isset($_POST) && !empty($_POST) && isset($_FILES)) {
 
-    $_SESSION["sendAuteur"] += 1;
+    $_SESSION["modifAuteur"] += 1;
 
-    $sql = "INSERT INTO Auteur (Nom, profil, Nationalite, Mort, Epoque, Courant)
-                VALUES (:Nom, :profil, :Nationalite, :Mort, :Epoque, :Courant)";
+    if ($_FILES["file"]["error"] != 4) {
 
-    $stmt = $conn->prepare($sql);
+        $sql = "UPDATE Auteur 
+            SET Nom = :Nom, profil = :profil, Nationalite = :Nationalite, Mort = :Mort, Epoque = :Epoque, Courant = :Courant
+            WHERE Id_Auteur = :Id_Auteur";
 
-    $stmt->bindValue(":Nom", htmlspecialchars($_POST["nom"]), PDO::PARAM_STR);
-    $stmt->bindValue(":profil", file_get_contents($_FILES['file']['tmp_name']), PDO::PARAM_LOB);
-    $stmt->bindValue(":Nationalite", htmlspecialchars($_POST["nationalite"]), PDO::PARAM_STR);
-    $stmt->bindValue(":Mort", isDead($_POST["mort"]), PDO::PARAM_INT);
-    $stmt->bindValue(":Epoque", htmlspecialchars(numberToRoman($_POST["epoque"])), PDO::PARAM_STR);
-    $stmt->bindValue(":Courant", ($_POST["courant"]), PDO::PARAM_STR);
+        $stmt = $conn->prepare($sql);
 
-    if ($_SESSION["sendAuteur"] == 1) {
+        $stmt->bindValue(":Nom", htmlspecialchars($_POST["nom"]), PDO::PARAM_STR);
+        $stmt->bindValue(":profil", file_get_contents($_FILES['file']['tmp_name']), PDO::PARAM_LOB);
+        $stmt->bindValue(":Nationalite", htmlspecialchars($_POST["nationalite"]), PDO::PARAM_STR);
+        $stmt->bindValue(":Mort", isDead($_POST["mort"]), PDO::PARAM_INT);
+        $stmt->bindValue(":Epoque", htmlspecialchars(numberToRoman($_POST["epoque"])), PDO::PARAM_STR);
+        $stmt->bindValue(":Courant", htmlspecialchars($_POST["courant"]), PDO::PARAM_STR);
+        $stmt->bindValue(":Id_Auteur", htmlspecialchars($parts[2]), PDO::PARAM_INT);
+    } else {
+        $sql = "UPDATE Auteur 
+            SET Nom = :Nom, Nationalite = :Nationalite, Mort = :Mort, Epoque = :Epoque, Courant = :Courant
+            WHERE Id_Auteur = :Id_Auteur";
+
+        $stmt = $conn->prepare($sql);
+
+        $stmt->bindValue(":Nom", htmlspecialchars($_POST["nom"]), PDO::PARAM_STR);
+        $stmt->bindValue(":Nationalite", htmlspecialchars($_POST["nationalite"]), PDO::PARAM_STR);
+        $stmt->bindValue(":Mort", isDead($_POST["mort"]), PDO::PARAM_INT);
+        $stmt->bindValue(":Epoque", htmlspecialchars(numberToRoman($_POST["epoque"])), PDO::PARAM_STR);
+        $stmt->bindValue(":Courant", htmlspecialchars($_POST["courant"]), PDO::PARAM_STR);
+        $stmt->bindValue(":Id_Auteur", htmlspecialchars($parts[2]), PDO::PARAM_INT);
+    }
+
+    if ($_SESSION["modifAuteur"] == 1) {
         $stmt->execute();
         header("Location: /adminauteur");
     } else {
         echo "Already send";
     }
 } else {
+
+    $sql = "SELECT * 
+            FROM Auteur
+            WHERE Id_Auteur = :id";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindValue(":id", $parts[2], PDO::PARAM_INT);
+    $stmt->execute();
+
+    $data = [];
+
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $data[] = $row;
+    }
+
+    $data = $data[0];
 
 ?>
 
@@ -102,31 +151,37 @@ if (isset($_POST) && !empty($_POST) && isset($_FILES) && !empty($_FILES)) {
         <form method='post' action='<?php echo $_SERVER["REQUEST_URI"]; ?>' enctype='multipart/form-data' style="display:flex; flex-direction:column; background-color: grey;">
             <div>
                 Nom de l'auteur
-                <input type="text" name="nom" placeholder="Nom de l'auteur" required>
+                <input type="text" name="nom" placeholder="Nom de l'auteur" required value="<?php echo $data["Nom"] ?>">
             </div>
             <div>
                 Photo de profil
-                <input type='file' name='file' accept="image/*" id="imgInp" required>
-                <img id="blah" src="#" alt=" " style="width:100px;height:100px;" />
+                <input type='file' name='file' accept="image/*" id="imgInp">
+                <img id="blah" src="data:image/png;base64, <?php echo base64_encode($data["profil"]) ?>" alt="" style="width: 100px;" alt=" " style="width:100px;height:100px;" />
             </div>
             <div>
                 Nationalité
-                <input type="text" name="nationalite" placeholder="Nationalité" required>
+                <input type="text" name="nationalite" placeholder="Nationalité" required value="<?php echo $data["Nationalite"] ?>">
             </div>
             <div>
                 Mort
-                <input type="checkbox" name="mort">
+                <input type="checkbox" name="mort" <?php if ($data["Mort"]) {
+                                                        echo "checked";
+                                                    } ?>>
             </div>
             <div>
                 Epoque
-                <input type="number" name="epoque" id="romanin" />
-                <p id="romanout"></p>
+                <input type="number" name="epoque" id="romanin" value="<?php echo romanToNumber($data["Epoque"]) ?>" />
+                <p id="romanout"><?php echo $data["Epoque"] ?></p>
             </div>
             <div>
                 Courant
                 <select name="courant" required>
                     <?php
+                    echo "<option value='$data[Courant]' selected>$data[Courant]</option>";
                     foreach ($vals as $key => $value) {
+                        if ($value == $data["Courant"]) {
+                            continue;
+                        }
                         echo "<option value='$value'>$value</option>";
                     }
                     ?>
@@ -199,14 +254,15 @@ if (isset($_POST) && !empty($_POST) && isset($_FILES) && !empty($_FILES)) {
             }
             return roman;
         }
+
     </script>
 
 <?php
 
-    $_SESSION["sendAuteur"] = 0;
+    $_SESSION["modifAuteur"] = 0;
 }
 
-if ($_SESSION["sendAuteur"] != 1) {
+if ($_SESSION["modifAuteur"] != 1) {
     empty($_POST);
     empty($_FILES);
     unset($_POST);

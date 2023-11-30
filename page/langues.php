@@ -31,9 +31,7 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/style/langues.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -46,16 +44,16 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     <header>
         <?php
         if (isset($_SESSION["Id_client"]) && !empty($_SESSION["Id_client"])) {
-            ?>
+        ?>
             <div class="div_icon_profil">
                 <p>
                     <?php echo strtoupper($_SESSION["Prenom"][0]) ?>
                 </p>
                 <a class="logout" href="/logout">Se deconnecter</a>
             </div>
-            <?php
+        <?php
         } else {
-            ?>
+        ?>
             <div class="logs">
                 <div class="div_MeConnecter">
                     <h4 id="MeConnecter" onclick="log()">Me connecter</h4>
@@ -64,7 +62,7 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 <a class="signUp" id="SignUp" href="/signUp">S'inscrire</a>
                 <a class="login" id="LogIn" href="/login">Se connecter</a>
             </div>
-            <?php
+        <?php
         }
         ?>
         <div class="name_page">
@@ -72,19 +70,19 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         </div>
         <?php
         if (isset($_SESSION["Id_client"]) && !empty($_SESSION["Id_client"])) {
-            ?>
+        ?>
             <div class="icon_settings">
                 <img src="/assets\settings.svg" alt="settings" onclick="setting()">
                 <a id="I_compte" href="parametre">Info compte</a>
                 <a id="addr_liv" href="Adresse_livraison">Info livraison</a>
             </div>
-            <?php
+        <?php
         } else {
-            ?>
+        ?>
             <div class="icon_settings" onclick="alert('Connectez vous pour accéder au paramètre'),show_logs()">
                 <img src="/assets\settings.svg" alt="settings">
             </div>
-            <?php
+        <?php
         }
         ?>
     </header>
@@ -104,7 +102,11 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             <?php
             foreach ($data as $key => $value) {
                 echo "
-                <button class='langues' id='$value[Id_Langue]' >$value[Language]</button>
+                <a href='/livres/langue/$value[Id_Langue]'>
+                    <div class='langues'>
+                        <p>$value[Language]</p>
+                    </div>
+                </a>
                 ";
             }
 
