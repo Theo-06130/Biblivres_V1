@@ -104,9 +104,8 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             foreach ($data as $key => $value) {
                 echo "
                 <a href='/livres/genre/$value[Id_Genre]'>
-                        <img src='/assets/genres/$value[Image_Genre]' alt='$value[Image_Genre]'>
-                        <h3>$value[Titre_Genre]</h3>
-                    </a>
+                    <h3>$value[Titre_Genre]</h3>
+                </a>
                 ";
             }
 
