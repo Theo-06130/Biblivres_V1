@@ -148,11 +148,17 @@ option {
     background-color: #ffffff5d;
 }
 
-.wish{
+.wish {
     width: 30px;
     height: 30px;
     border-radius: 5px;
     border: solid 1px black;
     background-color: #ffffff5d;
+    color: black;
+}
+
+
+
+.choix_qte>label {
     color: black;
 }

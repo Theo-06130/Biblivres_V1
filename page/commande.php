@@ -44,7 +44,7 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             <?php if (empty($data)) { ?>
                 <p>Vous n'avez pas encore passé de commande.</p>
                 <a href="/panier">Retour au panier</a>
-                <?php } else {
+            <?php } else {
                 foreach ($data as $key => $value) {
                     $sql = "SELECT * FROM Article_commande
                         JOIN Livres ON Article_commande.Id_Livre = Livres.Id_Livre
@@ -57,34 +57,61 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                         $data_article[] = $row;
                     }
 
-                ?>
-                    <div class="commande">
-                        <div class="commande__info">
-                            <h2>Commande n°<?= $value["Id_commande"] ?></h2>
-                            <p><?= $value["date_heure_commande"] ?></p>
-                            <p><?= $value["Prix_total"] ?>€</p>
+                    ?>
+
+                    <div class="commande__info">
+                        <h2>Commande n°
+                            <?= $value["Id_commande"] ?>
+                        </h2>
+                        <p>
+                            <?= $value["date_heure_commande"] ?>
+                        </p>
+                        <p>
+                            <?= $value["Prix_total"] ?>€
+                        </p>
+                    </div>
+                    <div class="cmd_info_nd_liv">
                         <div class="commande__adresse">
                             <h2>Adresse de livraison</h2>
-                            <p><?= $value["Nom"] . " " . $value["Prenom"] ?></p>
-                            <p><?= $value["Adresse"] ?></p>
-                            <p><?= $value["Code_postal"] . " " . $value["Ville"] ?></p>
-                            <p><?= $value["Pays"] ?></p>
+                            <p>
+                                <?= $value["Nom"] . " " . $value["Prenom"] ?>
+                            </p>
+                            <p>
+                                <?= $value["Adresse"] ?>
+                            </p>
+                            <p>
+                                <?= $value["Code_postal"] . " " . $value["Ville"] ?>
+                            </p>
+                            <p>
+                                <?= $value["Pays"] ?>
+                            </p>
                         </div>
+
                         <div class="commande__articles">
                             <h2>Articles</h2>
-                            <?php foreach ($data_article as $key1 => $value1) { ?>
-                                <div class="commande__article">
-                                    <img src='data:image/png;base64, <?php echo base64_encode($value1["Miniature"]) ?>' alt='' class='mini_back'>
-                                    <div class="commande__article__info">
-                                        <p><?= $value1["Titre_Livre"] ?></p>
-                                        <p><?= $value1["Prix"] ?>€</p>
-                                        <p>Quantité : <?= $value1["Quantity_buy"] ?></p>
+                            <div class="all_article">
+                                <?php foreach ($data_article as $key1 => $value1) { ?>
+                                    <div class="commande__article">
+                                        <img src='data:image/png;base64, <?php echo base64_encode($value1["Miniature"]) ?>' alt=''
+                                            class='mini_back'>
+                                        <div class="commande__article__info">
+                                            <p>
+                                                <?= $value1["Titre_Livre"] ?>
+                                            </p>
+                                            <p>
+                                                <?= $value1["Prix"] ?>€
+                                            </p>
+                                            <p>Quantité :
+                                                <?= $value1["Quantity_buy"] ?>
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
-                            <?php } ?>
+                                <?php } ?>
+                            </div>
                         </div>
                     </div>
                 <?php } ?>
+
 
             <?php } ?>
         </div>

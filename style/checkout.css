@@ -1,13 +1,57 @@
 @import url(./root.css);
 
 
-.info {
-    width: 100%;
+
+header {
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    width: 53vw;
+}
+
+article {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 5vh;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
     margin-bottom: 0;
+}
+
+.info>a {
+    text-decoration: underline;
+}
+
+.address_liv {
+    display: flex;
+    flex-direction: column;
+}
+
+.address_liv>a {
+    text-decoration: underline;
+}
+
+
+
+
+main>div>h3 {
+    text-align: center;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.all_books {
+    display: flex;
 }
 
 #adresse {
@@ -42,6 +86,7 @@
     justify-content: space-between;
     align-items: center;
     margin: 10px 0;
+    margin-right: 5vw;
 }
 
 .book img {
@@ -69,7 +114,7 @@
 }
 
 button {
-    width: 100%;
+    width: 15%;
     height: 50px;
     border: 1px solid black;
     border-radius: 5px;

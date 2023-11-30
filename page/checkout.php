@@ -112,34 +112,46 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 </head>
 
 <body>
-    <a href="/panier"><img src="/assets/left_arrow.svg" class="come_back" alt=""></a>
-    <main>
+    <header>
+        <a href="/panier"><img src="/assets/left_arrow.svg" class="come_back" alt=""></a>
         <h2>Checkout</h2>
+    </header>
+    <article>
         <div class="info">
             <h3>Informations personnelles</h3>
-            <p>Nom : <?= $_SESSION["Nom"] ?></p>
-            <p>Prénom : <?= $_SESSION["Prenom"] ?></p>
-            <p>Email : <?= $_SESSION["Email"] ?></p>
-            <p>Numéro de téléphone : <?= $_SESSION["Num_tel"] ?></p>
+            <p>Nom :
+                <?= $_SESSION["Nom"] ?>
+            </p>
+            <p>Prénom :
+                <?= $_SESSION["Prenom"] ?>
+            </p>
+            <p>Email :
+                <?= $_SESSION["Email"] ?>
+            </p>
+            <p>Numéro de téléphone :
+                <?= $_SESSION["Num_tel"] ?>
+            </p>
             <a href="/parametre">Modifier mes informations</a>
         </div>
-        <div>
+        <div class="address_liv">
             <h3>Adresse de livraison</h3>
             <?php
             if (empty($data)) {
-            ?>
+                ?>
                 <p>Vous n'avez pas encore d'adresse de livraison</p>
                 <a href="/Adresse">Ajouter une adresses</a>
-            <?php
+                <?php
             } else {
-            ?>
+                ?>
                 <select name="adresse" id="adresse">
                     <?php
 
                     foreach ($data as $key => $value) {
-                    ?>
-                        <option value="<?php echo $value["Id_adresse"] ?>"><?php echo $value["Adresse"] . " " . $value["Complement"] . " " . $value["Ville"] . " " . $value["Code_postal"] . " " . $value["Pays"] ?></option>
-                    <?php
+                        ?>
+                        <option value="<?php echo $value["Id_adresse"] ?>">
+                            <?php echo $value["Adresse"] . " " . $value["Complement"] . " " . $value["Ville"] . " " . $value["Code_postal"] . " " . $value["Pays"] ?>
+                        </option>
+                        <?php
                     }
 
                     ?>
@@ -147,28 +159,48 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 </select>
                 <a href="/Adresse">Modifier mes adresses</a>
 
-            <?php
+                <?php
             }
             ?>
         </div>
+    </article>
+    <main>
+
+
         <div>
             <h3>Résumer de la commande</h3>
-            <?php
-            foreach ($data_panier as $key => $value) {
-            ?>
-                <div class="book">
-                    <img src="data:image/png;base64,<?= base64_encode($value["Miniature"]) ?>" alt="">
-                    <div class="info_book">
-                        <p><?= $value["Titre_Livre"] ?></p>
-                        <p><?= $value["Nom"] ?></p>
-                        <p><?= $value["Language"] ?></p>
-                        <p><?= $value["Prix"] ?>€</p>
-                        <p>Quantité : <?= $value["quantity"] ?></p>
+            <div class="all_books">
+                <?php
+                foreach ($data_panier as $key => $value) {
+                    ?>
+                    <div class="book">
+                        <img src="data:image/png;base64,<?= base64_encode($value["Miniature"]) ?>" alt="">
+                        <div class="info_book">
+                            <strong>
+                                <p>
+                                    <?= $value["Titre_Livre"] ?>
+                                </p>
+                            </strong>
+                            <p>
+                                <?= $value["Nom"] ?>
+                            </p>
+                            <p>
+                                <?= $value["Language"] ?>
+                            </p>
+                            <strong>
+                                <p>
+                                    <?= $value["Prix"] ?>€
+                                </p>
+                            </strong>
+                            <p>Quantité :
+                                <?= $value["quantity"] ?>
+                            </p>
+                        </div>
                     </div>
-                </div>
-            <?php
-            }
-            ?>
+                    <?php
+                }
+                ?>
+            </div>
         </div>
         <button id="commander">Valider la commande</button>
 
@@ -178,7 +210,7 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 </html>
 
 <script>
-    document.getElementById("commander").addEventListener("click", function() {
+    document.getElementById("commander").addEventListener("click", function () {
         let adresse = document.getElementById("adresse").value;
         window.location.href = "/checkout/" + adresse;
     })
