@@ -1,14 +1,15 @@
 @import url(root.css);
 
 
-
+body {
+    overflow: hidden;
+}
 
 
 h1 {
     color: aliceblue;
     text-align: center;
     margin-bottom: 95px;
-    font-family: 'lato', sans-serif;
     margin-top: 20px;
 }
 
@@ -24,13 +25,14 @@ form {
     justify-content: center;
     align-items: center;
     color: #F3F3F3;
-    font-family: 'lato', sans-serif;
+
 
 
 }
 
 .form-group {
     margin-bottom: 10px;
+    
 }
 
 .element label {
@@ -60,7 +62,7 @@ form {
     background-color: white;
 }
 
-/* CSS */
+
 .button-60 {
     background-color: #01051A;
     border: 1px solid #a5a4a4;
@@ -83,9 +85,8 @@ form {
 p {
     color: rgb(124, 125, 126);
     text-align: center;
-    font-family: 'lato', sans-serif;
     font-size: 14px;
-    margin-top: 85px;
+    margin-top: 10px;
 }
 
 .deco {
@@ -95,4 +96,8 @@ p {
 a {
     text-decoration: none;
     color: #F3F3F3;
+}
+
+.iti__country-list .iti__country-name {
+    color: rgb(0, 0, 0); /* Changer la couleur du texte */
 }

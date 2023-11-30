@@ -2,6 +2,7 @@
 
 body {
     height: auto;
+    overflow: hidden;
 }
 
 h1 {
@@ -22,7 +23,9 @@ h1 {
 
 
 }
-
+.form-group {
+    margin-bottom: 10px;
+}
 .contain label {
     display: block;
     margin-bottom: 5px;
@@ -81,19 +84,34 @@ form {
 }
 
 .ligne_connection{
-    display: flex;
+    
     justify-content: center;
     align-items: center;
     margin-top: 50px;
-    margin-bottom: 20px;
+    
 }
 
 .msg{
     color: #F3F3F3;
-    font-family: 'lato', sans-serif;
+    
     font-size: 1.2em;
     margin-right: 10px;
     margin-left: 10px;
     margin-bottom: 50px;
 }
 
+p {
+    color: rgb(124, 125, 126);
+    text-align: center;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.deco {
+    text-decoration: underline;
+}
+
+a {
+    text-decoration: none;
+    color: #F3F3F3;
+}

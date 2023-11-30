@@ -107,27 +107,35 @@ function showinput($message)
                         <input type="text" id="nom" name="nom" required class="input">
                     </div>
 
-                    <label for="phone">Numéro de téléphone :</label>
-                    <input id="phone" type="tel" name="phone" class="input" required /><br><br>
+                    <div class="fomr-group">
+                        <label for="phone">Numéro de téléphone :</label>
+                        <input id="phone" type="tel" name="phone" class="input" required /><br><br>
+                    </div>
 
-                    <label for="email">Email :</label>
-                    <input type="email" id="email" name="email" required class="input"><br><br>
+                    <div class="form-group">
+                        <label for="email">Email :</label>
+                        <input type="email" id="email" name="email" required class="input"><br><br>
+                    </div>
 
-                    <label for="password">Mot de passe :</label>
-                    <input type="password" id="password" name="password" required class="input"><br><br>
+                    <div class="form-group">
+                        <label for="password">Mot de passe :</label>
+                        <input type="password" id="password" name="password" required class="input"><br><br>
+                    </div>
                     <div class="btn">
                         <input type="submit" value="Sign up" class="button-60">
                     </div>
 
                     <p class="ligne_inscription">By clicking on <a href="#">"Sign up"</a>, you accept the</p>
+                    <p>pour se connecter cliquez <a href="./login">ici</a></p>
                     <p class="deco">Terms and Conditions of Use.</p>
                 </form>
             </div>
     </body>
 
     </html>
-
-    <script src="/script/script.js"></script>
+   
+    <script src="/script/script.js"></script> 
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
         const phoneInputField = document.querySelector("#phone");
         const phoneInput = window.intlTelInput(phoneInputField, {
@@ -135,6 +143,22 @@ function showinput($message)
             utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
         });
     </script>
+
+
+
+        
+
+        <script>
+            // Limite la longueur de la valeur de l'élément à maxLength
+             function limitLength(element, maxLength) {
+            // Remplace tout caractère non numérique par une chaîne vide
+            element.value = element.value.replace(/[^0-9]/g, '');  
+        }
+        
+        </script>
+        
+
+
 
     <?php
 

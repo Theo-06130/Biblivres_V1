@@ -72,17 +72,20 @@ function showinput($message)
                     echo "<p class='msg'>$message</p>";
                 }
                 ?>
-
+            <div class="form-group">
                 <label for="email">Email :</label>
                 <input type="email" id="email" name="email" required class="input" placeholder="Email"><br><br>
-
+            </div>
+            <div class="form-group">
                 <label for="password">Mot de passe :</label>
                 <input type="password" id="password" name="password" required class="input" placeholder="password"><br><br>
+            </div>
                 <div class="btn">
                     <input type="submit" value="Login" class="button-60" id="button">
                 </div>
 
                 <p class="ligne_connection">By clicking on <a href="#">"Login"</a>, you accept the</p>
+                <p>pour s'inscrire cliquez <a href="./signUp">ici</a></p>
                 <p class="deco">Terms and Conditions of Use.</p>
             </form>
 
