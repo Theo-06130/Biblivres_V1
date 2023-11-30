@@ -26,8 +26,12 @@ if ($parts[1] == "home") {
     include("page/newauteur.php");
 } elseif ($parts[1] == "adminlivre") {
     include("page/adminlivre.php");
+} elseif ($parts[1] == "adminauteur") {
+    include("page/adminauteur.php");
 } elseif ($parts[1] == "modiflivre") {
     include("page/modiflivre.php");
+} elseif ($parts[1] == "modifauteur") {
+    include("page/modifauteur.php");
 } elseif ($parts[1] == "signUp") {
     include("page/signUp.php");
 } elseif ($parts[1] == "login") {
@@ -48,8 +52,20 @@ if ($parts[1] == "home") {
     include("page/types.php");
 } elseif ($parts[1] == "parametre") {
     include("page/parametre.php");
+} elseif ($parts[1] == "panier") {
+    include("page/panier.php");
 } elseif ($parts[1] == "langues") {
     include("page/langues.php");
+} elseif ($parts[1] == "Adresse") {
+    include("page/Adresse_liv.php");
+} elseif ($parts[1] == "Add_adresse") {
+    include("page/Add_adresse.php");
+} elseif ($parts[1] == "Edit_adresse") {
+    include("page/Edit_adresse.php");
+} elseif ($parts[1] == "checkout") {
+    include("page/checkout.php");
+} elseif ($parts[1] == "commande") {
+    include("page/commande.php");
 } else {
     header("Location: /home");
 }

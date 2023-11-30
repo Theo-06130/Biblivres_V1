@@ -6,58 +6,173 @@ $database = new Database($_ENV["DB_HOST"], $_ENV["DB_PORT"], $_ENV["DB_DATABASE"
 
 $conn = $database->getConnection();
 
-$sql = "SELECT * 
+$parts = explode("/", $_SERVER["REQUEST_URI"]);
+
+if (isset($parts[2]) && $parts[2] == "genre" && isset($parts[3]) && !empty($parts[3])) {
+
+    $sql = "SELECT * 
+            FROM Livres
+            JOIN Auteur ON Livres.Id_Auteur = Auteur.Id_Auteur
+            JOIN Langue ON Livres.Id_Langue = Langue.Id_Langue
+            JOIN Genre ON Livres.Id_Genre = Genre.Id_Genre
+            WHERE Genre.Id_Genre = :id_genre
+            ORDER BY Titre_Livre";
+
+    $stmt = $conn->prepare($sql);
+
+    $stmt->bindValue(":id_genre", $parts[3], PDO::PARAM_INT);
+
+    $stmt->execute();
+
+    $data = [];
+
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $data[] = $row;
+    }
+
+    $sql = "SELECT * FROM Genre WHERE Id_Genre = :id_genre";
+
+    $stmt = $conn->prepare($sql);
+
+    $stmt->bindValue(":id_genre", $parts[3], PDO::PARAM_INT);
+
+    $stmt->execute();
+
+    $data_genre = [];
+
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $data_genre[] = $row;
+    }
+
+    $data_genre = $data_genre[0]["Titre_Genre"];
+} else if (isset($parts[2]) && $parts[2] == "auteur" && isset($parts[3]) && !empty($parts[3])) {
+    $sql = "SELECT * 
+            FROM Livres
+            JOIN Auteur ON Livres.Id_Auteur = Auteur.Id_Auteur
+            JOIN Langue ON Livres.Id_Langue = Langue.Id_Langue
+            JOIN Genre ON Livres.Id_Genre = Genre.Id_Genre
+            WHERE Livres.Id_Auteur = :id_auteur
+            ORDER BY Titre_Livre";
+
+    $stmt = $conn->prepare($sql);
+
+    $stmt->bindValue(":id_auteur", $parts[3], PDO::PARAM_INT);
+
+    $stmt->execute();
+
+    $data = [];
+
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $data[] = $row;
+    }
+
+    $sql = "SELECT * FROM Auteur WHERE Id_Auteur = :id_auteur";
+
+    $stmt = $conn->prepare($sql);
+
+    $stmt->bindValue(":id_auteur", $parts[3], PDO::PARAM_INT);
+
+    $stmt->execute();
+
+    $data_auteur = [];
+
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $data_auteur[] = $row;
+    }
+
+    $data_auteur = $data_auteur[0]["Nom"];
+} else if (isset($parts[2]) && $parts[2] == "langue" && isset($parts[3]) && !empty($parts[3])) {
+    $sql = "SELECT * 
+            FROM Livres
+            JOIN Auteur ON Livres.Id_Auteur = Auteur.Id_Auteur
+            JOIN Langue ON Livres.Id_Langue = Langue.Id_Langue
+            JOIN Genre ON Livres.Id_Genre = Genre.Id_Genre
+            WHERE Langue.Id_Langue = :id_langue
+            ORDER BY Titre_Livre";
+
+    $stmt = $conn->prepare($sql);
+
+    $stmt->bindValue(":id_langue", $parts[3], PDO::PARAM_INT);
+
+    $stmt->execute();
+
+    $data = [];
+
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $data[] = $row;
+    }
+
+    $sql = "SELECT * FROM Langue WHERE Id_Langue = :id_langue";
+
+    $stmt = $conn->prepare($sql);
+
+    $stmt->bindValue(":id_langue", $parts[3], PDO::PARAM_INT);
+
+    $stmt->execute();
+
+    $data_langue = [];
+
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $data_langue[] = $row;
+    }
+
+    $data_langue = $data_langue[0]["Language"];
+} else if (isset($parts[2]) && $parts[2] == "type" && isset($parts[3]) && !empty($parts[3])) {
+    $sql = "SELECT * 
+            FROM Livres
+            JOIN Auteur ON Livres.Id_Auteur = Auteur.Id_Auteur
+            JOIN Langue ON Livres.Id_Langue = Langue.Id_Langue
+            JOIN Genre ON Livres.Id_Genre = Genre.Id_Genre
+            WHERE Livres.Id_Types = :id_type
+            ORDER BY Titre_Livre";
+
+    $stmt = $conn->prepare($sql);
+
+    $stmt->bindValue(":id_type", $parts[3], PDO::PARAM_INT);
+
+    $stmt->execute();
+
+    $data = [];
+
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $data[] = $row;
+    }
+
+    $sql = "SELECT * FROM Types WHERE Id_Types = :id_type";
+
+    $stmt = $conn->prepare($sql);
+
+    $stmt->bindValue(":id_type", $parts[3], PDO::PARAM_INT);
+
+    $stmt->execute();
+
+    $data_type = [];
+
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $data_type[] = $row;
+    }
+
+    $data_type = $data_type[0]["Types"];
+} else {
+
+    $sql = "SELECT * 
         FROM Livres
         JOIN Auteur ON Livres.Id_Auteur = Auteur.Id_Auteur
         JOIN Langue ON Livres.Id_Langue = Langue.Id_Langue
         ORDER BY Titre_Livre";
 
-$stmt = $conn->prepare($sql);
+    $stmt = $conn->prepare($sql);
 
-$stmt->execute();
+    $stmt->execute();
 
-$data = [];
+    $data = [];
 
-while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-    $data[] = $row;
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $data[] = $row;
+    }
 }
 
 ?>
-
-<?php
-
-include("src/DisplayData.php");
-
-$database = new Database($_ENV["DB_HOST"], $_ENV["DB_PORT"], $_ENV["DB_DATABASE"], $_ENV["DB_USER"], $_ENV["DB_PASSWORD"]);
-
-$conn = $database->getConnection();
-
-$sql = "SELECT * 
-            FROM Livres
-            JOIN Auteur ON Livres.Id_Auteur = Auteur.Id_Auteur
-            JOIN Langue ON Livres.Id_Langue = Langue.Id_Langue
-            ORDER BY Titre_Livre";
-
-$stmt = $conn->prepare($sql);
-
-$stmt->execute();
-
-$data = [];
-
-while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-    $data[] = $row;
-}
-
-// display_data($data);
-
-
-?>
-
-
-
-
-
-
 
 
 <!DOCTYPE html>
@@ -111,13 +226,15 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         <?php
         if (isset($_SESSION["Id_client"]) && !empty($_SESSION["Id_client"])) {
             ?>
-            <div class="icon_settings" onclick="document.location.href = 'parametre'">
-                <img src="/assets\settings.svg" alt="settings">
+            <div class="icon_settings">
+                <img src="/assets\settings.svg" alt="settings" onclick="setting()">
+                <a id="I_compte" href="parametre">Info compte</a>
+                <a id="addr_liv" href="Adresse_livraison">Info livraison</a>
             </div>
             <?php
         } else {
             ?>
-            <div class="icon_settings" onclick="alert('Connectez vous pour accéder au paramètre'),show_log()">
+            <div class="icon_settings" onclick="alert('Connectez vous pour accéder au paramètre'),show_logs()">
                 <img src="/assets\settings.svg" alt="settings">
             </div>
             <?php
@@ -138,8 +255,22 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 
     <div class="all_books">
         <?php
-        foreach ($data as $key => $value) {
-            echo "
+        if (isset($parts[2]) && $parts[2] == "genre" && isset($parts[3]) && !empty($parts[3])) {
+            echo "<h1>Tous les livres du genre : " . $data_genre . "</h1>";
+        } else if (isset($parts[2]) && $parts[2] == "auteur" && isset($parts[3]) && !empty($parts[3])) {
+            echo "<h1>Auteur : $data_auteur</h1>";
+        } else if (isset($parts[2]) && $parts[2] == "langue" && isset($parts[3]) && !empty($parts[3])) {
+            echo "<h1>Langue : $data_langue</h1>";
+        } else if (isset($parts[2]) && $parts[2] == "type" && isset($parts[3]) && !empty($parts[3])) {
+            echo "<h1>Type : $data_type</h1>";
+        } else {
+
+        }
+        if (empty($data)) {
+            echo "<h1>Aucun livre trouvé</h1>";
+        } else {
+            foreach ($data as $key => $value) {
+                echo "
         <a href='/livre/$value[Id_Livre]'>
         <div class='book'>
 
@@ -147,6 +278,7 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             
         </div>
         </a>";
+            }
         }
 
         ?>

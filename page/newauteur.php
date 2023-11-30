@@ -3,7 +3,7 @@
 session_start();
 
 if (!isset($_SESSION["Id_admin"]) && empty($_SESSION["Id_admin"])) {
-    header("Location: /home");
+    header("Location: /adminlogin");
     exit();
 }
 
@@ -72,11 +72,10 @@ if (isset($_POST) && !empty($_POST) && isset($_FILES) && !empty($_FILES)) {
 
     if ($_SESSION["sendAuteur"] == 1) {
         $stmt->execute();
-        header("Location: /home");
+        header("Location: /adminauteur");
     } else {
         echo "Already send";
     }
-
 } else {
 
     ?>
@@ -93,60 +92,60 @@ if (isset($_POST) && !empty($_POST) && isset($_FILES) && !empty($_FILES)) {
         <link
             href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100&display=swap"
             rel="stylesheet">
-        <link rel="stylesheet" href="/style/home.css">
+        <link rel="stylesheet" href="/style/newauteur.css">
         <title>New Auteur</title>
     </head>
 
     <body>
+        <a href="/adminauteur"><img src="/assets/left_arrow.svg" alt="" class="return"></a>
+
         <h1>Ajouter un auteur</h1>
-
-        <form method='post' action='<?php echo $_SERVER["REQUEST_URI"]; ?>' enctype='multipart/form-data'
-            style="display:flex; flex-direction:column; background-color: grey;">
-            <div>
-                Nom de l'auteur
-                <input type="text" name="nom" placeholder="Nom de l'auteur" required>
-            </div>
-            <div>
-                Photo de profil
-                <input type='file' name='file' accept="image/*" id="imgInp" required>
-                <img id="blah" src="#" alt=" " style="width:100px;height:100px;" />
-            </div>
-            <div>
-                Nationalité
-                <input type="text" name="nationalite" placeholder="Nationalité" required>
-            </div>
-            <div>
-                Mort
-                <input type="checkbox" name="mort">
-            </div>
-            <div>
-                Epoque
-                <input type="number" name="epoque" id="romanin" />
-                <p id="romanout"></p>
-            </div>
-            <div>
-                Courant
-                <select name="courant" required>
-                    <?php
-                    foreach ($vals as $key => $value) {
-                        echo "<option value='$value'>$value</option>";
-                    }
-                    ?>
-                </select>
-            </div>
-            <div>
-                Add new Auteur
-                <input type='submit' value='Upload'>
-            </div>
-        </form>
-
+        <div class="add_auteur_div">
+            <form method='post' action='<?php echo $_SERVER["REQUEST_URI"]; ?>' enctype='multipart/form-data'>
+                <div>
+                    Nom de l'auteur
+                    <input type="text" name="nom" placeholder="Nom de l'auteur" required>
+                </div>
+                <div>
+                    Photo de profil
+                    <input type='file' name='file' accept="image/*" id="imgInp" required>
+                    <img id="blah" src="#" alt=" " style="width:100px;height:100px;" />
+                </div>
+                <div>
+                    Nationalité
+                    <input type="text" name="nationalite" placeholder="Nationalité" required>
+                </div>
+                <div>
+                    Mort
+                    <input type="checkbox" name="mort">
+                </div>
+                <div>
+                    Epoque
+                    <input type="number" name="epoque" id="romanin" />
+                    <p id="romanout"></p>
+                </div>
+                <div>
+                    Courant
+                    <select name="courant" required>
+                        <?php
+                        foreach ($vals as $key => $value) {
+                            echo "<option value='$value'>$value</option>";
+                        }
+                        ?>
+                    </select>
+                </div>
+                <div>
+                    Add new Auteur
+                    <input type='submit' value='Upload' class="submit">
+                </div>
+            </form>
+        </div>
     </body>
 
     </html>
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script type="module">
-
         const imgInp = document.getElementById('imgInp')
         const blah = document.getElementById('blah')
         const romanin = document.getElementById('romanin')
@@ -177,7 +176,23 @@ if (isset($_POST) && !empty($_POST) && isset($_FILES) && !empty($_FILES)) {
         })
 
         function romanize(num) {
-            var lookup = { M: 1000, CM: 900, D: 500, CD: 400, C: 100, XC: 90, L: 50, XL: 40, X: 10, IX: 9, V: 5, IV: 4, I: 1 }, roman = '', i;
+            var lookup = {
+                M: 1000,
+                CM: 900,
+                D: 500,
+                CD: 400,
+                C: 100,
+                XC: 90,
+                L: 50,
+                XL: 40,
+                X: 10,
+                IX: 9,
+                V: 5,
+                IV: 4,
+                I: 1
+            },
+                roman = '',
+                i;
             for (i in lookup) {
                 while (num >= lookup[i]) {
                     roman += i;
@@ -186,13 +201,11 @@ if (isset($_POST) && !empty($_POST) && isset($_FILES) && !empty($_FILES)) {
             }
             return roman;
         }
-
     </script>
 
     <?php
 
     $_SESSION["sendAuteur"] = 0;
-
 }
 
 if ($_SESSION["sendAuteur"] != 1) {

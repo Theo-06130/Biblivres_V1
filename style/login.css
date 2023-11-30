@@ -1,5 +1,9 @@
 @import url(./root.css);
 
+.return {
+    width: 40px;
+}
+
 body {
     height: auto;
     overflow: hidden;

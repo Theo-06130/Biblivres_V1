@@ -14,8 +14,8 @@ $conn = $database->getConnection();
 if (isset($parts[2]) && !empty($parts[2])) {
 
     $sql = "SELECT * 
-            FROM Livres
-            WHERE Id_Livre = :id";
+            FROM Auteur
+            WHERE Id_Auteur = :id";
     $stmt = $conn->prepare($sql);
     $stmt->bindValue(":id", $parts[2], PDO::PARAM_INT);
     $stmt->execute();
@@ -26,21 +26,17 @@ if (isset($parts[2]) && !empty($parts[2])) {
         $data[] = $row;
     }
 
-    $sql = "DELETE FROM Livres WHERE Id_Livre = :id";
+    $sql = "DELETE FROM Auteur WHERE Id_Auteur = :id";
     $stmt = $conn->prepare($sql);
     $stmt->bindValue(":id", $parts[2], PDO::PARAM_INT);
     $stmt->execute();
 
-    include("UpdateSpecificAuteur.php");
-    UpdateSpecificAuteur($data[0]["Id_Auteur"], $database);
-    header("Location: /adminlivre");
+    header("Location: /adminauteur");
 }
 
 $sql = "SELECT * 
-            FROM Livres
-            JOIN Auteur ON Livres.Id_Auteur = Auteur.Id_Auteur
-            JOIN Langue ON Livres.Id_Langue = Langue.Id_Langue
-            ORDER BY Titre_Livre";
+        FROM Auteur
+        ORDER BY Nom";
 
 $stmt = $conn->prepare($sql);
 
@@ -70,7 +66,7 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="/style/home.css">
-    <title>Admin livre page</title>
+    <title>Admin auteur page</title>
 </head>
 
 <style id="style_mod">
@@ -80,17 +76,17 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 <body>
     <header>
         <div>
-            <a class="signUp" id="log_out_admin" href="/logoutadmin">Se deconnecter</a>
+            <a class="signUp" href="/logoutadmin">Se deconnecter</a>
         </div>
-        <h1>Admin Livre</h1>
-        <a href="/adminauteur">Modifier les auteurs</a>
+        <h1>Admin Auteur</h1>
+        <a href="/adminlivre">Modifier les livres</a>
     </header>
 
 
 
     <div class="all_livres">
-        <a href="/newlivre">
-            <h2>Ajouter un livre</h2>
+        <a href="/newauteur">
+            <h2>Ajouter un auteur</h2>
             <img src="/assets/plus.svg" alt="">
         </a>
     </div>
@@ -99,13 +95,13 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         <?php
         foreach ($data as $key => $value) {
             echo "
-        <a href='/modiflivre/$value[Id_Livre]'>
+        <a href='/modifauteur/$value[Id_Auteur]'>
         <div class='book'>
-            <h2>$value[Titre_Livre]</h2>
-            <p class='lang'>$value[Acronyme]</p>
-            <img src='data:image/png;base64," . base64_encode($value["Miniature"]) . "' alt=''>
-            <p>de $value[Nom] pour $value[Prix]€</p>
-            <button class='supprimer' data-id='$value[Id_Livre]'>Supprimer</button>
+            <h2>$value[Nom]</h2>
+            <p class='lang'>$value[Nationalite]</p>
+            <img src='data:image/png;base64," . base64_encode($value["profil"]) . "' alt=''>
+            <p> $value[Epoque],  $value[Courant]</p>
+            <button class='supprimer' data-id='$value[Id_Auteur]'>Supprimer</button>
         </div>
         </a>";
         }
@@ -134,11 +130,11 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             const idLivre = bouton.getAttribute('data-id');
 
             // Affichez une boîte de dialogue de confirmation
-            const confirmation = window.confirm("Êtes-vous sûr de vouloir supprimer ce livre ?");
+            const confirmation = window.confirm("Êtes-vous sûr de vouloir supprimer cet auteur ?");
 
             // Si l'utilisateur clique sur "OK" dans la boîte de dialogue, supprime 
             if (confirmation) {
-                window.location.href = `/adminlivre/${idLivre}`;
+                window.location.href = `/adminauteur/${idLivre}`;
             }
         });
     });

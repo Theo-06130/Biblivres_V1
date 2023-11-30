@@ -3,8 +3,17 @@
 
 
 
+header>a {
+    position: relative;
+    right: 15px;
+    text-decoration: underline;
+
+}
 
 
+.return {
+    width: 40px;
+}
 
 .last_see {
     margin-top: 15px;
@@ -99,6 +108,27 @@ button {
     color: white;
 }
 
+.Aventure {
+    background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+}
+
+.Autobiographie {
+    background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
+    color: white;
+}
+
+.Philosophique {
+    background-image: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
+}
+
+.Science-Fiction {
+    background-image: linear-gradient(to top, #96fbc4 0%, #f9f586 100%);
+}
+
+.Théâtral {
+    background-image: linear-gradient(to right, #f78ca0 0%, #f9748f 19%, #fd868c 60%, #fe9a8b 100%);
+}
+
 @media screen and (max-width:900px) {
     .Genre_Fav {
         overflow-x: scroll;
@@ -117,9 +147,19 @@ button {
     align-items: center;
 }
 
-.Favorite_Author>img {
+
+.author {
+    max-width: 90px;
+    margin-left: 5vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.author>img {
     margin: 15px 0 0 20px;
-    width: 100px;
+    width: 70px;
     border-radius: 100%;
 }
 
@@ -147,6 +187,10 @@ button {
     margin-left: 10px;
 }
 
+.all_livres>a>img {
+    width: 50px;
+}
+
 
 .all_book_home {
     margin-top: 15px;
@@ -162,4 +206,88 @@ button {
     .all_book_home {
         overflow-x: scroll;
     }
+}
+
+.icon_panier {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+.icon_panier>img {
+    width: 50px;
+    position: relative;
+    top: -4px;
+}
+
+.side {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 10px;
+}
+
+#nbr_article {
+    z-index: -1;
+    position: relative;
+    top: -44px;
+    left: 3px;
+    color: white;
+    border-radius: 100%;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    font-size: 15px;
+}
+
+#log_out_admin {
+    left: 0;
+}
+
+
+
+
+
+
+/*------------------------------------------------------------------*/
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+.container>h1 {
+    text-align: center;
+}
+
+
+.container>form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin-top: 5vh;
+    width: 60vw;
+    height: 80vh;
+}
+
+.intern>textarea,
+.intern>input,
+.intern>select,
+.intern>select>option {
+    color: black
+}
+
+.submit {
+    padding: 10px;
+    background-color: skyblue;
+    color: black;
+    border: none;
+    border-radius: 10px;
 }
